@@ -11,7 +11,7 @@ router.get('/profile', isLoggedIn, (req, res) => {
 router.get('/sign-up', isNotLoggedIn, (req, res) => {
   res.render('sign-up', {
     title: '회원가입 - BalanceGame',
-    user: null, // 회원 정보 - sign-up.pug 의 회원 정보 렌더링 하는 곳에 회원 정보가 들어감
+    user: req.user, // 회원 정보 - sign-up.pug 의 회원 정보 렌더링 하는 곳에 회원 정보가 들어감
     joinError: req.flash('signUpError'),
   });
 });
@@ -21,7 +21,7 @@ router.get('/sign-up', isNotLoggedIn, (req, res) => {
 router.get('/', (req, res, next) => {
   res.render('index', {
     title: 'BalanceGame',
-    user: req.user, // 회원 정보 - join.pug 의 회원 정보 렌더링 하는 곳에 회원 정보가 들어감
+    user: req.user,
   });
 });
 
@@ -29,7 +29,7 @@ router.get('/', (req, res, next) => {
 router.get('/login', (req, res, next) => {
   res.render('login', {
     title: 'login - BalanceGame',
-    user: null, // 회원 정보 - join.pug 의 회원 정보 렌더링 하는 곳에 회원 정보가 들어감
+    user: req.user,
     loginError: req.flash('loginError'),
   });
 });

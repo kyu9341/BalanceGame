@@ -3,3 +3,8 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+  .profile
+    if user && user.id
+      .user-name= '안녕하세요! ' + user.nickname + '님'
+
+  a#logout.btn(href='/auth/logout') 로그아웃

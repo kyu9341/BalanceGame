@@ -40,7 +40,7 @@ router.post('/login', isNotLoggedIn, (req, res, next) => {
         }
         if (!user) { // 실패의 경우
             req.flash('loginError', info.message); // 실패 1회성 메세지
-            return res.redirect('/');
+            return res.redirect('/login');
         }
         // 성공의 경우
         return req.login(user, (loginError) => { // req 의 login (passport 가 지원)
@@ -48,7 +48,7 @@ router.post('/login', isNotLoggedIn, (req, res, next) => {
                 console.error(loginError);
                 return next(loginError);
             }
-            return res.redirect('/');
+            return res.redirect('/login');
             // req.user 에서 앞으로 사용자 정보를 찾을 수 있음 (세선에 저장됨)
         })
     })(req, res, next);
