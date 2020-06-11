@@ -4,19 +4,26 @@ head
   title &#xB85C;&#xADF8;&#xC778;
   a(href='')
     img(src='./img/node_logo.png')
-  link(rel='stylesheet' href='loginCSS.pug')
+  link(rel='stylesheet' href='login.css')
 section.login
-  h2 &#xB85C;&#xADF8;&#xC778;
+  h2 Login
   ul
     li
-      input(type='text' placeholder='아이디' title='아이디입력')
+      label(for='exampleInputEmail1') Email address
     li
-      input(type='password' placeholder='비밀번호' title='비밀번호입력')
+      input#exampleInputEmail1.form-control(type='email' aria-describedby='emailHelp' placeholder='Enter email')
+    br
     li
-      input#chk_id(type='checkbox')
-      label(for='chk_id') &#xC544;&#xC774;&#xB514;&#xC800;&#xC7A5;
+      small#emailHelp.form-text.text-muted &#xC6B0;&#xB9AC;&#xB294; &#xB2E4;&#xB978; &#xC0AC;&#xB78C;&#xACFC; &#xADC0;&#xD558;&#xC758; &#xC774;&#xBA54;&#xC77C;&#xC744; &#xACF5;&#xC720;&#xD558;&#xC9C0; &#xC54A;&#xC2B5;&#xB2C8;&#xB2E4;.
     li
-      button &#xB85C;&#xADF8;&#xC778;
+      label(for='exampleInputPassword1') Password
+    li
+      input#exampleInputPassword1.form-control(type='password' placeholder='Password')
+    li
+      input#exampleCheck1.form-check-input(type='checkbox')
+      label Check me out
+    li
+      button.btn.btn-warning(type='submit') Submit
   div
     ul
       li
