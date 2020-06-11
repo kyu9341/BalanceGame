@@ -1,9 +1,37 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+// 프로필 페이지
+router.get('/profile', isLoggedIn, (req, res) => {
+  res.render('profile', {title:'profile - BalanceGame', user:null });
+});
+
+// 회원가입 페이지
+router.get('/sign-up', isNotLoggedIn, (req, res) => {
+  res.render('sign-up', {
+    title: '회원가입 - BalanceGame',
+    user: null, // 회원 정보 - sign-up.pug 의 회원 정보 렌더링 하는 곳에 회원 정보가 들어감
+    joinError: req.flash('signUpError'),
+  });
+});
+
+
+// 메인 페이지 www
+router.get('/', (req, res, next) => {
+  res.render('index', {
+    title: 'BalanceGame',
+    user: req.user, // 회원 정보 - join.pug 의 회원 정보 렌더링 하는 곳에 회원 정보가 들어감
+  });
+});
+
+// 메인 페이지 www
+router.get('/login', (req, res, next) => {
+  res.render('login', {
+    title: 'login - BalanceGame',
+    user: null, // 회원 정보 - join.pug 의 회원 정보 렌더링 하는 곳에 회원 정보가 들어감
+    loginError: req.flash('loginError'),
+  });
 });
 
 module.exports = router;

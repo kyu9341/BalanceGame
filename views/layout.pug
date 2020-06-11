@@ -1,7 +1,15 @@
-doctype html
+doctype
 html
-  head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
-  body
-    block content
+    head
+        meta(charset='UTF-8')
+        title= title
+        link(rel='stylesheet' href='/stylesheets/style.css')
+        link(rel='stylesheet' href='/sign-up.css')
+        link(rel='stylesheet' href='/login.css')
+        //link(rel='stylesheet' href='/node_modules/bootstrap/dist/css/bootstrap.min.css')
+        script(src='/node_modules/jquery/dist/jquery.min.js')
+        script(src='/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js')
+        link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous")
+
+body
+        block content
