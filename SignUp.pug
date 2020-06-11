@@ -1,0 +1,26 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  title &#xD68C;&#xC6D0;&#xAC00;&#xC785;
+  a(href='')
+    img(src='./img/node_logo.png')
+  link(rel='stylesheet' href='signUp.css')
+  link(rel='stylesheet' href='./css/bootstrap.css')
+form.sign(action='#' method='post')
+  fieldset
+    legend Sign Up
+    .form-group
+      label(for='exampleInputName') NickName
+      input#exampleInputName.form-control(type='text' aria-describedby='NameHelp' placeholder='Enter NickName')
+    .form-group
+      label(for='exampleInputEmail1') Email address
+      input#exampleInputEmail1.form-control(type='email' aria-describedby='emailHelp' placeholder='Enter email')
+      small#emailHelp.form-text.text-muted We&apos;ll never share your email with anyone else.
+    .form-group
+      label(for='exampleInputPassword1') Password
+      input#exampleInputPassword1.form-control(type='password' placeholder='Password')
+    .form-group
+      label(for='exampleInputPasswordCheck') Password
+      input#exampleInputPasswordCheck.form-control(type='password' placeholder='Password Check')
+  button.btn.btn-warning(type='submit') send
+  button.btn.btn-warning(type='reset') reset
