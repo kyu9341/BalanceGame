@@ -53,8 +53,8 @@ router.get('/free/:id', async (req, res, next) => {
 
 router.post('/free/:id/like', async (req, res, next) => {
     try {
-        const post = await Post.find({ where: { id: req.params.id }});
-        await post.addLikers(req.params.id);
+        const post = await Post.findOne({ where: { id: req.params.id }});
+        await post.addLiker(req.user.id); // 현재 포스트와 Liker를 연결
         res.send('OK');
     } catch (error) {
         console.error(error);
@@ -64,7 +64,9 @@ router.post('/free/:id/like', async (req, res, next) => {
 
 router.delete('/free/:id/like', async (req, res, next) => {
     try {
-
+        const post = await Post.findOne({ where: { id: req.params.id }});
+        await post.removeLiker(req.user.id);
+        res.send('OK');
     } catch (error) {
         console.error(error);
         next(error);

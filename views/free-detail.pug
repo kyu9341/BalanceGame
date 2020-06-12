@@ -3,11 +3,74 @@ extends layout
 block content
     .container
         .row.px-3.justify-content-center
-
+            input#post-id(hidden value='#{post.id}')
             .post-content.col-10.pt-3!= post.content
 
-            -const like = post && post.Liker.map(l => l.id).includes(post.user.id);
+            -const like = post && post.Liker.map(l => l.id).includes(user.id);
             if user && !like
                 button.like 좋아요
             else if user && like
                 button.unlike 좋아요 취소
+
+    script(type='application/javascript').
+        $(function () {
+            let pathname = window.location.pathname;
+            let likeTag = document.querySelector('.like');
+            likeTag.addEventListener('click', function () {
+                // let postId = document.querySelector('#project-id').value;
+                let xhr = new XMLHttpRequest();
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        location.reload();
+                    } else {
+                        console.error(xhr.responseText);
+                    }
+                };
+                xhr.open('POST', pathname + '/like');
+                xhr.send();
+            });
+        });
+
+        $(function () {
+            let pathname = window.location.pathname;
+            let unlikeTag = document.querySelector('.unlike');
+            unlikeTag.addEventListener('click', function () {
+                // let postId = document.querySelector('#project-id').value;
+                let xhr = new XMLHttpRequest();
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        location.reload();
+                    } else {
+                        console.error(xhr.responseText);
+                    }
+                };
+                xhr.open('DELETE', pathname + '/like');
+                xhr.send();
+            });
+        })
+
+        // $(function () {
+        //     let pathname = window.location.pathname;
+        //
+        //     let likeTag = document.querySelector('.like');
+        //     likeTag.addEventListener('click', function () {
+        //         // let postId = document.querySelector('#project-id').value;
+        //         likeRequest('POST')
+        //             .then(function (status) {
+        //                 if (status) {
+        //                     location.reload();
+        //                 }
+        //             }).catch(function (error) {
+        //             console.error(error);
+        //         });
+        //     });
+        //
+        //     function likeRequest(method) {
+        //         return fetch(pathname + '/like', {
+        //             method: method,
+        //             headers: {
+        //                 'Content-Type': 'application/json',
+        //             }
+        //         });
+        //     }
+        // });
