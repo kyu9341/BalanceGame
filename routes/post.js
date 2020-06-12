@@ -19,13 +19,22 @@ router.post('/write', isLoggedIn, async (req, res, next) => {
     }
 });
 
-router.get('/:id', async (req, res, next) => {
+router.get('/free/:id', async (req, res, next) => {
     try {
         const id = req.params.id;
         await Post.findOne({
             where: { id },
+            include: [{
+                model: User, // 작성자를 가져옴
+                attributes: ['id', 'nickname'],
+            }, {
+                model: User, // 좋아요를 누른 사람들을 가져옴
+                attributes: ['id', 'nickname'],
+                as: 'Liker', // include 에서 같은 모델이 여러개면 as로 구분
+            }],
         })
             .then((post) => {
+                console.log(post);
                 res.render('free-detail', {
                     title: 'board - free',
                     post: post,
@@ -40,7 +49,26 @@ router.get('/:id', async (req, res, next) => {
         console.error(error);
         next(error);
     }
+});
 
+router.post('/free/:id/like', async (req, res, next) => {
+    try {
+        const post = await Post.find({ where: { id: req.params.id }});
+        await post.addLikers(req.params.id);
+        res.send('OK');
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
+});
+
+router.delete('/free/:id/like', async (req, res, next) => {
+    try {
+
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
 });
 
 

@@ -17,4 +17,8 @@ db.Post = require('./post')(sequelize, Sequelize);
 db.User.hasMany(db.Post);
 db.Post.belongsTo(db.User);
 
+// 다대다 관계 - 매칭 테이블 : like
+db.User.belongsToMany(db.Post, { through : 'Like' });
+db.Post.belongsToMany(db.User, { through : 'Like', as: 'Liker' }); // 사용자를 Liker로 가져옴
+
 module.exports = db;

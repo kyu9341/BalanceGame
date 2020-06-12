@@ -11,6 +11,10 @@ module.exports = (sequelize, DataTypes) => (
         board_type: {
             type: DataTypes.ENUM('free', 'vs'),
         },
+        like: {
+            type: DataTypes.INTEGER.UNSIGNED,
+            defaultValue: 0,
+        },
     }, {
         timestamps: true,
         paranoid: true,
