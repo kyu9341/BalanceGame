@@ -48,7 +48,7 @@ router.post('/login', isNotLoggedIn, (req, res, next) => {
                 console.error(loginError);
                 return next(loginError);
             }
-            return res.redirect('/login');
+            return res.redirect('/');
             // req.user 에서 앞으로 사용자 정보를 찾을 수 있음 (세선에 저장됨)
         })
     })(req, res, next);

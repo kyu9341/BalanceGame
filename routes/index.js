@@ -25,12 +25,20 @@ router.get('/', (req, res, next) => {
   });
 });
 
-// 메인 페이지 www
+// 로그인 페이지
 router.get('/login', (req, res, next) => {
   res.render('login', {
     title: 'login - BalanceGame',
     user: req.user,
     loginError: req.flash('loginError'),
+  });
+});
+
+router.get('/write', (req, res, next) => {
+  res.render('write', {
+    title: 'post - write',
+    user: req.user,
+    postError: req.flash('postError'),
   });
 });
 

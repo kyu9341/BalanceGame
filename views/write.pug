@@ -1,0 +1,38 @@
+extends layout
+
+block content
+    .container
+        .form-group
+            form.needs-validation.col-sm-10(method='post' action='/post/write' novalidate)
+                .form-group
+                    select.custom-select(name='board_type')
+                        option(selected='') 게시판 선택
+                        option(value='vs') vs 게시판
+                        option(value='free') 자유 게시판
+                .form-group
+                    label(for='title') 제목
+                    input#title.form-control(type='text' placeholder='제목' aria-describedby='titleHelp' name='title' required max='50')
+                    small#titleHelp.form-text.text-muted
+                        | &#xC81C;&#xBAA9;&#xC744; &#xC785;&#xB825;&#xD558;&#xC138;&#xC694;.
+                    small.invalid-feedback &#xC81C;&#xBAA9;&#xC744; &#xC785;&#xB825;&#xD558;&#xC138;&#xC694;.
+                    small.form-text.text-danger Title Error
+                .form-group
+                    label(for='fullDescription') &#xAE00;&#xC4F0;&#xAE30;
+                    textarea#fullDescription.editor.form-control(type='textarea' placeholder='글쓰기.'
+                        name='content' aria-describedby='fullDescriptionHelp' required='')
+                    small#fullDescriptionHelp.form-text.text-muted
+                        | &#xB0B4;&#xC6A9;&#xC744; &#xC785;&#xB825;&#xD558;&#xC138;&#xC694;.
+                    small.invalid-feedback &#xB0B4;&#xC6A9;&#xC744; &#xC785;&#xB825;&#xD558;&#xC138;&#xC694;.
+                    small.form-text.text-danger FullDescription Error
+                .form-group
+                    button.btn.btn-warning.btn-block(type='submit' aria-describedby='submitHelp')
+                        | &#xAE00;&#xC4F0;&#xAE30;
+    script(type='application/javascript').
+        $(function () {
+            $('.editor').summernote({
+                fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Noto Sans KR', 'Merriweather'],
+                placeholder: '내용을 입력하세요.',
+                tabsize: 2,
+                height: 300
+            });
+        });
