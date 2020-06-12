@@ -19,6 +19,30 @@ router.post('/write', isLoggedIn, async (req, res, next) => {
     }
 });
 
+router.get('/:id', async (req, res, next) => {
+    try {
+        const id = req.params.id;
+        await Post.findOne({
+            where: { id },
+        })
+            .then((post) => {
+                res.render('free-detail', {
+                    title: 'board - free',
+                    post: post,
+                    user: req.user,
+                });
+            })
+            .catch((error) => {
+                console.error(error);
+                next(error);
+            });
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
+
+});
+
 
 
 module.exports = router;
