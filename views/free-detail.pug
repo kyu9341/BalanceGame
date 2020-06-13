@@ -6,18 +6,20 @@ block content
             input#post-id(hidden value='#{post.id}')
             .post-content.col-10.pt-3!= post.content
 
-            -const like = post && post.Liker.map(l => l.id).includes(user.id);
-            if user && !like
-                button.like 좋아요
-            else if user && like
-                button.unlike 좋아요 취소
+            -const liker = post && post.Liker.map(l => l.id).includes(user.id);
+            if user && !liker
+                button.like 좋아요 #{post.like}
+            else if user && liker
+                button.unlike 좋아요 취소 #{post.like}
 
     script(type='application/javascript').
+        let unlikeTag = document.querySelector('.unlike');
+        let likeTag = document.querySelector('.like');
+
         $(function () {
             let pathname = window.location.pathname;
-            let likeTag = document.querySelector('.like');
             likeTag.addEventListener('click', function () {
-                // let postId = document.querySelector('#project-id').value;
+                // let postId = document.querySelector('#post-id').value;
                 let xhr = new XMLHttpRequest();
                 xhr.onload = function () {
                     if (xhr.status === 200) {
@@ -33,9 +35,8 @@ block content
 
         $(function () {
             let pathname = window.location.pathname;
-            let unlikeTag = document.querySelector('.unlike');
             unlikeTag.addEventListener('click', function () {
-                // let postId = document.querySelector('#project-id').value;
+                // let postId = document.querySelector('#post-id').value;
                 let xhr = new XMLHttpRequest();
                 xhr.onload = function () {
                     if (xhr.status === 200) {

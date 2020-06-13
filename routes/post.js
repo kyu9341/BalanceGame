@@ -1,6 +1,6 @@
 const express = require('express');
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
-const { Post, User } = require('../models');
+const { Post, User, Like } = require('../models');
 
 const router = express.Router();
 
@@ -55,7 +55,21 @@ router.post('/free/:id/like', async (req, res, next) => {
     try {
         const post = await Post.findOne({ where: { id: req.params.id }});
         await post.addLiker(req.user.id); // 현재 포스트와 Liker를 연결
-        res.send('OK');
+        const likeCount = await Like.findAndCountAll({
+            where: { postId: req.params.id },
+        });
+        await Post.update({
+            like: likeCount.count,
+        },{
+            where: { id: req.params.id },
+        });
+
+        console.log("likeCount: " + likeCount.count);
+        res.status(200).send({
+            title: 'board - free',
+            post: post,
+            user: req.user,
+        });
     } catch (error) {
         console.error(error);
         next(error);
@@ -65,8 +79,12 @@ router.post('/free/:id/like', async (req, res, next) => {
 router.delete('/free/:id/like', async (req, res, next) => {
     try {
         const post = await Post.findOne({ where: { id: req.params.id }});
-        await post.removeLiker(req.user.id);
-        res.send('OK');
+        await Like.destroy({ where: { userId: req.user.id, postId: req.params.id }});
+        res.status(200).send({
+            title: 'board - free',
+            post: post,
+            user: req.user,
+        });
     } catch (error) {
         console.error(error);
         next(error);
