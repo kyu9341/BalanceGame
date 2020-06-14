@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang ="ko">
+    <head>
+        <meta charset="UTF-8">
+        <title>마이페이지</title>
+        <a href="main.html"><img src="./img/node_logo.png"></a>
+        <link rel="stylesheet" href="./css/bootstrap.css">
+        <link rel="stylesheet" href="mypage.css">
+        <script type="text" src="mypage.js"></script>
+    </head>
+    <body>
+        <header>
+            <div class="thumb-wapper">
+                <img src="img/person.png">
+                <div class ="badge">7</div>
+            </div>
+            <div class="text-area"><h3 class="welcome">Hi, Son Hyun Bin</h3></div>
+            <div class="desc">we'll make a mobile magazine<br/></div>
+            <div class="mail"><a href="mailto:a01047290225@gmail.com" style="text-decoration: none;">a01047290225@gmail.com</a></div>
+        </header>
+        <ul class ="list" style="list-style:none;">
+            <li class="item">
+                <div class="left">
+                    <img src="img/bookmark.png" for="bookmark">
+                    <div class="name"><button id="bookmark">Bookmark</button></div>
+                </div>
+                <div class="right" for="bookmark"><img src="img/right_arrow.png"></div>
+            </li>
+            <li class="item">
+                <div class="left">
+                    <img src="img/account.png" for="account">
+                    <div class="name"><button id="account"> Account</button></div>
+                </div>
+                <div class="right"><img src="img/right_arrow.png" for="account"></div>
+               
+            </li>
+            <li class="item">
+                <div class="left">
+                    <img src="img/business.png" for="business">
+                    <div class="name"><button id="business">Business</button></div>
+                </div>
+                <div class="right"><img src="img/right_arrow.png" for="business"></div>
+            </li>
+        </ul>
+        <section class ="Account_change" id="Change_Account_info" >
+            <h2>Account change</h2>
+            <ul>
+                <li><small id="emailHelp" class="form-text text-muted">변경하실 이메일과 닉네임을 입력해주세요</small></li>
+                <li><label for="Email">Email address</label></li>
+                <li><input type="email" class="form-control" id="Email" aria-describedby="emailHelp" placeholder="Enter email"></li>
+                <br>
+                <li><label for="NickName">Nick name</label></li>
+                <li><input type="text" class="form-control" id="Nicname" aria-describedby="nicknameHelp" 
+                    placeholder="Enter nick name" minlength="4"></li>
+                <br/>
+                <li><label for="Change_PW">Password</label></li>
+                <li><input type="password" class="form-control" id="Change_PW" placeholder="Password"></li>
+                <br/>
+                <li><label for="Check_PW">Password Check</label></li>
+                <li><input type="password_Check" class="form-control" id="Check_PW" placeholder="Password Check"></li>
+                <br/>
+                <li><button type="submit" class="btn btn-warning">Submit</button></li>
+            </ul>
+            
+        </section>
+        
+    </body>
+</html>

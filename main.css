@@ -1,0 +1,70 @@
+.body{
+    background: #fff;
+}
+#wrap{
+    width: 1500px; height: 2000px;
+    margin: 0 auto; 
+}
+#Header{
+    display: block;
+    width: 30%; height: 100px;
+    float: left;
+    line-height: 100px; background: #fff;   
+}
+
+#null{
+    width: 40%; height: 100px; float: left;
+    line-height: 90px; background:#fff;
+}
+#Nav{
+    width: 30%; height: 100px; float: left;
+    line-height: 90px; background:#fff;
+    text-decoration-color: aqua; font-size: 20px;}
+#Nav nav {
+    font-size: 20px;
+    text-align: center; 
+    height: 100px;
+}
+#Content{
+    float: left; width: 80%; height: 1300px; 
+    background:#fff;
+    padding: 0;
+}
+#Content div{
+    display: inline-block;
+    border: 1px solid gray;
+    text-decoration-color: #111;
+    width: 49%; height: 50%;
+}
+
+#Content div table{
+    width: 90%;
+    height: 500px;
+    font-size: 20px;
+    margin: 20px;
+    color: #111;
+    margin: 20px;
+    align-items: center;
+}
+#Content div table thead tr a{
+    text-align: left;
+    color: #111;
+}
+#Side{
+    border-top: 4px solid #111;
+    float: right; width: 20%; height: 1300px; 
+    line-height: 400px; background:#ffffaa;
+    font-size: 60px;
+}
+#Side div button{
+    font-size: 25px;
+    margin-bottom: 30px;
+}
+#Foorter {
+    display: inline-block;
+    width: 100%;
+    font-size: 20px;
+    text-align: center; 
+    height: 200px;
+    background-color: gray;
+}

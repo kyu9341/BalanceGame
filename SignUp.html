@@ -3,34 +3,57 @@
  <head>
   <meta charset="UTF-8">
   <title>회원가입</title>
-  <a href=""><img src="./img/node_logo.png"></a>
+  <a href="main.html"><img src="./img/node_logo.png"></a>
   <link rel="stylesheet" href="signUp.css">
   <link rel="stylesheet" href="./css/bootstrap.css">
+  <script type="text" src="SignUp.js"></script>
+  
 </head>
  <body>
-   <form action="#" method="post" class ="sign">
-     <fieldset>
-       <legend>Sign Up</legend>
-       <div class="form-group">
-        <label for="exampleInputName">NickName</label>
-        <input type="text" class="form-control" id="exampleInputName" aria-describedby="NameHelp" placeholder="Enter NickName">
-      </div>
+  <form action="" method="post" class ="sign">
+    <fieldset>
+      <legend>Sign Up</legend>
       <div class="form-group">
-        <label for="exampleInputEmail1">Email address</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-      </div>
-      <div class="form-group">
-        <label for="exampleInputPassword1">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-      </div>
-      <div class="form-group">
-        <label for="exampleInputPasswordCheck">Password</label>
-        <input type="password" class="form-control" id="exampleInputPasswordCheck" placeholder="Password Check">
-      </div>
-    </fieldset>
-    <button type="submit" class="btn btn-warning">send</button>
-    <button type="reset" class="btn btn-warning">reset</button>
-  </form>
+       <label for="Name">NickName</label>
+       <input type="text" class="form-control" 
+       id="Name" aria-describedby="NameHelp" 
+       placeholder="Enter NickName"
+       minlength ="4" maxlength ="8">
+       <small id="NameHelp" class="form-text text-danger" style="display: none;">닉네임은 공백없이 4자 이상 8자 이하입니다.</small>
+
+     </div>
+     <div class="form-group">
+       <label for="Email">Email address</label>
+       <input type="email" class="form-control" 
+       id="Email" aria-describedby="emailHelp" 
+       placeholder="Enter email">
+       <small id="emailHelp1" class="form-text text-danger" 
+       style="display:none">이메일의 형식이 맞지 않습니다.</small>
+       <small id="emailHelp2" class="form-text text-muted" 
+       style="display:block">We'll never share your email with anyone else.</small>
+      
+     </div>
+     <div class="form-group">
+       <label for="PW">Password</label>
+       <input type="password" class="form-control" 
+       id="PW" placeholder="Password" minlength="8" maxlength="20">
+   <small id="pwHelp" class="form-text text-danger" 
+       style="display:none">비밀번호를 입력해주세요</small>
+     
+   <small id="pwHelp1" class="form-text text-danger" 
+       style="display:none">비밀번호는 영문(대소문자구분),숫자,특수문자(#?!@$%^&*- 만 허용)를 혼용하여 입력해주세요</small>
+     </div>
+     <div class="form-group">
+       <label for="PWCheck">Password Check</label>
+       <input type="password" class="form-control" 
+       id="PWCheck" placeholder="Password Check" 
+       minlength="8" maxlength="20">
+       <small id="pwHelp2" class="form-text text-danger" 
+       style="display:none">비밀번호가 일치하지 않습니다.</small> 
+     </div>
+   </fieldset>
+   <button type="submit" class="btn btn-warning" id="send">send</button>
+   <button type="reset" class="btn btn-warning">reset</button>
+ </form>
   </body>
 </html>

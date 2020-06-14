@@ -1,0 +1,83 @@
+header{
+    width: 410px;
+    position: absolute; 
+    left: 50%; top: 20%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+header .thumb{
+    box-shadow: 0 6px 12px 0 black;
+    width: 92px; height: 92px; border-radius: 50%;
+}
+header .thumb-wrapper{
+    position: relative;
+    display: inline-block;
+}
+header .thumb-wrapper .bedge{
+    width: 28px; height: 28px; font-size: 12px; 
+    position: absolute; top:0; right: -8px; background-color:tomato;
+    border-radius: 50%; display: flex; align-items: center; justify-self: center; 
+}
+header .welcome{
+    margin: 10px;
+}
+header .mail{
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+    padding: 8px 22px 10px 22px; background-color: yellow; 
+    display: inline-block; border-radius: 20px; margin-top: 18px;
+}
+.list{
+    width: 40%;
+    position: absolute; 
+    left: 0; top: 70%;
+    transform: translate(0px, -80%);
+    text-align: center;
+}
+.list .item{
+    display: flex;
+    align-items: center;
+    border-bottom: 1px soild black;
+    position: relative;
+    justify-content: space-between; font-size: 15px;
+     font-size: 15px;
+}
+.list .item:after{
+    content: "";
+    background-color: rgba(0, 0, 0, 0.08);
+    position: absolute; width: 100%; height: 100%; left: 0;top: 0;
+}
+
+.list .item:hover:after{
+    background-color: rgba(0, 0, 0, 0.12);
+}
+.list .item .left{
+    display: flex;
+    align-items: center;
+}
+.list .item img{
+    padding: 20px 22px ;
+}
+.list .item .left .name{
+    margin-left: 6px;
+}
+.list .item .right{
+    opacity: 0.5;
+}
+.list .item .right img{
+    padding-right: 14px;
+}
+.list .item div button{
+    border: none;
+}
+.Account_change{
+    font-family: "sans-serif";
+    width: 410px;
+    position: absolute; 
+    left: 50%; top: 50%;
+    transform: translate(10%, -20%);
+    text-align: left;
+}
+.Account_change ul{
+    list-style: none;
+}

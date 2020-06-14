@@ -1,12 +1,10 @@
 .sign{
     font-family: "sans-serif";
     width: 410px;
-    text-emphasis-color: yellow;
     position: absolute; 
     left: 50%; top: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
-    border: ;
 }
 .sign legend{
     padding: 0 0 20px; 
@@ -20,10 +18,6 @@
     margin-top: 30px;
     margin-bottom: 10px;
 }
-.sign fieldset p{
-    padding: 0 0 12px;
-    text-align: left;
-}
 .sign fieldset div{
     padding: 0 0 12px;
     text-align: left;
@@ -32,8 +26,6 @@
     width: 100%;
     height: 30px;
 }
-
-.sign fieldset p input{
-    width: 70%;
-    height: 40px;
+.sign fieldset small{
+    display: inline;
 }
