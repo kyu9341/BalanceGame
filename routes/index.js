@@ -12,7 +12,7 @@ router.get('/sign-up', isNotLoggedIn, (req, res) => {
   res.render('sign-up', {
     title: '회원가입 - BalanceGame',
     user: req.user, // 회원 정보 - sign-up.pug 의 회원 정보 렌더링 하는 곳에 회원 정보가 들어감
-    joinError: req.flash('signUpError'),
+    signUpError: req.flash('signUpError'),
   });
 });
 

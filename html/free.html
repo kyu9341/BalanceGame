@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html >
+<head>
+<!-- CSS only -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+
+<!-- JS, Popper.js, and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<style>
+/*        
+    @media screen and (max-width: 700px)  {
+        html{
+            font-size: 0;
+        }
+    } */
+    html{
+        /* margin-left: 50px;
+        margin-right:50px; */
+        max-width:100%;
+        width:80%;
+        height:100%;
+        margin-left:auto;         
+        margin-right:auto;
+    
+        
+    }
+    /* 병아리 색 style="background-color: #FFE16F;" */
+    /*우측 네비게이션바  */
+    #list-tab{
+        position: relative; 
+        margin-top:10px;
+        margin-left:10px;
+        text-align:center;
+        width: 20%;
+    }
+    /* 상단 네비바 */
+    #top_navbar{
+        /* border:3px solid #e3b51d ; */
+        /* border:3px solid #f2eba7 ; */
+        /* border-top:10px solid #f2eba7 ;
+        border-bottom:10px solid #f2eba7 ; */
+        background-color: #f2eaa7 !important;
+        /* background-color: white !important; */
+ 
+        
+     }
+     /* 드롭박스css */
+     .list-group-item.active{
+        background-color: #f2eaa7;
+        border-color: #f2eaa7;
+        color: black;
+    }
+      /* 하단 페이지 이동 버튼 */
+    .paging_comm{
+        position: relative; 
+    
+        /* margin-left:auto;         
+         margin-right:auto; */
+        display: flex;
+        /* 화면이 작아져도 아래로 안내려감 */
+        justify-content: center; 
+        align-content: center; 
+        /* 정렬방향에서, 정렬방향에서 수직으로 정렬=> 정가운데 정렬 */
+      
+    }
+    .page-item active .page-link{
+      background-color: #f2eaa7;
+      border-color: #f2eba7;
+      color:black;
+    }
+    .page-item{
+      background-color: #f2eaa7;
+      color:#f2eba7;
+    }
+    /* 홈 버튼 로고 */
+    #logo{
+        display:block;
+        margin:10px;
+        /* 중앙정렬 */
+         /* margin-left:auto;         
+         margin-right:auto;
+          */
+         }
+    
+    /* 게시판 명 */
+    #notice_name{
+        position: relative;
+        margin-left:20px;
+        margin-top:20px;
+        font-size:1em;
+    }
+
+    /* 게시판 */
+    #table_id{
+        width:80%;  margin-top:10px; position:relative;
+        /* table-layout:fixed; */
+    }
+
+    </style>
+  
+    <!-- 홈 버튼 로고 -->
+    <a href="#main.html"><img id="logo" src="images/balance.jpg" height="20%" width="35%" alt="닥전닥후" ></a>
+    <!-- 상단 네비바 -->
+    <div id="top_navbar"  >
+    <nav class="navbar navbar-light bg-light" style="background-color: #f2eba7 !important;" >
+        <a class="navbar-brand" href="#">
+            <img src="images/chick.png" width="30" height="30" alt="" loading="lazy" style="border-radius: .90rem; border:1px solid #5c5729; margin-right:30px;">
+        </a>
+        <!-- 검색창 -->
+          <form class="form-inline" style="justify-content: right; margin-left:460px;">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit"style="background-color: white;">Search</button>
+          </form>
+        
+         <!-- 사용자 -->
+        <div class="btn-group" style="justify-content: right;">
+            <button type="button" class="btn btn-warning" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: #f2eba7; border:none; outline:none;" >
+                <!-- 사용자 이미지 -->
+                <a class="navbar-brand" href="#">
+                    <img src="images/ic_pic.gif" width="20" height="20" alt="" loading="lazy" style="border-radius: .25rem;">
+                </a>user_name ▼
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="#">마이페이지</a>
+              <a class="dropdown-item" href="#">출석부</a>
+              <a class="dropdown-item" href="#">내가 쓴 글</a>
+              <a class="dropdown-item" href="#">좋아요한 글</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">로그아웃</a>
+            </div>
+          </div>
+      </nav>
+    </div>
+</head>
+
+<body>
+    <div class="row" id="notice_name" >
+    <!-- 게시판 명 -->
+        <h5>자유게시판</h5>
+        <a href="#">
+        <button type="button" class="btn btn-warning" style="display:relative; font-size:0.8rem; margin-left: 600px; ">글쓰기</button>
+      </a>
+    </div>
+    <div class="main_content" style="display: flex;"  >
+        <!-- 게시글 -->
+        <table class="table" id="table_id"  >
+            <thead class="thead-light"  style="background-color:#f2eba7 !important;">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">제목</th>
+                <th scope="col">글쓴이</th>
+                <th scope="col">날짜</th>
+                <th scope="col">댓글수</th>
+                <th scope="col">추천수</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>게시판 제목입니다.</td>
+                <td>Otto</td>
+                <td>2020/06/12</td>
+                <td>9999</td>
+                <td>+9999</td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>오늘 글 좀 쓰겠ㅅㅡㅂ니다</td>
+                <td>Thornton</td>
+                <td>2020/06/12</td>
+                <td>9999</td>
+                <td>+9999</td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td>나쿠쿠</td>
+                <td>the Bird</td>
+                <td>2020/06/12</td>
+                <td>9999</td>
+                <td>+9999</td>
+              </tr>
+              <tr>
+                <th scope="row">4</th>
+                <td>밥이 완성되었습니다.</td>
+                <td>the Bird</td>
+                <td>2020/06/12</td>
+                <td>9999</td>
+                <td>+9999</td>
+              </tr>
+              <tr>
+                <th scope="row">5</th>
+                <td>밥이 완성되었습니다.</td>
+                <td>the Bird</td>
+                <td>2020/06/12</td>
+                <td>9999</td>
+                <td>+9999</td>
+              </tr>
+              <tr>
+                <th scope="row">6</th>
+                <td>밥이 완성되었습니다.</td>
+                <td>the Bird</td>
+                <td>2020/06/12</td>
+                <td>9999</td>
+                <td>+9999</td>
+              </tr>
+              <tr>
+                <th scope="row">7</th>
+                <td>밥이 완성되었습니다.</td>
+                <td>the Bird</td>
+                <td>2020/06/12</td>
+                <td>9999</td>
+                <td>+9999</td>
+              </tr>
+              <tr>
+                <th scope="row">8</th>
+                <td>밥이 완성되었습니다.</td>
+                <td>the Bird</td>
+                <td>2020/06/12</td>
+                <td>9999</td>
+                <td>+9999</td>
+              </tr>
+              <tr>
+                <th scope="row">9</th>
+                <td>밥이 완성되었습니다.</td>
+                <td>the Bird</td>
+                <td>2020/06/12</td>
+                <td>9999</td>
+                <td>+9999</td>
+              </tr>
+              <tr>
+                <th scope="row">10</th>
+                <td>밥이 완성되었습니다.</td>
+                <td>the Bird</td>
+                <td>2020/06/12</td>
+                <td>9999</td>
+                <td>+9999</td>
+              </tr>
+
+            </tbody>
+          </table>
+           <!-- 우측 네비게이션바 -->
+         <div class="list-group" id="list-tab" role="tablist" >
+            <!-- <a class="list-group-item list-group-item-action" style="background-color: wheat;"  id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">게시글 작성</a> -->
+            <!-- <a class="list-group-item list-group-item-action active"  id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">베스트 vs 게시판</a> -->
+            <!-- <a class="list-group-item list-group-item-action" style="background-color: #f2eba7;" href="#list-home" role="tab" aria-controls="home">게시글 작성</a> -->
+            <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#free.html" role="tab" aria-controls="settings">베스트 vs 게시판</a>
+            <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">베스트 자유게시판</a>
+            <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">vs 게시판</a>
+            <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#free.html" role="tab" aria-controls="settings">자유 게시판</a>
+         </div>
+      </div>
+
+       <!-- 하단 페이지 이동바 -->
+       <div id="page_move" class="paging_comm">
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+              <li class="page-item disabled">
+              <a class="page-link"  tabindex="-1" aria-disabled="true" href="#" aria-label="previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+              <li class="page-item active" aria-current="page">
+               <a class="page-link" href="#">1 <span class="sr-only">(current)</span></a>
+              </li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">4</a></li>
+            <li class="page-item"><a class="page-link" href="#">5</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+                    
+
+</body>
+</html>

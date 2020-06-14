@@ -1,18 +1,17 @@
 .login{
     font-family: "sans-serif";
     width: 410px;
-    position: absolute; 
+    position: absolute;
     left: 50%; top: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
 }
 .login h2{
-    padding: 0 0 20px; 
+    padding: 0 0 20px;
     border-bottom: 2px solid #111;
     text-align: center;
     line-height: 1;
     font-size: 32px;
-    counter-reset: #111;
 }
 
 .login ul{
@@ -39,7 +38,7 @@
     position: absolute;
     display:inline-block;
     block-size: 20px;
-    
+
     left: -190px;
 }
 
@@ -73,6 +72,6 @@
 }
 
 .login > a{
-    font-size: 14px; color: #666; 
+    font-size: 14px; color: #666;
 }
 

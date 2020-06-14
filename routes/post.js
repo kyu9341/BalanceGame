@@ -1,6 +1,6 @@
 const express = require('express');
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
-const { Post, User, Like } = require('../models');
+const { Post, User, Like, Comment } = require('../models');
 
 const router = express.Router();
 
@@ -22,7 +22,7 @@ router.post('/write', isLoggedIn, async (req, res, next) => {
 router.get('/free/:id', async (req, res, next) => {
     try {
         const id = req.params.id;
-        await Post.findOne({
+        const post = await Post.findOne({
             where: { id },
             include: [{
                 model: User, // 작성자를 가져옴
@@ -32,19 +32,13 @@ router.get('/free/:id', async (req, res, next) => {
                 attributes: ['id', 'nickname'],
                 as: 'Liker', // include 에서 같은 모델이 여러개면 as로 구분
             }],
-        })
-            .then((post) => {
-                console.log(post);
-                res.render('free-detail', {
-                    title: 'board - free',
-                    post: post,
-                    user: req.user,
-                });
-            })
-            .catch((error) => {
-                console.error(error);
-                next(error);
-            });
+        });
+        res.render('free-detail', {
+            title: 'board - free',
+            post: post,
+            user: req.user,
+        });
+
     } catch (error) {
         console.error(error);
         next(error);
@@ -89,6 +83,66 @@ router.delete('/free/:id/like', async (req, res, next) => {
         console.error(error);
         next(error);
     }
+});
+
+
+
+router.get('/free/:id/comment', async (req, res, next) => {
+    try {
+        const comments = await Comment.findAll({
+            include: [{
+                model: Post,
+                where: { id: req.params.id },
+            }, {
+                model: User,
+                attributes: ['id', 'nickname'],
+            }],
+        });
+        res.json(comments);
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
+});
+
+
+router.post('/free/:id/comment', async (req, res, next) => {
+    try {
+        await Comment.create({
+            content: req.body.content,
+            userId: req.user.id,
+            postId: req.params.id,
+        });
+        res.redirect('/free/:id');
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
+});
+
+router.patch('/free/:id/comment', async (req, res, next) => {
+   try {
+       await Comment.update({
+          content: req.body.content,
+          where: { postId: req.params.id, userId: req.user.id },
+       });
+       res.redirect('/free/:id');
+   } catch (error) {
+        console.error(error);
+        next(error);
+   }
+});
+
+router.delete('/free/:id/comment', async (req, res, next) => {
+   try {
+       await Comment.destroy({
+          where: { postId: req.params.id, userId: req.user.id },
+       });
+       res.redirect('/free/:id');
+   } catch (error) {
+       console.error(error);
+       next(error);
+   }
 });
 
 

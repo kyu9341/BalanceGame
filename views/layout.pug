@@ -16,4 +16,47 @@ html
         script(src='https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js')
 
 body
-        block content
+    // 홈 버튼 로고
+    a(href='/')
+        img#logo(src='images/balance.jpg', height='20%', width='35%', alt='닥전닥후')
+    // 상단 네비바
+    #top_navbar
+        nav.navbar.navbar-light.bg-light.navbar-expand-lg(style='background-color: #f2eba7 !important;')
+            a.navbar-brand(href='/')
+                img(src='images/chick.png', width='30', height='30', alt='', loading='lazy', style='border-radius: .90rem; border:1px solid #5c5729; margin-right:30px;')
+            // 검색창
+            button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent'
+                aria-expanded='false' aria-label='Toggle navigation')
+                span.navbar-toggler-icon
+            .collapse.navbar-collapse#navbarSupportedContent
+                ul.navbar-nav.mr-auto
+                    li.nav-item
+                        form.form-inline(style='justify-content: right; margin-left:460px;')
+                            input.form-control.mr-sm-2(type='search', placeholder='Search', aria-label='Search')
+                            button.btn.btn-outline-success.my-2.my-sm-0(type='submit', style='background-color: white;') Search
+                // 사용자
+
+                ul.navbar-nav.justify-content-end
+                    if !user
+                        li.nav-item
+                            a.nav-link(href='/login') 로그인
+                        li.nav-item
+                            a.nav-link(href='/sign-up') 회원가입
+                    else
+                        li.nav-item.dropdown
+                            .btn-group
+                                button.btn.btn-warning(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false',
+                                    style='background-color: #f2eba7; border:none; outline:none;')
+                                    // 사용자 이미지
+                                    a.navbar-brand(href='#')
+                                        img(src='images/ic_pic.gif', width='20', height='20', alt='', loading='lazy', style='border-radius: .25rem;')
+                                    | user_name ▼
+                                .dropdown-menu.dropdown-menu-sm-right
+                                    a.dropdown-item(href='#') 마이페이지
+                                    a.dropdown-item(href='#') 출석부
+                                    a.dropdown-item(href='#') 내가 쓴 글
+                                    a.dropdown-item(href='#') 좋아요한 글
+                                    .dropdown-divider
+                                    a.dropdown-item(href='/auth/logout') 로그아웃
+
+    block content
