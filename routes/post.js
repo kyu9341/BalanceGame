@@ -1,6 +1,8 @@
 const express = require('express');
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 const { Post, User, Like, Comment } = require('../models');
+const multer = require('multer');
+const path = require('path');
 
 const router = express.Router();
 
@@ -143,6 +145,24 @@ router.delete('/free/:id/comment', async (req, res, next) => {
        console.error(error);
        next(error);
    }
+});
+
+const upload = multer({
+    storage: multer.diskStorage({
+        destination(req, file, cb) {
+            cb(null, 'public/uploads/');
+        },
+        filename(req, file, cb) {
+            const ext = path.extname(file.originalname);
+            cb(null, path.basename(file.originalname, ext) + new Date().valueOf() + ext);
+        },
+    }),
+    limit: { fileSize: 20 * 1024 * 1024 },
+})
+
+router.post('/free/image', upload.single('file'), (req, res) => {
+    console.log(req.body, req.file);
+    res.json({ url: `/uploads/${req.file.filename}` });
 });
 
 

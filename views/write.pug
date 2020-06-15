@@ -19,7 +19,7 @@ block content
                 .form-group
                     label(for='fullDescription') 글쓰기
                     textarea#fullDescription.editor.form-control(type='textarea' placeholder='글쓰기.'
-                        name='content' aria-describedby='fullDescriptionHelp' required='')
+                        name='content' aria-describedby='fullDescriptionHelp' required)
                     small#fullDescriptionHelp.form-text.text-muted
                         |내용을 입력하세요.
                     small.invalid-feedback 내용을 입력하세요.
@@ -33,6 +33,34 @@ block content
                 fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Noto Sans KR', 'Merriweather'],
                 placeholder: '내용을 입력하세요.',
                 tabsize: 2,
-                height: 300
+                height: 300,
+                focus: true,
+                callbacks: {
+                    onImageUpload: function (files, editor, welEditable) {
+                        for (var i = files.length - 1; i >= 0; i--) {
+                            sendFile(files[i], this);
+                        }
+                    }
+                }
             });
+
+            function sendFile(file, el) {
+                var form_data = new FormData();
+                form_data.append('file', file);
+                $.ajax({
+                    data: form_data,
+                    type: "POST",
+                    url: '/post/free/image',
+                    cache: false,
+                    contentType: false,
+                    enctype: 'multipart/form-data',
+                    processData: false,
+                    success: function (data) {
+                        $(el).summernote('editor.insertImage', data.url);
+                        // $('#imageBoard > ul').append('<li><img src="' + data.url + '" width="480" height="auto"/></li>');
+                    }
+                });
+            }
+
+
         });

@@ -1,18 +1,12 @@
 .login{
     font-family: "sans-serif";
     width: 410px;
-    position: absolute;
+    position: relative;
     left: 50%; top: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, 10%);
     text-align: center;
 }
-.login h2{
-    padding: 0 0 20px;
-    border-bottom: 2px solid #111;
-    text-align: center;
-    line-height: 1;
-    font-size: 32px;
-}
+
 
 .login ul{
     margin-top: 40px;

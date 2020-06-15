@@ -1,23 +1,38 @@
 extends layout
 
 block content
-    form.sign(action='/auth/sign-up' method='post')
-        fieldset
-            legend Sign Up
-            .form-group
-                label(for='sign-up-email') 이메일
-                input#sign-up-email.form-control(type='email' name='email' aria-describedby='emailHelp' placeholder='example@example.com')
-                small#emailHelp.form-text.text-muted 이메일을 입력하세요.
-            .form-group
-                label(for='sign-up-nickname') 닉네임
-                input#sign-up-nickname.form-control(type='text' name='nickname' aria-describedby='NameHelp' placeholder='nickname')
-            .form-group
-                label(for='sign-up-password') 패스워드
-                input#sign-up-password.form-control(type='password' name='password' placeholder='password')
-            .form-group
-                label(for='sign-up-password-check') 패스워드 확인
-                input#sign-up-password-check.form-control(type='password' placeholder='password check')
-            if signUpError
-                smaill.error-message= signUpError
-            button.btn.btn-warning(type='submit') 회원가입
-        button.btn.btn-warning(type='reset') 로그인
+    .container
+        .py-5.text-center
+            h2 회원 가입
+        .row.justify-content-center
+            form.needs-validation.col-sm-6(action='/auth/sign-up' method='post' novalidate)
+                .form-group
+                    label(for='email') 이메일
+                    input#email.form-control(type='email' name='email' placeholder='your@email.com' aria-describedby='emailHelp' required)
+                    small#emailHelp.form-text.text-muted
+                        | 이메일을 입력하세요.
+                    small.invalid-feedback 이메일을 입력하세요.
+                .form-group
+                    label(for='nickname') 닉네임
+                    input#nickname.form-control(type='text' name='nickname' placeholder='nickname' aria-describedby='nicknameHelp' required minlength='3' maxlength='20')
+                    small#nicknameHelp.form-text.text-muted
+                        | 공백없이 문자와 숫자로만 3자 이상 20자 이내로 입력하세요.
+                    small.invalid-feedback 닉네임을 입력하세요.
+                .form-group
+                    label(for='password') 패스워드
+                    input#password.form-control(type='password' name='password' aria-describedby='passwordHelp' placeholder='password' required minlength='6' maxlength='50')
+                    small#passwordHelp.form-text.text-muted
+                        | 8자 이상 50자 이내로 입력하세요.
+                    small.invalid-feedback 패스워드를 입력하세요.
+                .form-group
+                    label(for='check-password') 패스워드 확인
+                    input#check-password.form-control(type='password' placeholder='password check'
+                        required minlength='6' maxlength='50' onchange='isSame()')
+                    small.invalid-feedback 패스워드를 확인하세요.
+
+                if signUpError
+                    smaill.error-message= signUpError
+                .form-group
+                    button.btn.btn-warning.btn-block(type='submit' aria-describedby='submitHelp')
+                        | 회원가입
+                button.btn.btn-warning.btn-block(type='submit') 회원가입
