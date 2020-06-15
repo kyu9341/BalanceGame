@@ -1,0 +1,61 @@
+extends layout
+
+block content
+    .container
+        #notice_name.row
+            // 게시판 명
+            h5 &#xC790;&#xC720;&#xAC8C;&#xC2DC;&#xD310;
+            a(href='write.html')
+                button.btn.btn-warning(type='button' style='display:relative; font-size:0.8rem; margin-left: 600px; ') &#xAE00;&#xC4F0;&#xAE30;
+        .main_content(style='display: flex;')
+            // 게시글
+            table#table_id.table
+                thead.thead-light(style='background-color:#f2eba7 !important;')
+                    tr
+                        th(scope='col') #
+                        th(scope='col') &#xC81C;&#xBAA9;
+                        th(scope='col') &#xAE00;&#xC4F4;&#xC774;
+                        th(scope='col') &#xB0A0;&#xC9DC;
+                        th(scope='col') &#xB313;&#xAE00;&#xC218;
+                        th(scope='col') &#xCD94;&#xCC9C;&#xC218;
+                tbody
+                    tr
+                        th(scope='row') 1
+                        td &#xAC8C;&#xC2DC;&#xD310; &#xC81C;&#xBAA9;&#xC785;&#xB2C8;&#xB2E4;.
+                        td Otto
+                        td 2020/06/12
+                        td 9999
+                        td +9999
+                    tr
+                        th(scope='row') 2
+                        td &#xC624;&#xB298; &#xAE00; &#xC880; &#xC4F0;&#xACA0;&#x3145;&#x3161;&#x3142;&#xB2C8;&#xB2E4;
+                        td Thornton
+                        td 2020/06/12
+                        td 9999
+                        td +9999
+                   
+          // 하단 페이지 이동바
+        #page_move.paging_comm
+            nav(aria-label='Page navigation example')
+                ul.pagination
+                    li.page-item.disabled
+                        a.page-link(tabindex='-1' aria-disabled='true' href='#' aria-label='previous')
+                            span(aria-hidden='true') &laquo;
+                    li.page-item.active(aria-current='page')
+                        a.page-link(href='#')
+                            | 1
+                            span.sr-only (current)
+                    li.page-item
+                        a.page-link(href='#') 2
+                    li.page-item
+                        a.page-link(href='#') 3
+                    li.page-item
+                        a.page-link(href='#') 4
+                    li.page-item
+                        a.page-link(href='#') 5
+                    li.page-item
+                        a.page-link(href='#' aria-label='Next')
+                            span(aria-hidden='true') &raquo;
+
+
+

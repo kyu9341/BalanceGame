@@ -1,5 +1,4 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -25,7 +24,6 @@ a {
    margin-left:auto;
    margin-right:auto;
 
-
  }
 /* 병아리 색 style="background-color: #FFE16F;" */
 /*우측 네비게이션바  */
@@ -44,8 +42,6 @@ a {
   border-bottom:10px solid #f2eba7 ; */
   background-color: #f2eaa7 !important;
   /* background-color: white !important; */
-
-
 }
 /* 드롭박스css */
 .list-group-item.active{
@@ -75,15 +71,7 @@ a {
   background-color: #f2eaa7;
   color:#f2eba7;
 }
-/* 홈 버튼 로고 */
-#logo{
-  display:block;
-  margin:10px;
-  /* 중앙정렬 */
-  /* margin-left:auto;
-  margin-right:auto;
-   */
-}
+
 
 /* 게시판 명 */
 #notice_name{

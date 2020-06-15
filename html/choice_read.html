@@ -33,7 +33,7 @@
         /*우측 네비게이션바  */
         #list-tab{
             position: relative;
-            margin-top:10px;
+            margin-top:78px;
             margin-left:10px;
             text-align:center;
             width: 20%;
@@ -139,15 +139,16 @@
 </head>
 
 <body>
+
 <div class="main_content" style="display: flex; "  >
     <!-- 게시글 제목 -->
     <div class="container" style="width:80%;  margin-top: 10px;">
         <div >
-            <h3>밥이 완성되었습니다.</h3>
+            <h3>부먹 vs 찍먹</h3>
         </div>
         <!-- 게시글 헤더 -->
         <div class="row" style="  font-size:0.6rem;  margin:10px; text-align: center; ">
-            <div class="col-2"><span>vs 게시판</span></div>
+            <div class="col-2"><span>자유게시판</span></div>
             <div class="col"><span>|</span></div>
             <!-- <div class="col"><span>작성자 user</span></div> -->
             <div class="col-2"><span>2020-06-15</span></div>
@@ -158,18 +159,40 @@
             <div class="col"><span>|</span></div>
             <div class="col-2"><span>추천 1,244</span></div>
         </div>
-
-
         <!-- 게시글 -->
 
         <!-- 게시글 내용 -->
         <div class="card" >
             <div class="card-body" style="height: 200px;">
-                게시글 내요옹
+                게시글 내용
             </div>
         </div>
 
+        <div class="row" style="width:100%; text-align: center; display:block; margin:10px;">
 
+            <!-- 닥전닥후 선택창(닥전) -->
+
+            <div class="card" style="width: 18rem; display:inline-block;">
+                <!-- <img src="..." class="card-img-top" alt="..."> -->
+                <div class="card-body">
+                    <h5 class="card-title">부먹</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary" style="background-color: #f2eaa7; color:black; border-color: #888141;">닥전</a>
+                </div>
+            </div>
+
+            <!-- 닥전닥후 선택창(닥후) -->
+
+            <div class="card" style="width: 18rem; display:inline-block;">
+                <!-- <img src="..." class="card-img-top" alt="..."> -->
+                <div class="card-body">
+                    <h5 class="card-title">찍먹</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary" style="background-color: #888141; color:black; border-color: #888141;">닥후</a>
+                </div>
+            </div>
+
+        </div>
 
         <div>
             댓글수
@@ -202,13 +225,13 @@
     </div>
 
     <!-- 우측 네비게이션바 -->
-    <div class="list-group" id="list-tab" role="tablist" >
+    <div class="list-group" id="list-tab" role="tablist" style="display:block; width:20%;" >
         <!-- <a class="list-group-item list-group-item-action" style="background-color: wheat;"  id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">게시글 작성</a> -->
         <!-- <a class="list-group-item list-group-item-action active"  id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">베스트 vs 게시판</a> -->
         <!-- <a class="list-group-item list-group-item-action" style="background-color: #f2eba7;" href="#list-home" role="tab" aria-controls="home">게시글 작성</a> -->
         <a class="list-group-item list-group-item-action" id="list-settings-list"  href="#" role="tab" aria-controls="settings">베스트 vs 게시판</a>
         <a class="list-group-item list-group-item-action" id="list-profile-list"  href="#" role="tab" aria-controls="profile">베스트 자유게시판</a>
-        <a class="list-group-item list-group-item-action" id="list-messages-list"  href="choice.html" role="tab" aria-controls="messages">vs 게시판</a>
+        <a class="list-group-item list-group-item-action" id="list-messages-list"  href="#list-messages" role="tab" aria-controls="messages">vs 게시판</a>
         <a class="list-group-item list-group-item-action" id="list-settings-list"  href="free.html" role="tab" aria-controls="settings">자유게시판</a>
     </div>
 </div>
