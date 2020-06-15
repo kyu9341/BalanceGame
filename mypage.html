@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang ="ko">
+    <head>
+        <meta charset="UTF-8">
+        <title>마이페이지</title>
+        <link rel="stylesheet" href="./css/bootstrap.css">
+        <link rel="stylesheet" href="mypage.css">
+        <script type="text/javascript" src="mypage.js"></script>
+    </head>
+    <body>
+        <div class="container" style="width: 1000px; height: 1000px;">
+            <div class="row">
+              <div class="col-sm">
+                <a href="main.html"><img src="./img/node_logo.png" 
+                    style="width: 240px; height: 100px; margin-top: 20px;"></a>
+              </div>
+            </div>
+            <div class="row" style="height: 1200px; width: 100%; display: flex;">
+              <div class="col-sm=4">
+                <div class="list-group" style="margin-top:80px; display:inline-block;">
+                    <button id="info" type="button" class="list-group-item list-group-item-action">내 정보</button>
+                    <button id="pw_change" type="button " class="list-group-item list-group-item-action">비밀번호 변경</button>
+                    <button type="button" class="list-group-item list-group-item-action">알림</button>
+                    <button type="button" class="list-group-item list-group-item-action">정책</button>
+                </div>
+              </div>
+              <div id="infomation"class="col-sm=6" style="margin: 50px; display:inline-block;">
+                <h2 style="margin-left: 20px;">My infomation</h2>
+                <img src="img/person.png" style="width:200px; height: 200px; border-radius: 20px;">
+                <label class="uers_name" style="font-size: 30px;">Son Hyun Bin</label>
+                <br/>
+                <label class="uers_email" style="font-size: 20px;">a01047290225@gmail.com</label>
+                <h4>exp</h4>
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                  </div>  
+                </div>
+              <div id="PW_Change"class="col-sm=6" style="margin: 50px; display:none;">
+                <h2 style="margin-left: 20px;">Password Change</h2>
+                <ul style="list-style:none;"> 
+                    <li><label for="Change_PW">Password</label></li>
+                    <li><input type="password" class="form-control" id="Change_PW" placeholder="Password"></li>
+                    <br/>
+                    <li><label for="Check_PW">Password Check</label></li>
+                    <li><input type="password" class="form-control" id="Check_PW" placeholder="Password check"></li>
+                    <br/>
+                    <li><button type="submit" class="btn btn-warning">Submit</button></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+    </body>
+</html>
