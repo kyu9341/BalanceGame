@@ -2,15 +2,69 @@ extends layout
 
 block content
     .container
-        .row.px-3.justify-content-center
-            input#post-id(hidden value='#{post.id}')
-            .post-content.col-10.pt-3!= post.content
-
+        div
+            h3 #{post.title}
+        // 게시글 헤더
+        .row(style='  font-size:0.6rem;  margin:10px; text-align: center; ')
+            .col-2
+                span vs &#xAC8C;&#xC2DC;&#xD310;
+            .col
+                span |
+            // <div class="col"><span>작성자 user</span></div>
+            .col-2
+                span 2020-06-15
+            .col
+                span |
+            .col-2
+                span &#xC870;&#xD68C;&#xC218; 39,930
+            .col
+                span |
+            .col-2
+                span &#xB313;&#xAE00; 111
+            .col
+                span |
+            .col-2
+                span &#xCD94;&#xCC9C; 1,244
+        // 게시글 내용
+        .card
+            .card-body(style='height: 200px;')!= post.content
+        .text-center
             -const liker = post && post.Liker.map(l => l.id).includes(user.id);
             if user && !liker
-                button.like 좋아요 #{post.like}
+                button.like.btn.btn-warning 좋아요 #{post.like}
             else if user && liker
-                button.unlike 좋아요 취소 #{post.like}
+                button.unlike.btn.btn-warning 좋아요 취소 #{post.like}
+        // 댓글쓰기
+        div
+            h4 댓글 쓰기
+            form.needs-validation(method='post' action='/post/free/'+ post.id + '/comment' novalidate)
+                textarea.form-control(name='content' aria-label='With textarea')
+                button.btn.btn-warning.btn-lg.btn-block(type='submit') 등록
+        // 댓글 수
+        div
+            span.d-block.p-2.bg-dark.text-white(style='background-color: #f2eaa7 !important; color:rgba(0, 0, 0, 0.61) !important') &#xB313;&#xAE00; &#xC218; 30
+        // 댓글창
+        div
+            .d-block.p-2.bg-dark.text-white(style='height:auto; background-color: #f2eaa756 !important; color:rgba(0, 0, 0, 0.61) !important')
+                div(style='border-bottom: 1px solid rgba(0, 0, 0, 0.205);')
+                    .row(style='margin:10px; ')
+                        .col-7
+                            span &starf;user1
+                            span  |
+                            span  2020-06-16 17:27
+                        .col-5
+                            button.btn.btn-warning(type='button')
+                                | 추천
+                                span 3
+                            button.btn.btn-warning(type='button')
+                                | 수정
+                                span 3
+                            button.btn.btn-warning(type='button') 신고
+                    div(style='margin:25px; ')
+                        span &#xB313;&#xAE00; &#xB0B4;&#xC6A9;
+
+
+
 
     script(type='application/javascript').
         let unlikeTag = document.querySelector('.unlike');

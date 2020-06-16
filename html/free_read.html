@@ -33,7 +33,7 @@
         /*우측 네비게이션바  */
         #list-tab{
             position: relative;
-            margin-top:10px;
+            margin-top:78px;
             margin-left:10px;
             text-align:center;
             width: 20%;
@@ -104,12 +104,12 @@
     </style>
 
     <!-- 홈 버튼 로고 -->
-    <a href="free.html"><img id="logo" src="images/balance.jpg" height="20%" width="35%" alt="닥전닥후" ></a>
+    <!-- <a href="free.html"><img id="logo" src="images/balance.jpg" height="20%" width="35%" alt="닥전닥후" ></a> -->
     <!-- 상단 네비바 -->
     <div id="top_navbar"  >
         <nav class="navbar navbar-light bg-light" style="background-color: #f2eba7 !important;" >
             <a class="navbar-brand" href="#">
-                <img src="images/chick.png" width="30" height="30" alt="" loading="lazy" style="border-radius: .90rem; border:1px solid #5c5729; margin-right:30px;">
+                <img src="images/balance.jpg" width="180" height="30" alt="" loading="lazy" style=" background-color: #f2eaa7; margin-right:30px;">
             </a>
             <!-- 검색창 -->
             <form class="form-inline" style="justify-content: right; margin-left:460px;">
@@ -142,7 +142,7 @@
 <div class="main_content" style="display: flex; "  >
     <!-- 게시글 제목 -->
     <div class="container" style="width:80%;  margin-top: 10px;">
-        <div >
+        <div>
             <h3>밥이 완성되었습니다.</h3>
         </div>
         <!-- 게시글 헤더 -->
@@ -159,9 +159,6 @@
             <div class="col-2"><span>추천 1,244</span></div>
         </div>
 
-
-        <!-- 게시글 -->
-
         <!-- 게시글 내용 -->
         <div class="card" >
             <div class="card-body" style="height: 200px;">
@@ -169,75 +166,105 @@
             </div>
         </div>
 
-
-
+        <!-- 댓글쓰기 -->
         <div>
-            댓글수
+            <h4>댓글 쓰기</h4>
+            <div class="input-group">
+                <textarea class="form-control" aria-label="With textarea"></textarea>
+                <button type="button" class="btn btn-primary btn-lg btn-block" style="color:rgba(0, 0, 0, 0.61); margin-bottom:10px; border:none; background-color: #ffc107;">등록</button>
+            </div>
         </div>
+
+        <!-- 댓글 수 -->
         <div>
-            댓글
+            <span class="d-block p-2 bg-dark text-white" style="background-color: #f2eaa7 !important; color:rgba(0, 0, 0, 0.61) !important">댓글 수 30</span>
+
         </div>
+
         <!-- 댓글창 -->
-        <!-- <div>
-            <div id="disqus_thread"></div>
-        <script>
-        /**
-        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-        /*
-        var disqus_config = function () {
-        this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-        };
-        */
-        (function() { // DON'T EDIT BELOW THIS LINE
-        var d = document, s = d.createElement('script');
-        s.src = 'https://free-read.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-        })();
-        </script>
-        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-                                                 -->
-    </div>
+        <div>
 
-    <!-- 우측 네비게이션바 -->
-    <div class="list-group" id="list-tab" role="tablist" >
-        <!-- <a class="list-group-item list-group-item-action" style="background-color: wheat;"  id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">게시글 작성</a> -->
-        <!-- <a class="list-group-item list-group-item-action active"  id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">베스트 vs 게시판</a> -->
-        <!-- <a class="list-group-item list-group-item-action" style="background-color: #f2eba7;" href="#list-home" role="tab" aria-controls="home">게시글 작성</a> -->
-        <a class="list-group-item list-group-item-action" id="list-settings-list"  href="#" role="tab" aria-controls="settings">베스트 vs 게시판</a>
-        <a class="list-group-item list-group-item-action" id="list-profile-list"  href="#" role="tab" aria-controls="profile">베스트 자유게시판</a>
-        <a class="list-group-item list-group-item-action" id="list-messages-list"  href="choice.html" role="tab" aria-controls="messages">vs 게시판</a>
-        <a class="list-group-item list-group-item-action" id="list-settings-list"  href="free.html" role="tab" aria-controls="settings">자유게시판</a>
-    </div>
-</div>
+            <div class="d-block p-2 bg-dark text-white" style="height:auto; background-color: #f2eaa756 !important; color:rgba(0, 0, 0, 0.61) !important">
+
+                <div style="border-bottom: 1px solid rgba(0, 0, 0, 0.205);">
+                    <div class="row" style="margin:10px; ">
+                        <div class="col-7">
+                            <span>★user1</span>
+                            <span> | </span>
+                            <span> 2020-06-16 17:27</span>
+                        </div>
+                        <div class="col-5" >
+                            <button  type="button" class="btn btn-warning">추천<span>3</span></button>
+                            <button  type="button" class="btn btn-warning">비추천<span>3</span></button>
+                            <button  type="button" class="btn btn-warning">신고</button>
+                        </div>
+                    </div>
+                    <div style="margin:25px; ">
+                        <span >댓글 내용</span>
+                    </div>
+                </div>
+
+                <div style="border-bottom: 1px solid rgba(0, 0, 0, 0.205);">
+                    <div class="row" style="margin:10px; ">
+                        <div class="col-7">
+                            <span>★user2</span>
+                            <span> | </span>
+                            <span> 2020-06-16 17:27</span>
+                        </div>
+                        <div class="col-5" >
+                            <button  type="button" class="btn btn-warning">추천<span>3</span></button>
+                            <button  type="button" class="btn btn-warning">비추천<span>3</span></button>
+                            <button  type="button" class="btn btn-warning">신고</button>
+                        </div>
+                    </div>
+                    <div style="margin:25px; ">
+                        <span >댓글 내용</span>
+                    </div>
+                </div>
 
 
-<!-- 하단 페이지 이동바 -->
-<div id="page_move" class="paging_comm">
-    <nav aria-label="Page navigation example">
-        <ul class="pagination">
-            <li class="page-item disabled">
-                <a class="page-link"  tabindex="-1" aria-disabled="true" href="#" aria-label="previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-            <li class="page-item active" aria-current="page">
-                <a class="page-link" href="#">1 <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">4</a></li>
-            <li class="page-item"><a class="page-link" href="#">5</a></li>
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
-</div>
+
+
+            </div>
+
+
+
+
+            <!-- 우측 네비게이션바 -->
+            <div class="list-group" id="list-tab" role="tablist" >
+                <!-- <a class="list-group-item list-group-item-action" style="background-color: wheat;"  id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">게시글 작성</a> -->
+                <!-- <a class="list-group-item list-group-item-action active"  id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">베스트 vs 게시판</a> -->
+                <!-- <a class="list-group-item list-group-item-action" style="background-color: #f2eba7;" href="#list-home" role="tab" aria-controls="home">게시글 작성</a> -->
+                <a class="list-group-item list-group-item-action" id="list-settings-list"  href="#" role="tab" aria-controls="settings">베스트 vs 게시판</a>
+                <a class="list-group-item list-group-item-action" id="list-profile-list"  href="#" role="tab" aria-controls="profile">베스트 자유게시판</a>
+                <a class="list-group-item list-group-item-action" id="list-messages-list"  href="choice.html" role="tab" aria-controls="messages">vs 게시판</a>
+                <a class="list-group-item list-group-item-action" id="list-settings-list"  href="free.html" role="tab" aria-controls="settings">자유게시판</a>
+            </div>
+
+            <!-- 하단 페이지 이동바 -->
+            <div id="page_move" class="paging_comm">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <li class="page-item disabled">
+                            <a class="page-link"  tabindex="-1" aria-disabled="true" href="#" aria-label="previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item active" aria-current="page">
+                            <a class="page-link" href="#">1 <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">4</a></li>
+                        <li class="page-item"><a class="page-link" href="#">5</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
 
 
 </body>

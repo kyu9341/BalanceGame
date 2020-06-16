@@ -2,7 +2,7 @@ extends layout
 
 block content
     .container
-        .form-group
+        .form-group.mt-5
             form.needs-validation.col-sm-10(method='post' action='/post/write' novalidate)
                 .form-group
                     select.custom-select(name='board_type')
@@ -37,7 +37,7 @@ block content
                 focus: true,
                 callbacks: {
                     onImageUpload: function (files, editor, welEditable) {
-                        for (var i = files.length - 1; i >= 0; i--) {
+                        for (let i = files.length - 1; i >= 0; i--) {
                             sendFile(files[i], this);
                         }
                     }
@@ -45,7 +45,7 @@ block content
             });
 
             function sendFile(file, el) {
-                var form_data = new FormData();
+                let form_data = new FormData();
                 form_data.append('file', file);
                 $.ajax({
                     data: form_data,

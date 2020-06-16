@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
-const { Post, User, Like } = require('../models');
+const { Post, User, Like, Comment } = require('../models');
 
-router.get('/list/:page', async (req, res, next) => {
+router.get('/free/:page', async (req, res, next) => {
    try{
       const curPage = req.params.page;
       const pageSize = 10; // 한 페이지 당 게시글
@@ -31,16 +31,27 @@ router.get('/list/:page', async (req, res, next) => {
       }
 
       const posts = await Post.findAll({
+         include: [{
+            model: User, // 작성자를 가져옴
+            attributes: ['id', 'nickname'],
+         },],
          offset: no,
          limit: pageSize,
-         order: 'createAt DESC',
+         order: [['createdAt', 'DESC']],
       });
 
-      res.render('/free-board', {
+      res.render('free-board', {
          title: 'free-board',
          posts: posts,
          user: req.user,
          count: post.count,
+         totalPage: totalPage,
+         curSet: curSet,
+         pageSize: pageSize,
+         pageListSize: pageListSize,
+         curPage: curPage,
+         totalSet: totalSet,
+
       });
 
    } catch (error) {
