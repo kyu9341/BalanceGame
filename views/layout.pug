@@ -54,20 +54,22 @@ body.bg-white
                                     a.dropdown-item(href='#') 출석부
                                     a.dropdown-item(href='#') 내가 쓴 글
                                     a.dropdown-item(href='#') 좋아요한 글
+                                    a.dropdown-item(href='/write') 글쓰기
                                     .dropdown-divider
                                     a.dropdown-item(href='/auth/logout') 로그아웃
     .row.justify-content-center
         .col-9
             block content
         .col-3
-            .thumbnail.mr-5.ml-5
-                .thumb-wapper
-                    img(src='/images/chick.png' width=50 height=50)
-                .text-area
-                    label=user.nickname
-                .mail=user.email
-                .progress
-                    .progress-bar(role='progressbar' style='width: 25%;' aria-valuenow='25' aria-valuemin='0' aria-valuemax='100') 25%
+            if user
+                .thumbnail.mr-5.ml-5
+                    .thumb-wapper
+                        img(src='/images/chick.png' width=50 height=50)
+                    .text-area
+                        label=user.nickname
+                    .mail=user.email
+                    .progress
+                        .progress-bar(role='progressbar' style='width: 25%;' aria-valuenow='25' aria-valuemin='0' aria-valuemax='100') 25%
 
             // 우측 네비게이션바
             #list-tab.list-group.mt-5(role='tablist')

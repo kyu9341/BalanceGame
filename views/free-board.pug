@@ -5,12 +5,12 @@ block content
         #notice_name.row
             // 게시판 명
             h5 &#xC790;&#xC720;&#xAC8C;&#xC2DC;&#xD310;
-            a(href='write.html')
-                button.btn.btn-warning(type='button' style='display:relative; font-size:0.8rem; margin-left: 600px; ') &#xAE00;&#xC4F0;&#xAE30;
+            a(href='/write')
+                button.btn.btn-warning(type='button' style='display:relative; font-size:0.8rem; margin-left: 600px; ') 글쓰기
         .main_content(style='display: flex;')
             // 게시글
             table#table_id.table
-                thead.thead-light(style='background-color:#f2eba7 !important;')
+                thead.thead-warning(style='background-color:#f2eba7 !important;')
                     tr
                         th(scope='col') #
                         th(scope='col') 제목
@@ -83,5 +83,3 @@ block content
                 //    if curSet == (totalSet - 1)
                 //        li.disabled
                 //            a(href='#', aria-label='Next')
-
-
