@@ -33,11 +33,19 @@ router.get('/free/:id', async (req, res, next) => {
                 model: User, // 좋아요를 누른 사람들을 가져옴
                 attributes: ['id', 'nickname'],
                 as: 'Liker', // include 에서 같은 모델이 여러개면 as로 구분
-            }],
+            },],
+        });
+        const comments = await Comment.findAll({
+           where: { postId: req.params.id },
+           include: {
+              model: User,
+              attributes: ['id', 'nickname'],
+           } ,
         });
         res.render('free-detail', {
             title: 'board - free',
             post: post,
+            comments: comments,
             user: req.user,
         });
 
@@ -115,7 +123,7 @@ router.post('/free/:id/comment', async (req, res, next) => {
             userId: req.user.id,
             postId: req.params.id,
         });
-        res.redirect('/free/:id');
+        res.redirect('/post/free/' + req.params.id);
     } catch (error) {
         console.error(error);
         next(error);

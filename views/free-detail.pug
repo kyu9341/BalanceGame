@@ -27,7 +27,7 @@ block content
                 span &#xCD94;&#xCC9C; 1,244
         // 게시글 내용
         .card
-            .card-body(style='height: 200px;')!= post.content
+            .card-body!= post.content
         .text-center
             -const liker = post && post.Liker.map(l => l.id).includes(user.id);
             if user && !liker
@@ -37,31 +37,33 @@ block content
         // 댓글쓰기
         div
             h4 댓글 쓰기
-            form.needs-validation(method='post' action='/post/free/'+ post.id + '/comment' novalidate)
+            form#comment-form.needs-validation(method='post' action='/post/free/' + post.id + '/comment' novalidate)
                 textarea.form-control(name='content' aria-label='With textarea')
-                button.btn.btn-warning.btn-lg.btn-block(type='submit') 등록
+                button#comment-form-button.btn.btn-warning.btn-lg.btn-block(type='submit') 등록
         // 댓글 수
         div
             span.d-block.p-2.bg-dark.text-white(style='background-color: #f2eaa7 !important; color:rgba(0, 0, 0, 0.61) !important') &#xB313;&#xAE00; &#xC218; 30
         // 댓글창
+        -console.log("comment: ")
         div
             .d-block.p-2.bg-dark.text-white(style='height:auto; background-color: #f2eaa756 !important; color:rgba(0, 0, 0, 0.61) !important')
-                div(style='border-bottom: 1px solid rgba(0, 0, 0, 0.205);')
-                    .row(style='margin:10px; ')
-                        .col-7
-                            span &starf;user1
-                            span  |
-                            span  2020-06-16 17:27
-                        .col-5
-                            button.btn.btn-warning(type='button')
-                                | 추천
-                                span 3
-                            button.btn.btn-warning(type='button')
-                                | 수정
-                                span 3
-                            button.btn.btn-warning(type='button') 신고
-                    div(style='margin:25px; ')
-                        span &#xB313;&#xAE00; &#xB0B4;&#xC6A9;
+                each comment in comments
+                    div(style='border-bottom: 1px solid rgba(0, 0, 0, 0.205);')
+                        .row(style='margin:10px; ')
+                            .col-7
+                                span=comment.user.nickname
+                                span  |
+                                span=comment.createdAt
+                            .col-5
+                                button.btn.btn-warning(type='button')
+                                    | 추천
+                                    span 3
+                                button.btn.btn-warning(type='button')
+                                    | 수정
+                                    span 3
+                                button.btn.btn-warning(type='button') 신고
+                        div(style='margin:25px; ')
+                            span=comment.content
 
 
 
@@ -104,6 +106,23 @@ block content
             });
         })
 
+        // $(function () {
+        //     const commentForm = document.querySelector('#comment-form-button');
+        //     let pathname = window.location.pathname;
+        //     commentForm.addEventListener('click', function () {
+        //         // let postId = document.querySelector('#post-id').value;
+        //         let xhr = new XMLHttpRequest();
+        //         xhr.onload = function () {
+        //             if (xhr.status === 200) {
+        //                 location.reload();
+        //             } else {
+        //                 console.error(xhr.responseText);
+        //             }
+        //         };
+        //         xhr.open('POST', pathname + '/comment');
+        //         xhr.send();
+        //     });
+        // });
         // $(function () {
         //     let pathname = window.location.pathname;
         //
