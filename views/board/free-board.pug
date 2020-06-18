@@ -30,8 +30,10 @@ block content
                                     a(href='/post/free/'+ post.id) #{post.title}
                                 td #{post.user.nickname}
                                 - let dateform = new Date(post.createdAt)
-                                // - let resultDate = moment(dateform).startOf('hour').fromNow()
-                                td #{post.createdAt}
+                                - moment.locale('ko');
+                                // - let resultDate = moment(dateform).format('MMMM Do YYYY, h:mm:ss a');
+                                - let resultDate = moment(dateform).startOf('hour').fromNow();
+                                td #{resultDate}
                                 td #{post.id}
                                 td #{post.like}
 

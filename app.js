@@ -6,6 +6,7 @@ const logger = require('morgan');
 const session = require('express-session');
 const flash = require('connect-flash');
 const passport = require('passport');
+const moment = require('moment');
 require('dotenv').config();
 
 const indexRouter = require('./routes/index');

@@ -1,4 +1,5 @@
 const express = require('express');
+const moment = require('moment');
 const router = express.Router();
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 const { Post, User, Like, Comment } = require('../models');
@@ -54,6 +55,7 @@ router.get('/free/:page', async (req, res, next) => {
          totalSet,
          startPage,
          endPage,
+         moment,
 
       });
 
