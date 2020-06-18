@@ -7,7 +7,15 @@ a {
 }
 .error-message { color: red; }
 
-
+.my.pagination > .active > a,
+.my.pagination > .active > span,
+.my.pagination > .active > a:hover,
+.my.pagination > .active > span:hover,
+.my.pagination > .active > a:focus,
+.my.pagination > .active > span:focus {
+  background: #FFB400;
+  border-color: #FFB400;
+}
 
    /*
        @media screen and (max-width: 700px)  {

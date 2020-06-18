@@ -10,19 +10,20 @@ router.get('/free/:page', async (req, res, next) => {
       const pageListSize = 5; // 페이지의 갯수
 
       let no = ""; // limit 변수
-      let totalPageCount = 0; // 전체 게시글 수
+      let totalPostCount = 0; // 전체 게시글 수
 
       const post = await Post.findAndCountAll({
       });
-      totalPageCount = post.count;
+      totalPostCount = post.count;
 
-      if (totalPageCount < 0) totalPageCount = 0;
+      if (totalPostCount < 0) totalPostCount = 0;
 
-      const totalPage = Math.ceil(totalPageCount / pageSize); // 전체 페이지 수
+      const totalPage = Math.ceil(totalPostCount / pageSize); // 전체 페이지 수
       const totalSet = Math.ceil(totalPage / pageListSize) // 전체 세트 수
       const curSet = Math.ceil(curPage / pageListSize); // 현재 세트 번호
       const startPage = ((curSet - 1) * pageListSize) + 1; // 현재 세트 내 출력될 시작 페이지
-      let endPage = (startPage + pageListSize) - 1;
+      let endPage = (startPage + pageListSize) - 1; // 현재 세트 내 출력될 마지막 페이지
+      if (totalPage < endPage) endPage = totalPage;
 
       if (curPage < 0) {
          no = 0;
@@ -44,13 +45,15 @@ router.get('/free/:page', async (req, res, next) => {
          title: 'free-board',
          posts: posts,
          user: req.user,
-         count: post.count,
-         totalPage: totalPage,
-         curSet: curSet,
-         pageSize: pageSize,
-         pageListSize: pageListSize,
-         curPage: curPage,
-         totalSet: totalSet,
+         count: totalPostCount,
+         totalPage,
+         curSet,
+         pageSize,
+         pageListSize,
+         curPage,
+         totalSet,
+         startPage,
+         endPage,
 
       });
 
