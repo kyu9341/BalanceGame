@@ -1,4 +1,4 @@
-extends layout
+extends ../layout
 
 block content
     .container
@@ -29,7 +29,8 @@ block content
         .card
             .card-body!= post.content
         .text-center
-            -const liker = post && post.Liker.map(l => l.id).includes(user.id);
+            if user
+                -const liker = post && post.Liker.map(l => l.id).includes(user.id);
             if user && !liker
                 button.like.btn.btn-warning 좋아요 #{post.like}
             else if user && liker
@@ -42,9 +43,8 @@ block content
                 button#comment-form-button.btn.btn-warning.btn-lg.btn-block(type='submit') 등록
         // 댓글 수
         div
-            span.d-block.p-2.bg-dark.text-white(style='background-color: #f2eaa7 !important; color:rgba(0, 0, 0, 0.61) !important') &#xB313;&#xAE00; &#xC218; 30
+            span.d-block.p-2.bg-dark.text-white(style='background-color: #f2eaa7 !important; color:rgba(0, 0, 0, 0.61) !important') 댓글 수
         // 댓글창
-        -console.log("comment: ")
         div
             .d-block.p-2.bg-dark.text-white(style='height:auto; background-color: #f2eaa756 !important; color:rgba(0, 0, 0, 0.61) !important')
                 each comment in comments

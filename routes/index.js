@@ -35,7 +35,7 @@ router.get('/login', (req, res, next) => {
 });
 
 router.get('/write', (req, res, next) => {
-  res.render('write', {
+  res.render('board/write', {
     title: 'post - write',
     user: req.user,
     postError: req.flash('postError'),

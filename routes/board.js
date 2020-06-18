@@ -40,7 +40,7 @@ router.get('/free/:page', async (req, res, next) => {
          order: [['createdAt', 'DESC']],
       });
 
-      res.render('free-board', {
+      res.render('board/free-board', {
          title: 'free-board',
          posts: posts,
          user: req.user,

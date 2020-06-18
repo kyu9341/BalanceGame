@@ -42,7 +42,7 @@ router.get('/free/:id', async (req, res, next) => {
               attributes: ['id', 'nickname'],
            } ,
         });
-        res.render('free-detail', {
+        res.render('board/free-detail', {
             title: 'board - free',
             post: post,
             comments: comments,

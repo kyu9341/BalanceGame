@@ -1,21 +1,21 @@
-extends layout
+extends ../layout
 
 block content
     .container
         .form-group.mt-5
             form.needs-validation.col-sm-10(method='post' action='/post/write' novalidate)
                 .form-group
-                    select.custom-select(name='board_type')
-                        option(selected='') 게시판 선택
+                    select#select-board.custom-select(name='board_type' onchange='selectedBoard()' required)
+                        option(value='' selected) 게시판 선택
                         option(value='vs') vs 게시판
                         option(value='free') 자유 게시판
+                small#board-option.form-text.text-danger 게시판을 선택하세요.
                 .form-group
                     label(for='title') 제목
                     input#title.form-control(type='text' placeholder='제목' aria-describedby='titleHelp' name='title' required max='50')
                     small#titleHelp.form-text.text-muted
                         |제목을 입력하세요.
                     small.invalid-feedback | 제목을 입력하세요.
-                    small.form-text.text-danger Title Error
                 .form-group
                     label(for='fullDescription') 글쓰기
                     textarea#fullDescription.editor.form-control(type='textarea' placeholder='글쓰기.'
@@ -23,12 +23,31 @@ block content
                     small#fullDescriptionHelp.form-text.text-muted
                         |내용을 입력하세요.
                     small.invalid-feedback 내용을 입력하세요.
-                    small.form-text.text-danger FullDescription Error
                 .form-group
-                    button.btn.btn-warning.btn-block(type='submit' aria-describedby='submitHelp')
+                    button#write-btn.btn.btn-warning.btn-block(type='submit' aria-describedby='submitHelp')
                         |글쓰기
+    include ../form-validation
     script(type='application/javascript').
+        let writeButton = document.getElementById('write-btn');
+        writeButton.disabled = true;
+
+        function selectedBoard() {
+            let writeButton = document.getElementById('write-btn');
+            let select = document.getElementById("select-board");
+            let value = select.options[select.selectedIndex].value;
+            if (value === '') {
+                document.getElementById('board-option').innerHTML = '게시판을 선택하세요.';
+                document.getElementById('board-option').style.display = "block";
+                document.getElementById('same').style.color = 'red';
+                writeButton.disabled = true;
+            } else {
+                document.getElementById('board-option').style.display = "none";
+                writeButton.disabled = false;
+            }
+        }
+
         $(function () {
+
             $('.editor').summernote({
                 fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Noto Sans KR', 'Merriweather'],
                 placeholder: '내용을 입력하세요.',
