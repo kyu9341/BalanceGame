@@ -29,9 +29,9 @@ body.bg-white
             .collapse.navbar-collapse#navbarSupportedContent
                 ul.navbar-nav.mr-auto
                     li.nav-item
-                        form.form-inline(style='justify-content: right; margin-left:460px;')
-                            input.form-control.mr-sm-2(type='search', placeholder='Search', aria-label='Search')
-                            button.btn.btn-outline-success.my-2.my-sm-0(type='submit', style='background-color: white;') Search
+                        form.form-inline(style='justify-content: right; margin-left:460px;' action='/search/1' method='get')
+                            input.form-control.mr-sm-2(type='search' name='search' placeholder='Search' aria-label='Search')
+                            button.btn.btn-outline-success.my-2.my-sm-0(type='submit' style='background-color: white;') Search
                 // 사용자
 
                 ul.navbar-nav.justify-content-end
