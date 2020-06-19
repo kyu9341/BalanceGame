@@ -3,8 +3,8 @@ const router = express.Router();
 const {isLoggedIn, isNotLoggedIn} = require('./middlewares');
 const { Post, User, Comment } = require('../models');
 const sequelize = require('sequelize');
-const moment = require('moment');
 const paging = require('./paging');
+const moment = require('moment');
 
 // 프로필 페이지
 router.get('/profile', isLoggedIn, (req, res) => {
@@ -22,11 +22,43 @@ router.get('/sign-up', isNotLoggedIn, (req, res) => {
 
 
 // 메인 페이지 www
-router.get('/', (req, res, next) => {
-    res.render('index', {
-        title: 'BalanceGame',
-        user: req.user,
-    });
+router.get('/', async (req, res, next) => {
+    try {
+        const freePosts = await Post.findAll({
+            include: [{
+                model: User, // 작성자를 가져옴
+                attributes: ['id', 'nickname'],
+            },],
+            offset: 0,
+            limit: 5,
+            // attributes: { include: [[await Comment.count({}) ], 'count'] },
+            order: [['createdAt', 'DESC']],
+            where: { board_type: 'free' },
+        });
+
+        const vsPosts = await Post.findAll({
+            include: [{
+                model: User, // 작성자를 가져옴
+                attributes: ['id', 'nickname'],
+            },],
+            offset: 0,
+            limit: 5,
+            // attributes: { include: [[await Comment.count({}) ], 'count'] },
+            order: [['createdAt', 'DESC']],
+            where: { board_type: 'vs' },
+        });
+        res.render('index', {
+            title: 'BalanceGame',
+            user: req.user,
+            freePosts,
+            vsPosts,
+            moment,
+        });
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
+
 });
 
 // 로그인 페이지

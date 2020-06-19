@@ -1,3 +1,59 @@
 extends layout
 
 block content
+    .container
+        .row.mt-5.justify-content-center
+            .col-6
+                .card
+                    table#table_id.table.table-hover.table-border
+                        thead.bg-warning
+                            tr
+                                th(scope='col') 자유 게시판
+                                th(scope='col')
+                                th(scope='col')
+                                th(scope='col') 댓글
+                                th(scope='col') 추천
+                        tbody
+                            if count === 0
+                                tr
+                                    th.text-center(colspan=4) 게시글이 없습니다.
+                            else
+                                each post in freePosts
+                                    tr
+                                        td
+                                            a(href=`/post/${post.board_type}/${post.id}`) #{post.title}
+                                        td #{post.user.nickname}
+                                        - let dateform = new Date(post.createdAt)
+                                        - moment.locale('ko');
+                                        // - let resultDate = moment(dateform).format('MMMM Do YYYY, h:mm:ss a');
+                                        - let resultDate = moment(dateform).startOf('hour').fromNow();
+                                        td #{resultDate}
+                                        td #{post.id}
+                                        td #{post.like}
+            .col-6
+                .card
+                    table#table_id.table.table-hover.table-border
+                        thead.bg-warning
+                            tr
+                                th(scope='col') vs 게시판
+                                th(scope='col')
+                                th(scope='col')
+                                th(scope='col') 댓글
+                                th(scope='col') 추천
+                        tbody
+                            if count === 0
+                                tr
+                                    th.text-center(colspan=4) 게시글이 없습니다.
+                            else
+                                each post in vsPosts
+                                    tr
+                                        td
+                                            a(href=`/post/${post.board_type}/${post.id}`) #{post.title}
+                                        td #{post.user.nickname}
+                                        - let dateform = new Date(post.createdAt)
+                                        - moment.locale('ko');
+                                        // - let resultDate = moment(dateform).format('MMMM Do YYYY, h:mm:ss a');
+                                        - let resultDate = moment(dateform).startOf('hour').fromNow();
+                                        td #{resultDate}
+                                        td #{post.id}
+                                        td #{post.like}

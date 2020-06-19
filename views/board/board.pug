@@ -1,16 +1,20 @@
 extends ../layout
 
 block content
-    .container
+    .container.justify-content-center
         #notice_name.row
             // 게시판 명
-            h5=type
-            a(href='/write')
-                button.btn.btn-warning(type='button' style='display:relative; font-size:0.8rem; margin-left: 600px; ') 글쓰기
-        .main_content(style='display: flex;')
+            //h5=type
+        div
             // 게시글
-            table#table_id.table
-                thead.thead-warning(style='background-color:#f2eba7 !important;')
+
+            nav(aria-label='breadcrumb')
+                ol.breadcrumb.alert-info.mt-5
+                    li.breadcrumb-item.active(aria-current='page')=type
+
+
+            table#table_id.table.table-hover.table-border
+                thead.alert-warning
                     tr
                         //th(scope='col') #
                         th(scope='col') 제목
@@ -26,6 +30,7 @@ block content
                         each post in posts
                             tr
                                 //td #{post.id}
+                                // -let postUrl = `/post/${post.board_type}/${post.id}`;
                                 td
                                     a(href=`/post/${post.board_type}/${post.id}`) #{post.title}
                                 td #{post.user.nickname}
@@ -70,3 +75,16 @@ block content
                                 span(aria-hidden='true') &raquo;
 
     script(type='application/javascript').
+
+        //function clickTrEvent(post) {
+        //    console.log(post);
+        //    location.href = '/post' + post.board_type + '/' + post.id;
+        //}
+        //
+        // let table = document.getElementById("table_id");
+        // let rows = table.getElementsByTagName("tr");
+        // for (let i = 0; i < rows.length; i++) {
+        //     rows[i].onclick = function () {
+        //         location.href = `/post/free/1`;
+        //     }
+        // } // '/post/' + post.board_type + post.id;

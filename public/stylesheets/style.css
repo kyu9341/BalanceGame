@@ -81,17 +81,17 @@ a {
 }
 
 
-/* 게시판 명 */
-#notice_name{
-  position: relative;
-  margin-left:20px;
-  margin-top:20px;
-  font-size:1em;
-}
+/*!* 게시판 명 *!*/
+/*#notice_name{*/
+/*  position: relative;*/
+/*  margin-left:20px;*/
+/*  margin-top:20px;*/
+/*  font-size:1em;*/
+/*}*/
 
-/* 게시판 */
-#table_id{
-  width:80%;  margin-top:10px; position:relative;
-  /* table-layout:fixed; */
-}
+/*!* 게시판 *!*/
+/*#table_id{*/
+/*  width:80%;  margin-top:10px; position:relative;*/
+/*  !* table-layout:fixed; *!*/
+/*}*/
 

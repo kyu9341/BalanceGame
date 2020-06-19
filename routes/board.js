@@ -6,7 +6,6 @@ const { Post, User, Like, Comment } = require('../models');
 const paging = require('./paging');
 const sequelize = require('sequelize');
 
-
 router.get('/:type/:page', async (req, res, next) => {
    try{
       const board_type = req.params.type;
