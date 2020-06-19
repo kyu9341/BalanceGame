@@ -47,7 +47,7 @@ body.bg-white
                                     style='background-color: #f2eba7; border:none; outline:none;')
                                     // 사용자 이미지
                                     a.navbar-brand(href='#')
-                                        img(src='images/ic_pic.gif', width='20', height='20', alt='', loading='lazy', style='border-radius: .25rem;')
+                                        img(src='/images/chick.png', width='20', height='20', alt='', loading='lazy', style='border-radius: .25rem;')
                                     | #{user.nickname} ▼
                                 .dropdown-menu.dropdown-menu-sm-right
                                     a.dropdown-item(href='#') 마이페이지
@@ -75,5 +75,5 @@ body.bg-white
             #list-tab.list-group.mt-5(role='tablist')
                 a#list-best-vs-list.list-group-item.list-group-item-action(href='#' role='tab' aria-controls='settings') &#xBCA0;&#xC2A4;&#xD2B8; vs &#xAC8C;&#xC2DC;&#xD310;
                 a#list-best-free-list.list-group-item.list-group-item-action(href='#' role='tab' aria-controls='profile') &#xBCA0;&#xC2A4;&#xD2B8; &#xC790;&#xC720;&#xAC8C;&#xC2DC;&#xD310;
-                a#list-vs-list.list-group-item.list-group-item-action(href='choice.html' role='tab' aria-controls='messages') vs &#xAC8C;&#xC2DC;&#xD310;
+                a#list-vs-list.list-group-item.list-group-item-action(href='/board/vs/1' role='tab' aria-controls='messages') vs &#xAC8C;&#xC2DC;&#xD310;
                 a#list-free-list.list-group-item.list-group-item-action(href='/board/free/1' role='tab' aria-controls='settings') 자유게시판

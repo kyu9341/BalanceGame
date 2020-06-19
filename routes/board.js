@@ -5,16 +5,20 @@ const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 const { Post, User, Like, Comment } = require('../models');
 const paging = require('./paging');
 
-router.get('/free/:page', async (req, res, next) => {
+router.get('/:type/:page', async (req, res, next) => {
    try{
+      const board_type = req.params.type;
+      const path = '/board/' + board_type + '/';
       const curPage = req.params.page;
       const pageSize = 10; // 한 페이지 당 게시글
       const pageListSize = 5; // 페이지의 갯수
+      const searchWordUrl = '';
 
       let offset = ""; // limit 변수
       let totalPostCount = 0; // 전체 게시글 수
 
       const post = await Post.findAndCountAll({
+         where: { board_type }
       });
       totalPostCount = post.count;
 
@@ -29,10 +33,11 @@ router.get('/free/:page', async (req, res, next) => {
          offset: result.offset,
          limit: pageSize,
          order: [['createdAt', 'DESC']],
+         where: { board_type },
       });
 
       res.render('board/board', {
-         title: 'free-board',
+         title: board_type + '-board',
          type: '자유 게시판',
          posts: posts,
          user: req.user,
@@ -42,15 +47,14 @@ router.get('/free/:page', async (req, res, next) => {
          curPage,
          result,
          moment,
-
+         path,
+         searchWordUrl,
       });
 
    } catch (error) {
       console.error(error);
       next(error);
    }
-
-
 });
 
 

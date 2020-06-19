@@ -48,8 +48,9 @@ router.get('/write', (req, res, next) => {
 
 router.get('/search/:page', async (req, res, next) => {
     try {
-
+        const path = '/search/';
         const searchWord = req.query.search;
+        const searchWordUrl = '?search=' + searchWord;
         const curPage = req.params.page;
         const pageSize = 10; // 한 페이지 당 게시글
         const pageListSize = 5; // 페이지의 갯수
@@ -94,6 +95,8 @@ router.get('/search/:page', async (req, res, next) => {
             pageListSize,
             curPage,
             moment,
+            path,
+            searchWordUrl,
         });
 
 

@@ -27,7 +27,7 @@ block content
                             tr
                                 //td #{post.id}
                                 td
-                                    a(href='/post/free/'+ post.id) #{post.title}
+                                    a(href=`/post/${post.board_type}/${post.id}`) #{post.title}
                                 td #{post.user.nickname}
                                 - let dateform = new Date(post.createdAt)
                                 - moment.locale('ko');
@@ -42,30 +42,31 @@ block content
         #page_move.paging_comm
             nav(aria-label='Page navigation example')
                 ul.pagination.my
-                    -console.log("start : "+ startPage + "   end: " + endPage + "   current : " + curPage + "   total : " + totalPage)
-                    if startPage > totalPage
+                    -console.log("start : "+ result.startPage + "   end: " + result.endPage + "   current : " + curPage + "   total : " + result.totalPage)
+                    if result.startPage > result.totalPage
                         li.page-item
-                            a.page-link(href=`/board/free/${startPage - 1}` aria-label='previous')
+                            a.page-link(href=`${path}${result.startPage - 1}${searchWordUrl}` aria-label='previous')
                                 span(aria-hidden='true') &laquo;
                     else
                         li.page-item.disabled
                             a.page-link(aria-disabled='true' href='javascript:void(0);' aria-label='previous')
                                 span(aria-hidden='true') &laquo;
-                    -for (let i = startPage; i <= endPage; i++)
+                    -for (let i = result.startPage; i <= result.endPage; i++)
                         if i == curPage
                             li.page-item.active(aria-current='page')
-                                a.page-link(href=`/board/free/${i}`)
+                                a.page-link(href=`${path}${i}${searchWordUrl}`)
                                     span=i
                         else
                             li.page-item(aria-current='page')
-                                a.page-link.text-warning(href=`/board/free/${i}`)
+                                a.page-link.text-warning(href=`${path}${i}${searchWordUrl}`)
                                     span=i
-                    if endPage < totalPage
+                    if result.endPage < result.totalPage
                         li.page-item
-                            a.page-link(href=`/board/free/${endPage + 1}` aria-label='Next')
+                            a.page-link(href=`${path}${result.endPage + 1}${searchWordUrl}` aria-label='Next')
                                 span(aria-hidden='true') &raquo;
                     else
                         li.page-item.disabled
                             a.page-link(href='javascript:void(0);' aria-label='Next')
                                 span(aria-hidden='true') &raquo;
 
+    script(type='application/javascript').
