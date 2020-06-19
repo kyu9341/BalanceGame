@@ -31,10 +31,11 @@ block content
         .text-center
             if user
                 -const liker = post && post.Liker.map(l => l.id).includes(user.id);
-            if user && !liker
-                button.like.btn.btn-warning 좋아요 #{post.like}
-            else if user && liker
-                button.unlike.btn.btn-warning 좋아요 취소 #{post.like}
+                -console.log("liker : " + liker + "  user : " + user);
+                if user && !liker
+                    button.like.btn.btn-warning 좋아요 #{post.like}
+                else if user && liker
+                    button.unlike.btn.btn-warning 좋아요 취소 #{post.like}
         // 댓글쓰기
         div
             h4 댓글 쓰기

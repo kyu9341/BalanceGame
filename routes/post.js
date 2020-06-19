@@ -57,18 +57,20 @@ router.get('/free/:id', async (req, res, next) => {
 
 router.post('/free/:id/like', async (req, res, next) => {
     try {
-        const post = await Post.findOne({ where: { id: req.params.id }});
+        let post = await Post.findOne({ where: { id: req.params.id }});
         await post.addLiker(req.user.id); // 현재 포스트와 Liker를 연결
         const likeCount = await Like.findAndCountAll({
             where: { postId: req.params.id },
         });
+        console.log("likeCount1: " + likeCount.count);
+
         await Post.update({
             like: likeCount.count,
         },{
             where: { id: req.params.id },
         });
 
-        console.log("likeCount: " + likeCount.count);
+        console.log("likeCount2: " + likeCount.count);
         res.status(200).send({
             title: 'board - free',
             post: post,
@@ -82,8 +84,16 @@ router.post('/free/:id/like', async (req, res, next) => {
 
 router.delete('/free/:id/like', async (req, res, next) => {
     try {
-        const post = await Post.findOne({ where: { id: req.params.id }});
         await Like.destroy({ where: { userId: req.user.id, postId: req.params.id }});
+        const likeCount = await Like.findAndCountAll({
+            where: { postId: req.params.id },
+        });
+        const post = await Post.update({
+            like: likeCount.count,
+        },{
+            where: { id: req.params.id },
+        });
+        // const post = await Post.findOne({ where: { id: req.params.id }});
         res.status(200).send({
             title: 'board - free',
             post: post,
