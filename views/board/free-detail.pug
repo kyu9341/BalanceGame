@@ -2,73 +2,60 @@ extends ../layout
 
 block content
     .container
-        div
-            h3 #{post.title}
-        // 게시글 헤더
-        .row(style='  font-size:0.6rem;  margin:10px; text-align: center; ')
-            .col-2
-                span vs &#xAC8C;&#xC2DC;&#xD310;
-            .col
-                span |
-            // <div class="col"><span>작성자 user</span></div>
-            .col-2
-                span 2020-06-15
-            .col
-                span |
-            .col-2
-                span &#xC870;&#xD68C;&#xC218; 39,930
-            .col
-                span |
-            .col-2
-                span &#xB313;&#xAE00; 111
-            .col
-                span |
-            .col-2
-                span &#xCD94;&#xCC9C; 1,244
-        // 게시글 내용
-        .card
+        nav(aria-label='breadcrumb')
+            ol.breadcrumb.mt-5.pl-2.pr-2
+                li.breadcrumb-item
+                    a(href='/') Home
+                li.breadcrumb-item.active
+                    a(href='/board/free/1' aria-current='page') 자유 게시판
+        .card.mt-3
+            h5.card-header=post.title
             .card-body!= post.content
-        .text-center
-            if user
-                -const liker = post && post.Liker.map(l => l.id).includes(user.id);
-                -console.log("liker : " + liker + "  user : " + user);
-                if user && !liker
-                    button.like.btn.btn-warning 좋아요 #{post.like}
-                else if user && liker
-                    button.unlike.btn.btn-warning 좋아요 취소 #{post.like}
+            .text-center.mb-3
+                if user
+                    -const liker = post && post.Liker.map(l => l.id).includes(user.id);
+                    -console.log("liker : " + liker + "  user : " + user);
+                    if user && !liker
+                        button.like.btn.btn-outline-warning 좋아요 #{post.like}
+                    else if user && liker
+                        button.unlike.btn.btn-outline-warning 좋아요 취소 #{post.like}
+
         // 댓글쓰기
-        div
-            h4 댓글 쓰기
+        .mt-3.border-bottom
+            h5 댓글
+            each comment in comments
+                .border-top.pt-1.pb-1
+                    .row
+                        .col-3.col-md-2.col-lg-1.pl-4=comment.user.nickname
+                        .col-6.col-md-7.col-lg-8
+                            .comment-show
+                                .comment-text.mb-3=comment.content
+                                small.d-block
+                                - let dateform = new Date(comment.createdAt)
+                                - moment.locale('ko');
+                                - let resultDate = moment(dateform).startOf('hour').fromNow();
+                                    small=resultDate
+                        .col-3.btn-group.btn-group-sm(role='group')
+                            small.d-block
+                                button.btn.btn-warning(type='button') 좋아요
+                                button.btn.btn-outline-warning(type='button') 삭제
+                                button.btn.btn-outline-warning(type='button') 신고
+
+
+
+        .mt-3
             form#comment-form.needs-validation(method='post' action='/post/free/' + post.id + '/comment' novalidate)
-                textarea.form-control(name='content' aria-label='With textarea')
-                button#comment-form-button.btn.btn-warning.btn-lg.btn-block(type='submit') 등록
-        // 댓글 수
-        div
-            span.d-block.p-2.bg-dark.text-white(style='background-color: #f2eaa7 !important; color:rgba(0, 0, 0, 0.61) !important') 댓글 수
-        // 댓글창
-        div
-            .d-block.p-2.bg-dark.text-white(style='height:auto; background-color: #f2eaa756 !important; color:rgba(0, 0, 0, 0.61) !important')
-                each comment in comments
-                    div(style='border-bottom: 1px solid rgba(0, 0, 0, 0.205);')
-                        .row(style='margin:10px; ')
-                            .col-7
-                                span=comment.user.nickname
-                                span  |
-                                span=comment.createdAt
-                            .col-5
-                                button.btn.btn-warning(type='button')
-                                    | 추천
-                                    span 3
-                                button.btn.btn-warning(type='button')
-                                    | 수정
-                                    span 3
-                                button.btn.btn-warning(type='button') 신고
-                        div(style='margin:25px; ')
-                            span=comment.content
+                .row.mb-5
+                    .col-8
+                        textarea.form-control(name='content' aria-label='With textarea' rows='2' required)
+                    .col-4
+                        button#comment-form-button.btn.btn-warning.h-100.mr-2(type='submit') 댓글 달기
+                    small.invalid-feedback.mb-5 내용을 입력하세요.
 
 
 
 
+    include ../form-validation
     script(type='application/javascript').
         let unlikeTag = document.querySelector('.unlike');
         let likeTag = document.querySelector('.like');

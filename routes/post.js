@@ -3,6 +3,7 @@ const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 const { Post, User, Like, Comment } = require('../models');
 const multer = require('multer');
 const path = require('path');
+const moment = require('moment');
 
 const router = express.Router();
 
@@ -47,6 +48,7 @@ router.get('/free/:id', async (req, res, next) => {
             post: post,
             comments: comments,
             user: req.user,
+            moment,
         });
 
     } catch (error) {

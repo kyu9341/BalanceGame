@@ -9,38 +9,38 @@ block content
             // 게시글
 
             nav(aria-label='breadcrumb')
-                ol.breadcrumb.alert-info.mt-5
+                ol.breadcrumb.mt-5
                     li.breadcrumb-item.active(aria-current='page')=type
 
-
-            table#table_id.table.table-hover.table-border
-                thead.alert-warning
-                    tr
-                        //th(scope='col') #
-                        th(scope='col') 제목
-                        th(scope='col') 글쓴이
-                        th(scope='col') 날짜
-                        th(scope='col') 댓글수
-                        th(scope='col') 추천수
-                tbody
-                    if count === 0
+            .card.mb-1
+                table#table_id.table.table-hover.table-border
+                    thead.alert-warning
                         tr
-                            th.text-center(colspan=4) 게시글이 없습니다.
-                    else
-                        each post in posts
+                            //th(scope='col') #
+                            th(scope='col') 제목
+                            th(scope='col') 글쓴이
+                            th(scope='col') 날짜
+                            th(scope='col') 댓글수
+                            th(scope='col') 추천수
+                    tbody
+                        if count === 0
                             tr
-                                //td #{post.id}
-                                // -let postUrl = `/post/${post.board_type}/${post.id}`;
-                                td
-                                    a(href=`/post/${post.board_type}/${post.id}`) #{post.title}
-                                td #{post.user.nickname}
-                                - let dateform = new Date(post.createdAt)
-                                - moment.locale('ko');
-                                // - let resultDate = moment(dateform).format('MMMM Do YYYY, h:mm:ss a');
-                                - let resultDate = moment(dateform).startOf('hour').fromNow();
-                                td #{resultDate}
-                                td #{post.id}
-                                td #{post.like}
+                                th.text-center(colspan=4) 게시글이 없습니다.
+                        else
+                            each post in posts
+                                tr
+                                    //td #{post.id}
+                                    // -let postUrl = `/post/${post.board_type}/${post.id}`;
+                                    td
+                                        a(href=`/post/${post.board_type}/${post.id}`) #{post.title}
+                                    td #{post.user.nickname}
+                                    - let dateform = new Date(post.createdAt)
+                                    - moment.locale('ko');
+                                    // - let resultDate = moment(dateform).format('MMMM Do YYYY, h:mm:ss a');
+                                    - let resultDate = moment(dateform).startOf('hour').fromNow();
+                                    td #{resultDate}
+                                    td #{post.id}
+                                    td #{post.like}
 
 
         // 하단 페이지 이동바
