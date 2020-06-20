@@ -57,7 +57,7 @@ router.get('/free/:id', async (req, res, next) => {
     }
 });
 
-router.post('/free/:id/like', async (req, res, next) => {
+router.post('/free/:id/like', isLoggedIn, async (req, res, next) => {
     try {
         let post = await Post.findOne({ where: { id: req.params.id }});
         await post.addLiker(req.user.id); // 현재 포스트와 Liker를 연결
@@ -84,7 +84,7 @@ router.post('/free/:id/like', async (req, res, next) => {
     }
 });
 
-router.delete('/free/:id/like', async (req, res, next) => {
+router.delete('/free/:id/like', isLoggedIn, async (req, res, next) => {
     try {
         await Like.destroy({ where: { userId: req.user.id, postId: req.params.id }});
         const likeCount = await Like.findAndCountAll({
@@ -127,8 +127,8 @@ router.get('/free/:id/comment', async (req, res, next) => {
     }
 });
 
-
-router.post('/free/:id/comment', async (req, res, next) => {
+// 댓글 입력
+router.post('/free/:id/comment', isLoggedIn, async (req, res, next) => {
     try {
         await Comment.create({
             content: req.body.content,
@@ -142,7 +142,8 @@ router.post('/free/:id/comment', async (req, res, next) => {
     }
 });
 
-router.patch('/free/:id/comment', async (req, res, next) => {
+
+router.patch('/free/:id/comment', isLoggedIn, async (req, res, next) => {
    try {
        await Comment.update({
           content: req.body.content,
@@ -155,7 +156,7 @@ router.patch('/free/:id/comment', async (req, res, next) => {
    }
 });
 
-router.delete('/free/:id/comment', async (req, res, next) => {
+router.delete('/free/:id/comment', isLoggedIn, async (req, res, next) => {
    try {
        await Comment.destroy({
           where: { postId: req.params.id, userId: req.user.id },

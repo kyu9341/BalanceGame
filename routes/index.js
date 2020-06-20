@@ -70,7 +70,7 @@ router.get('/login', (req, res, next) => {
     });
 });
 
-router.get('/write', (req, res, next) => {
+router.get('/write', isLoggedIn, (req, res, next) => {
     res.render('board/write', {
         title: 'post - write',
         user: req.user,
