@@ -15,6 +15,10 @@ module.exports = (sequelize, DataTypes) => (
             type: DataTypes.INTEGER.UNSIGNED,
             defaultValue: 0,
         },
+        comment_count: {
+            type: DataTypes.INTEGER.UNSIGNED,
+            defaultValue: 0,
+        },
     }, {
         timestamps: true,
         paranoid: true,

@@ -135,6 +135,13 @@ router.post('/free/:id/comment', isLoggedIn, async (req, res, next) => {
             userId: req.user.id,
             postId: req.params.id,
         });
+        let count = await Comment.count({ where: { postId: req.params.id } });
+        await Post.update({
+           comment_count: count,
+        },{
+            where: { id: req.params.id }
+          },
+        );
         res.redirect('/post/free/' + req.params.id);
     } catch (error) {
         console.error(error);
@@ -147,8 +154,10 @@ router.patch('/free/:id/comment', isLoggedIn, async (req, res, next) => {
    try {
        await Comment.update({
           content: req.body.content,
-          where: { postId: req.params.id, userId: req.user.id },
+       },{
+           where: { postId: req.params.id, userId: req.user.id },
        });
+
        res.redirect('/free/:id');
    } catch (error) {
         console.error(error);
@@ -161,6 +170,13 @@ router.delete('/free/:id/comment', isLoggedIn, async (req, res, next) => {
        await Comment.destroy({
           where: { postId: req.params.id, userId: req.user.id },
        });
+       let count = await Comment.count({ where: { postId: req.params.id } });
+       await Post.update({
+               comment_count: count,
+           },{
+               where: { id: req.params.id }
+           },
+       );
        res.redirect('/free/:id');
    } catch (error) {
        console.error(error);
