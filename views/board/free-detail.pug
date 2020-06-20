@@ -23,9 +23,18 @@ block content
         // 댓글쓰기
         .mt-3.border-bottom
             h5 댓글
+            .mt-3
+                form#comment-form.needs-validation(method='post' action='/post/free/' + post.id + '/comment' novalidate)
+                    .row.mb-5
+                        .col-10
+                            textarea.form-control(name='content' aria-label='With textarea' rows='2' required)
+                        .col-2
+                            button#comment-form-button.btn.btn-warning.h-100.mr-2(type='submit') 댓글 달기
+                        small.invalid-feedback.mb-5 내용을 입력하세요.
+
             each comment in comments
                 .border-top.pt-1.pb-1
-                    .row
+                    .row.mt-2
                         .col-3.col-md-2.col-lg-1.pl-4=comment.user.nickname
                         .col-6.col-md-7.col-lg-8
                             .comment-show
@@ -40,17 +49,11 @@ block content
                                 button.btn.btn-warning(type='button') 좋아요
                                 button.btn.btn-outline-warning(type='button') 삭제
                                 button.btn.btn-outline-warning(type='button') 신고
+            br.mb-5
+            br
+            br
 
 
-
-        .mt-3
-            form#comment-form.needs-validation(method='post' action='/post/free/' + post.id + '/comment' novalidate)
-                .row.mb-5
-                    .col-8
-                        textarea.form-control(name='content' aria-label='With textarea' rows='2' required)
-                    .col-4
-                        button#comment-form-button.btn.btn-warning.h-100.mr-2(type='submit') 댓글 달기
-                    small.invalid-feedback.mb-5 내용을 입력하세요.
 
 
 

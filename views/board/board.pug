@@ -9,17 +9,18 @@ block content
             // 게시글
 
             nav(aria-label='breadcrumb')
-                ol.breadcrumb.mt-5
-                    li.breadcrumb-item.active(aria-current='page')=type
+                ol.breadcrumb.mt-5.bg-warning
+                    li.breadcrumb-item.active.text-dark(aria-current='page')
+                        b=type
 
             .card.mb-1
                 table#table_id.table.table-hover.table-border
-                    thead.alert-warning
+                    thead.alert-secondary
                         tr
                             //th(scope='col') #
                             th(scope='col') 제목
-                            th(scope='col') 글쓴이
-                            th(scope='col') 날짜
+                            th(scope='col')
+                            th(scope='col')
                             th(scope='col') 댓글수
                             th(scope='col') 추천수
                     tbody
