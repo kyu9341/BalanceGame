@@ -10,29 +10,30 @@ block content
                     a(href='/board/vs/1' aria-current='page') vs 게시판
         .card.mt-3
             h5.card-header=post.title
-            .card-body!= post.content
-            .row.text-center
-                .col-2
-                .col-4
-                    .vs-left.card
-                        div(style="width: 200; height: 200px;")
-                            if !post.img_left
-                                img.card-img-top(src='/images/toright.png' width="200" height="200" alt='닥전')
-                            else
-                                img.card-img-top(src=post.img_left width="200" height="200" alt='닥전')
-                        .card-body.border-top
-                            p.card-title #{post.description_left}
-                            //a.btn.btn-primary(href='#') 닥전
-                .col-4
-                    .vs-right.card
-                        div(style="width: 200; height: 200px;")
-                            if !post.img_right
-                                img.card-img-top(src='/images/toleft.png' width="200" height="200" alt='닥전')
-                            else
-                                img.card-img-top(src=post.img_right width="200" height="200" alt='닥후')
-                        .card-body.border-top
-                            p.card-title #{post.description_right}
-                            //a.btn.btn-primary(href='#') 닥후
+            .card-body.border-bottom.mb-3!= post.content
+            .card-body.mb-3.border-bottom
+                .row.text-center
+                    .col-2
+                    .col-4
+                        .vs-left.card
+                            div(style="width: 200; height: 200px;")
+                                if !post.img_left
+                                    img.card-img-top(src='/images/toright.png' width="200" height="200" alt='닥전')
+                                else
+                                    img.card-img-top(src=post.img_left width="200" height="200" alt='닥전')
+                            .card-body.border-top
+                                p.card-title #{post.description_left}
+                                //a.btn.btn-primary(href='#') 닥전
+                    .col-4
+                        .vs-right.card
+                            div(style="width: 200; height: 200px;")
+                                if !post.img_right
+                                    img.card-img-top(src='/images/toleft.png' width="200" height="200" alt='닥전')
+                                else
+                                    img.card-img-top(src=post.img_right width="200" height="200" alt='닥후')
+                            .card-body.border-top
+                                p.card-title #{post.description_right}
+                                //a.btn.btn-primary(href='#') 닥후
             .text-center.mb-3.mt-3
                 if user
                     -const liker = post && post.postLiker.map(l => l.id).includes(user.id);
