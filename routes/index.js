@@ -172,12 +172,13 @@ router.get('/my-posts/:page', isLoggedIn, async (req, res, next) => {
         const curPage = req.params.page;
         const pageSize = 10; // 한 페이지 당 게시글
         const pageListSize = 5; // 페이지의 갯수
-        const searchWordUrl = '';
 
         let offset = ""; // limit 변수
         let totalPostCount = 0; // 전체 게시글 수
 
-        const post = await Post.findAndCountAll({});
+        const post = await Post.findAndCountAll({
+            where: { userId: req.user.id },
+        });
         totalPostCount = post.count;
 
         // 페이징
@@ -205,7 +206,6 @@ router.get('/my-posts/:page', isLoggedIn, async (req, res, next) => {
             result,
             moment,
             path,
-            searchWordUrl,
         });
 
     } catch (error) {
