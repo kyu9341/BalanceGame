@@ -52,8 +52,8 @@ block content
                                         td #{post.user.nickname}
                                         - let dateform = new Date(post.createdAt)
                                         - moment.locale('ko');
-                                        - let resultDate = moment(dateform).format('L');
-                                        // - let resultDate = moment(dateform).startOf('hour').fromNow();
+                                        // - let resultDate = moment(dateform).format('MMMM Do YYYY, h:mm:ss a');
+                                        - let resultDate = moment(dateform).startOf('hour').fromNow();
                                         td #{resultDate}
                                         td #{post.comment_count}
                                         td #{post.like}

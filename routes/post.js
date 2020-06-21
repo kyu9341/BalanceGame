@@ -7,15 +7,20 @@ const moment = require('moment');
 
 const router = express.Router();
 
-router.post('/write', isLoggedIn, async (req, res, next) => {
+const vsUpload = multer();
+router.post('/write', isLoggedIn, vsUpload.none(), async (req, res, next) => {
     try  {
         const post = await Post.create({
             title: req.body.title, // 제목
             content: req.body.content, // 게시글
             board_type: req.body.board_type, // 게시판 종류
             userId: req.user.id, // 작성자 아이디를 넣어준다.
+            img_left: req.body.url_left,
+            img_right: req.body.url_right,
+            description_left: req.body.description_left,
+            description_right: req.body.description_right,
         });
-        res.redirect('/');
+        res.redirect('/board/' + req.body.board_type + '/1');
     } catch (error) {
         console.error(error);
         next(error); // 에러처리 미들웨어로 넘김
@@ -165,7 +170,7 @@ const upload = multer({
     limit: { fileSize: 20 * 1024 * 1024 },
 })
 
-router.post('/free/image', upload.single('file'), (req, res) => {
+router.post('/image', upload.single('file'), (req, res) => {
     console.log(req.body, req.file);
     res.json({ url: `/uploads/${req.file.filename}` });
 });

@@ -19,6 +19,22 @@ module.exports = (sequelize, DataTypes) => (
             type: DataTypes.INTEGER.UNSIGNED,
             defaultValue: 0,
         },
+        img_left: {
+            type: DataTypes.STRING(200),
+            allowNull: true,
+        },
+        img_right: {
+            type: DataTypes.STRING(200),
+            allowNull: true,
+        },
+        description_left: {
+            type: DataTypes.STRING(50),
+            allowNull: false,
+        },
+        description_right: {
+            type: DataTypes.STRING(50),
+            allowNull: false,
+        },
     }, {
         timestamps: true,
         paranoid: true,
