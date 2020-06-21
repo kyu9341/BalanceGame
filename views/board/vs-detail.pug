@@ -18,7 +18,7 @@ block content
                         -const voter = post && post.Voter.map(l => l.id).includes(user.id);
                         if user && !voter
                             .col-4
-                                .vs-left.card#left
+                                .vs-left.card.table-hover#left
                                     div(style="width: 200; height: 200px;")
                                         if !post.img_left
                                             img.card-img-top(src='/images/toright.png' width="200" height="200" alt='닥전')
@@ -65,6 +65,25 @@ block content
                                         #right-progress-div.progress
                                             #right-progress.progress-bar.progress-bar-striped.bg-warning(role='progressbar' style='width: 0%;'
                                                 aria-valuenow='25' aria-valuemin='0' aria-valuemax='100') #{rightPer} %
+                    else
+                        .col-4
+                            .vs-left.card
+                                div(style="width: 200; height: 200px;")
+                                    if !post.img_left
+                                        img.card-img-top(src='/images/toright.png' width="200" height="200" alt='닥전')
+                                    else
+                                        img.card-img-top(src=post.img_left width="200" height="200" alt='닥전')
+                                .card-body.border-top
+                                    p.card-title #{post.description_left}
+                        .col-4
+                            .vs-right.card
+                                div(style="width: 200; height: 200px;")
+                                    if !post.img_right
+                                        img.card-img-top(src='/images/toleft.png' width="200" height="200" alt='닥전')
+                                    else
+                                        img.card-img-top(src=post.img_right width="200" height="200" alt='닥후')
+                                .card-body.border-top
+                                    p.card-title #{post.description_right}
 
             .text-center.mb-3.mt-3
                 if user
@@ -136,6 +155,7 @@ block content
         let unlikeTag = document.querySelector('.unlike');
         let likeTag = document.querySelector('.like');
 
+        // 좋아요, 좋아요 취소
         $(function () {
             let pathname = window.location.pathname;
             likeTag.addEventListener('click', function () {
@@ -151,10 +171,7 @@ block content
                 xhr.open('POST', pathname + '/like');
                 xhr.send();
             });
-        });
 
-        $(function () {
-            let pathname = window.location.pathname;
             unlikeTag.addEventListener('click', function () {
                 // let postId = document.querySelector('#post-id').value;
                 let xhr = new XMLHttpRequest();
@@ -173,7 +190,7 @@ block content
         let left = document.querySelector('#left');
         let right = document.querySelector('#right');
 
-        $(function () {
+        $(function () { // 투표 기능
             let pathname = window.location.pathname;
             left.addEventListener('click', function () {
                 let xhr = new XMLHttpRequest();
@@ -203,10 +220,8 @@ block content
                 xhr.setRequestHeader('Content-Type', 'application/json'); // 컨텐츠타입을 json으로
                 xhr.send(JSON.stringify(data));
             });
-
-
-
         });
+        // progress bar 동작 구현
         window.addEventListener('load', function () {
             let left = document.getElementById('left-progress');
             let leftProgressGroup = document.getElementById('left-progress-div');
@@ -221,4 +236,27 @@ block content
             setTimeout(function () {
                 right.style.width = !{rightPer} + "%";
             }, 200);
+        });
+
+        $(document).ready(function () {
+            // 그림자 hover 추가
+            console.log("document is ready");
+
+            $(".vs-left").hover(
+                function () {
+                    $(this).addClass('shadow-lg').css('cursor', 'pointer');
+                }, function () {
+                    $(this).removeClass('shadow-lg');
+                }
+            );
+
+            $(".vs-right").hover(
+                function () {
+                    $(this).addClass('shadow-lg').css('cursor', 'pointer');
+                }, function () {
+                    $(this).removeClass('shadow-lg');
+                }
+            );
+
+            // document ready
         });

@@ -56,9 +56,9 @@ router.get('/:type/:id', async (req, res, next) => {
                 as: 'commentLiker', // include 에서 같은 모델이 여러개면 as로 구분
             },],
         });
-        let leftPer = (post.score_left / (post.score_left + post.score_right)) * 100;
+        let leftPer = Math.round((post.score_left / (post.score_left + post.score_right)) * 100);
         console.log("leftPer : " + leftPer);
-        let rightPer = (post.score_right / (post.score_left + post.score_right)) * 100;
+        let rightPer = Math.round((post.score_right / (post.score_left + post.score_right)) * 100);
         console.log("rightPer : " + rightPer);
 
         res.render('board/' + req.params.type + '-detail', {
@@ -172,9 +172,9 @@ router.post('/:type/:id/vote', isLoggedIn, async (req, res, next) => {
             where: { id: req.params.id }
         });
 
-        let leftPer = (post.score_left / (post.score_left + post.score_right)) * 100;
+        let leftPer = Math.round((post.score_left / (post.score_left + post.score_right)) * 100);
         console.log("leftPer : " + leftPer);
-        let rightPer = (post.score_right / (post.score_left + post.score_right)) * 100;
+        let rightPer = Math.round((post.score_right / (post.score_left + post.score_right)) * 100);
         console.log("rightPer : " + rightPer);
 
 
