@@ -1,0 +1,91 @@
+extends ../layout
+
+block content
+    .container.justify-content-center
+        #notice_name.row
+            // 게시판 명
+            //h5=type
+        div
+            // 게시글
+
+            nav(aria-label='breadcrumb')
+                ol.breadcrumb.mt-5.bg-warning
+                    li.breadcrumb-item.active.text-dark(aria-current='page')
+                        b=type
+
+            .card.mb-1
+                table#table_id.table.table-hover.table-border
+                    thead.alert-secondary
+                        tr
+                            //th(scope='col') #
+                            th(scope='col') 제목
+                            th(scope='col')
+                            th(scope='col')
+                            th(scope='col') 댓글수
+                            th(scope='col') 추천수
+                    tbody
+                        if count === 0
+                            tr
+                                th.text-center(colspan=4) 게시글이 없습니다.
+                        else
+                            each post in posts
+                                tr
+                                    //td #{post.id}
+                                    // -let postUrl = `/post/${post.board_type}/${post.id}`;
+                                    td
+                                        a(href=`/post/${post.board_type}/${post.id}`) #{post.title}
+                                    td #{post.user.nickname}
+                                    - let dateform = new Date(post.createdAt)
+                                    - moment.locale('ko');
+                                    // - let resultDate = moment(dateform).format('MMMM Do YYYY, h:mm:ss a');
+                                    - let resultDate = moment(dateform).startOf('hour').fromNow();
+                                    td #{resultDate}
+                                    td #{post.comment_count}
+                                    td #{post.like}
+
+
+        // 하단 페이지 이동바
+        #page_move.paging_comm
+            nav(aria-label='Page navigation example')
+                ul.pagination.my
+                    -console.log("start : "+ result.startPage + "   end: " + result.endPage + "   current : " + curPage + "   total : " + result.totalPage)
+                    if result.startPage > result.totalPage
+                        li.page-item
+                            a.page-link(href=`${path}${result.startPage - 1}${searchWordUrl}` aria-label='previous')
+                                span(aria-hidden='true') &laquo;
+                    else
+                        li.page-item.disabled
+                            a.page-link(aria-disabled='true' href='javascript:void(0);' aria-label='previous')
+                                span(aria-hidden='true') &laquo;
+                    -for (let i = result.startPage; i <= result.endPage; i++)
+                        if i == curPage
+                            li.page-item.active(aria-current='page')
+                                a.page-link(href=`${path}${i}${searchWordUrl}`)
+                                    span=i
+                        else
+                            li.page-item(aria-current='page')
+                                a.page-link.text-warning(href=`${path}${i}${searchWordUrl}`)
+                                    span=i
+                    if result.endPage < result.totalPage
+                        li.page-item
+                            a.page-link(href=`${path}${result.endPage + 1}${searchWordUrl}` aria-label='Next')
+                                span(aria-hidden='true') &raquo;
+                    else
+                        li.page-item.disabled
+                            a.page-link(href='javascript:void(0);' aria-label='Next')
+                                span(aria-hidden='true') &raquo;
+
+    script(type='application/javascript').
+
+        //function clickTrEvent(post) {
+        //    console.log(post);
+        //    location.href = '/post' + post.board_type + '/' + post.id;
+        //}
+        //
+        // let table = document.getElementById("table_id");
+        // let rows = table.getElementsByTagName("tr");
+        // for (let i = 0; i < rows.length; i++) {
+        //     rows[i].onclick = function () {
+        //         location.href = `/post/free/1`;
+        //     }
+        // } // '/post/' + post.board_type + post.id;

@@ -1,0 +1,113 @@
+extends ../layout
+
+block content
+    .container
+        nav(aria-label='breadcrumb')
+            ol.breadcrumb.mt-5.pl-2.pr-2
+                li.breadcrumb-item
+                    a(href='/') Home
+                li.breadcrumb-item.active
+                    a(href='/board/vs/1' aria-current='page') vs 게시판
+        .card.mt-3
+            h5.card-header=post.title
+            .card-body!= post.content
+            .text-center.mb-3
+                if user
+                    -const liker = post && post.postLiker.map(l => l.id).includes(user.id);
+                    -console.log("liker : " + liker + "  user : " + user);
+                    if user && !liker
+                        button.like.btn
+                            img#nolike(style=' width:30px; height:30px;  ' src='/images/egg_nolike.png') 
+                        span#count(style='vertical-align: middle;') #{post.like} LIKE
+                    else if user && liker
+                        button.unlike.btn
+                            img#nolike(style=' width:30px; height:30px;' src='/images/egg_like.png') 
+                        span#count(style='vertical-align: middle;') #{post.like} LIKE
+
+        // 댓글쓰기
+        .mt-3.border-bottom
+            h5 댓글
+            .mt-3
+                form#comment-form.needs-validation(method='post' action='/post/' + post.board_type + '/' + post.id + '/comment' novalidate)
+                    .row.mb-5
+                        .col-10
+                            textarea.form-control(name='content' aria-label='With textarea' rows='2' required)
+                        .col-2
+                            button#comment-form-button.btn.btn-warning.h-100.mr-2(type='submit') 댓글 달기
+                        small.invalid-feedback.mb-5 내용을 입력하세요.
+
+            each comment in comments
+                .border-top.pt-1.pb-1
+                    .row.mt-2
+                        .col-3.col-md-2.col-lg-1.pl-4=comment.user.nickname
+                        .col-6.col-md-7.col-lg-8
+                            .comment-show
+                                .comment-text.mb-3=comment.content
+                                    span.commentId(hidden)=comment.id
+                                small.d-block
+                                - let dateform = new Date(comment.createdAt)
+                                - moment.locale('ko');
+                                - let resultDate = moment(dateform).startOf('hour').fromNow();
+                                    small=resultDate
+                        .col-3.btn-group.btn-group-sm(role='group')
+                            small.d-block
+                                small.d-block
+                                    if user
+                                        -const liker = comment && comment.commentLiker.map(l => l.id).includes(user.id);
+                                        if user && !liker
+                                            form.d-inline(method='post' action=`${post.id}/like/comment/${comment.id}`)
+                                                button.likeComment.btn.btn-outline-warning 좋아요 #{comment.like}
+                                        else if user && liker
+                                            form.d-inline(method='post' action=`${post.id}/like/comment/${comment.id}/delete`)
+                                                button.unlikeComment.btn.btn-outline-warning 좋아요 취소 #{comment.like}
+                                    //button.btn.btn-warning(type='button') 좋아요
+                                    if user
+                                        form.d-inline(method='post' action=`${post.id}/comment/${comment.id}/delete`)
+                                            button.btn.btn-outline-warning(type='submit') 삭제
+        br.mb-5
+        br
+        br
+
+
+
+
+
+
+    include ../form-validation
+    script(type='application/javascript').
+        let unlikeTag = document.querySelector('.unlike');
+        let likeTag = document.querySelector('.like');
+
+        $(function () {
+            let pathname = window.location.pathname;
+            likeTag.addEventListener('click', function () {
+                // let postId = document.querySelector('#post-id').value;
+                let xhr = new XMLHttpRequest();
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        location.reload();
+                    } else {
+                        console.error(xhr.responseText);
+                    }
+                };
+                xhr.open('POST', pathname + '/like');
+                xhr.send();
+            });
+        });
+
+        $(function () {
+            let pathname = window.location.pathname;
+            unlikeTag.addEventListener('click', function () {
+                // let postId = document.querySelector('#post-id').value;
+                let xhr = new XMLHttpRequest();
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        location.reload();
+                    } else {
+                        console.error(xhr.responseText);
+                    }
+                };
+                xhr.open('DELETE', pathname + '/like');
+                xhr.send();
+            });
+        });

@@ -1,0 +1,150 @@
+extends layout
+
+block content
+    .container
+        div
+            h3 #{post.title}
+        // 게시글 헤더
+        .row(style='  font-size:0.6rem;  margin:10px; text-align: center; ')
+            .col-2
+                span vs &#xAC8C;&#xC2DC;&#xD310;
+            .col
+                span |
+            // <div class="col"><span>작성자 user</span></div>
+            .col-2
+                span 2020-06-15
+            .col
+                span |
+            .col-2
+                span &#xC870;&#xD68C;&#xC218; 39,930
+            .col
+                span |
+            .col-2
+                span &#xB313;&#xAE00; 111
+            .col
+                span |
+            .col-2
+                span &#xCD94;&#xCC9C; 1,244
+        // 게시글 내용
+        .card
+            .card-body!= post.content
+        .text-center
+            -const liker = post && post.Liker.map(l => l.id).includes(user.id);
+            if user && !liker
+                button.like.btn.btn-warning 좋아요 #{post.like}
+            else if user && liker
+                button.unlike.btn.btn-warning 좋아요 취소 #{post.like}
+        // 댓글쓰기
+        div
+            h4 댓글 쓰기
+            form#comment-form.needs-validation(method='post' action='/post/free/' + post.id + '/comment' novalidate)
+                textarea.form-control(name='content' aria-label='With textarea')
+                button#comment-form-button.btn.btn-warning.btn-lg.btn-block(type='submit') 등록
+        // 댓글 수
+        div
+            span.d-block.p-2.bg-dark.text-white(style='background-color: #f2eaa7 !important; color:rgba(0, 0, 0, 0.61) !important') &#xB313;&#xAE00; &#xC218; 30
+        // 댓글창
+        -console.log("comment: ")
+        div
+            .d-block.p-2.bg-dark.text-white(style='height:auto; background-color: #f2eaa756 !important; color:rgba(0, 0, 0, 0.61) !important')
+                each comment in comments
+                    div(style='border-bottom: 1px solid rgba(0, 0, 0, 0.205);')
+                        .row(style='margin:10px; ')
+                            .col-7
+                                span=comment.user.nickname
+                                span  |
+                                span=comment.createdAt
+                            .col-5
+                                button.btn.btn-warning(type='button')
+                                    | 추천
+                                    span 3
+                                button.btn.btn-warning(type='button')
+                                    | 수정
+                                    span 3
+                                button.btn.btn-warning(type='button') 신고
+                        div(style='margin:25px; ')
+                            span=comment.content
+
+
+
+
+    script(type='application/javascript').
+        let unlikeTag = document.querySelector('.unlike');
+        let likeTag = document.querySelector('.like');
+
+        $(function () {
+            let pathname = window.location.pathname;
+            likeTag.addEventListener('click', function () {
+                // let postId = document.querySelector('#post-id').value;
+                let xhr = new XMLHttpRequest();
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        location.reload();
+                    } else {
+                        console.error(xhr.responseText);
+                    }
+                };
+                xhr.open('POST', pathname + '/like');
+                xhr.send();
+            });
+        });
+
+        $(function () {
+            let pathname = window.location.pathname;
+            unlikeTag.addEventListener('click', function () {
+                // let postId = document.querySelector('#post-id').value;
+                let xhr = new XMLHttpRequest();
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        location.reload();
+                    } else {
+                        console.error(xhr.responseText);
+                    }
+                };
+                xhr.open('DELETE', pathname + '/like');
+                xhr.send();
+            });
+        })
+
+        // $(function () {
+        //     const commentForm = document.querySelector('#comment-form-button');
+        //     let pathname = window.location.pathname;
+        //     commentForm.addEventListener('click', function () {
+        //         // let postId = document.querySelector('#post-id').value;
+        //         let xhr = new XMLHttpRequest();
+        //         xhr.onload = function () {
+        //             if (xhr.status === 200) {
+        //                 location.reload();
+        //             } else {
+        //                 console.error(xhr.responseText);
+        //             }
+        //         };
+        //         xhr.open('POST', pathname + '/comment');
+        //         xhr.send();
+        //     });
+        // });
+        // $(function () {
+        //     let pathname = window.location.pathname;
+        //
+        //     let likeTag = document.querySelector('.like');
+        //     likeTag.addEventListener('click', function () {
+        //         // let postId = document.querySelector('#project-id').value;
+        //         likeRequest('POST')
+        //             .then(function (status) {
+        //                 if (status) {
+        //                     location.reload();
+        //                 }
+        //             }).catch(function (error) {
+        //             console.error(error);
+        //         });
+        //     });
+        //
+        //     function likeRequest(method) {
+        //         return fetch(pathname + '/like', {
+        //             method: method,
+        //             headers: {
+        //                 'Content-Type': 'application/json',
+        //             }
+        //         });
+        //     }
+        // });

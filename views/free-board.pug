@@ -1,0 +1,85 @@
+extends layout
+
+block content
+    .container
+        #notice_name.row
+            // 게시판 명
+            h5 &#xC790;&#xC720;&#xAC8C;&#xC2DC;&#xD310;
+            a(href='/write')
+                button.btn.btn-warning(type='button' style='display:relative; font-size:0.8rem; margin-left: 600px; ') 글쓰기
+        .main_content(style='display: flex;')
+            // 게시글
+            table#table_id.table
+                thead.thead-warning(style='background-color:#f2eba7 !important;')
+                    tr
+                        th(scope='col') #
+                        th(scope='col') 제목
+                        th(scope='col') 글쓴이
+                        th(scope='col') 날짜
+                        th(scope='col') 댓글수
+                        th(scope='col') 추천수
+                tbody
+                    if count === 0
+                        tr
+                            th.text-center(colspan=4) 게시글이 없습니다.
+                    else
+                        each post in posts
+                            tr
+                                td #{post.id}
+                                td
+                                    a(href='/post/free/'+ post.id) #{post.title}
+                                td #{post.user.nickname}
+                                - let dateform = new Date(post.createdAt)
+                                // - let resultDate = moment(dateform).startOf('hour').fromNow()
+                                td #{post.createdAt}
+                                td #{post.id}
+                                td #{post.like}
+
+
+        // 하단 페이지 이동바
+        #page_move.paging_comm
+            nav(aria-label='Page navigation example')
+                ul.pagination
+                    li.page-item.disabled
+                        a.page-link(tabindex='-1' aria-disabled='true' href='#' aria-label='previous')
+                            span(aria-hidden='true') &laquo;
+                    li.page-item.active(aria-current='page')
+                        a.page-link(href='#')
+                            | 1
+                            span.sr-only (current)
+                    li.page-item
+                        a.page-link(href='#') 2
+                    li.page-item
+                        a.page-link(href='#') 3
+                    li.page-item
+                        a.page-link(href='#') 4
+                    li.page-item
+                        a.page-link(href='#') 5
+                    li.page-item
+                        a.page-link(href='#' aria-label='Next')
+                            span(aria-hidden='true') &raquo;
+
+                //ul.pagination
+                //    if curSet === 0
+                //        li.disabled
+                //            a(href='#', aria-label='Previous')
+                //                span(aria-hidden='true') &laquo;
+                //    else
+                //        li
+                //            -let prepage = (curSet) * pageListSize
+                //            a(href='/board/free/' + prepage, aria-label='Previous')
+                //                span(aria-hidden='true') &laquo;
+                //
+                //    -let i = curSet * pageListSize + 1
+                //    -while (i <= totalPage && i <= (curSet + 1) * pageListSize)
+                //    if i === curPage
+                //        li.active
+                //            a(href='/board/free/' + i)= i
+                //    else
+                //        li
+                //            a(href= '/board/free/' + i)= i
+                //    - i = i + 1
+                //
+                //    if curSet == (totalSet - 1)
+                //        li.disabled
+                //            a(href='#', aria-label='Next')

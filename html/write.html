@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="../node_modules/summernote/dist/summernote-bs4.min.css">
+
+
+    <!-- JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+            integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+            crossorigin="anonymous"></script>
+
+    <meta charset="utf-8"/>
+
+</head>
+<body>
+
+
+<div class="container">
+    <div class="form-group">
+
+        <form class="needs-validation col-sm-10" method="post" novalidate>
+            <div class="form-group">
+
+                <select class="custom-select">
+                    <option selected>게시판 선택</option>
+                    <option value="1">vs 게시판</option>
+                    <option value="2">자유 게시판</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="title">제목</label>
+                <input id="title" type="text" class="form-control"
+                       placeholder="제목" aria-describedby="titleHelp" required max="50">
+                <small id="titleHelp" class="form-text text-muted">
+                    제목을 입력하세요.
+                </small>
+                <small class="invalid-feedback">제목을 입력하세요.</small>
+                <small class="form-text text-danger">Title Error</small>
+            </div>
+
+
+            <div class="form-group">
+                <label for="fullDescription">글쓰기</label>
+                <textarea id="fullDescription" type="textarea" class="editor form-control"
+                          placeholder="글쓰기." aria-describedby="fullDescriptionHelp" required></textarea>
+                <small id="fullDescriptionHelp" class="form-text text-muted">
+                    내용을 입력하세요.
+                </small>
+                <small class="invalid-feedback">내용을 입력하세요.</small>
+                <small class="form-text text-danger">FullDescription Error</small>
+            </div>
+
+            <div class="form-group">
+                <button class="btn btn-warning btn-block" type="submit"
+                        aria-describedby="submitHelp">글쓰기
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div class="mt-3 border-bottom">
+        <div class="border-top pt-1 pb-1">
+            <div class="row">
+                <div class="col-3 col-md-2 col-lg-1 pl-4">username</div> <!-- 1-3 -->
+                <div class="col-9 col-md-10 col-lg-11">
+                    <div class="comment-show">
+                        <div class="comment-text mb-3">text</div> <!-- 1-4 -->
+                        <small class="d-block">
+                            <span>날짜</span> <!-- 1-5 -->
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="mt-3"> <!-- 2 -->
+        <form action="" method="post">
+            <div class="row">
+                <div class="col-8">
+                    <textarea name="text" rows="2" class="form-control">text</textarea>
+                </div>
+                <div class="col-4">
+                    <button type="submit" class="btn btn-primary h-100 mr-2">Add Comment</button>
+                </div>
+            </div>
+            error
+            <span class="invalid-feedback d-block">errormessage</span> <!-- 2-2 -->
+        </form>
+    </div>
+
+
+</div>
+<script src="../node_modules/summernote/dist/summernote-bs4.min.js"></script>
+<script type="application/javascript">
+    $(function () {
+        $('.editor').summernote({
+            fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Noto Sans KR', 'Merriweather'],
+            placeholder: '내용을 입력하세요.',
+            tabsize: 2,
+            height: 300
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+extends layout
+
+block content
+    .container
+        .py-5.text-center
+            h2 로그인
+        .row.justify-content-center
+            form.needs-validation.col-sm-6#login-form(action='/auth/login' method='post' novalidate)
+                .form-group
+                    label(for='login-email') 이메일
+                    input#login-email.form-control(type='email' name='email' aria-describedby='emailHelp' placeholder='your@email.com' required)
+                    small#emailHelp.form-text.text-muted
+                        | 가입할 때 사용한 이메일을 입력하세요.
+                    small.invalid-feedback 이메일을 입력하세요.
+                .form-group
+                    label(for='login-password') 패스워드
+                    input#login-password.form-control(type='password' placeholder='password' name='password' aria-describedby='passwordHelp' required)
+                    small#passwordHelp.form-text.text-muted
+                        | 패스워드를 입력하세요.
+                    small.invalid-feedback 패스워드를 입력하세요.
+                    if loginError
+                        small.error-message= loginError
+                .form-group.form-check
+                    input#rememberMe.form-check-input(type='checkbox' name='remember-me')
+                    label.form-check-label(for='rememberMe' aria-describedby='rememberMeHelp') 로그인 유지
+                .form-group
+                    button.btn.btn-warning.btn-block.text-secondary(type='submit' aria-describedby='submitHelp') 로그인
+                    button.btn.btn-warning.btn-block.text-secondary(type='button') 회원가입
+    include form-validation
+

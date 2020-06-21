@@ -1,0 +1,66 @@
+extends layout
+
+block content
+    .container
+        .form-group.mt-5
+            form.needs-validation.col-sm-10(method='post' action='/post/write' novalidate)
+                .form-group
+                    select.custom-select(name='board_type')
+                        option(selected='') 게시판 선택
+                        option(value='vs') vs 게시판
+                        option(value='free') 자유 게시판
+                .form-group
+                    label(for='title') 제목
+                    input#title.form-control(type='text' placeholder='제목' aria-describedby='titleHelp' name='title' required max='50')
+                    small#titleHelp.form-text.text-muted
+                        |제목을 입력하세요.
+                    small.invalid-feedback | 제목을 입력하세요.
+                    small.form-text.text-danger Title Error
+                .form-group
+                    label(for='fullDescription') 글쓰기
+                    textarea#fullDescription.editor.form-control(type='textarea' placeholder='글쓰기.'
+                        name='content' aria-describedby='fullDescriptionHelp' required)
+                    small#fullDescriptionHelp.form-text.text-muted
+                        |내용을 입력하세요.
+                    small.invalid-feedback 내용을 입력하세요.
+                    small.form-text.text-danger FullDescription Error
+                .form-group
+                    button.btn.btn-warning.btn-block(type='submit' aria-describedby='submitHelp')
+                        |글쓰기
+    script(type='application/javascript').
+        $(function () {
+            $('.editor').summernote({
+                fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Noto Sans KR', 'Merriweather'],
+                placeholder: '내용을 입력하세요.',
+                tabsize: 2,
+                height: 300,
+                focus: true,
+                callbacks: {
+                    onImageUpload: function (files, editor, welEditable) {
+                        for (let i = files.length - 1; i >= 0; i--) {
+                            sendFile(files[i], this);
+                        }
+                    }
+                }
+            });
+
+            function sendFile(file, el) {
+                let form_data = new FormData();
+                form_data.append('file', file);
+                $.ajax({
+                    data: form_data,
+                    type: "POST",
+                    url: '/post/free/image',
+                    cache: false,
+                    contentType: false,
+                    enctype: 'multipart/form-data',
+                    processData: false,
+                    success: function (data) {
+                        $(el).summernote('editor.insertImage', data.url);
+                        // $('#imageBoard > ul').append('<li><img src="' + data.url + '" width="480" height="auto"/></li>');
+                    }
+                });
+            }
+
+
+        });
