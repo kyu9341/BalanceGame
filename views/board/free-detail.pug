@@ -14,15 +14,14 @@ block content
             .text-center.mb-3
                 if user
                     -const liker = post && post.postLiker.map(l => l.id).includes(user.id);
-                    -console.log("liker : " + liker + "  user : " + user);
                     if user && !liker
-                        button.like.btn
+                        button.like.btn.btn-outline-warning.text-dark
                             img#nolike(style=' width:30px; height:30px;  ' src='/images/egg.png')
-                        span#count(style='vertical-align: middle;') #{post.like} LIKE
+                            span#count(style='vertical-align: middle;') #{post.like} LIKE
                     else if user && liker
-                        button.unlike.btn
+                        button.unlike.btn.btn-outline-warning.text-dark.btn-warning
                             img#nolike(style=' width:30px; height:30px;' src='/images/likedegg.png')
-                        span#count(style='vertical-align: middle;') #{post.like} LIKE
+                            span#count(style='vertical-align: middle;') #{post.like} LIKE
         // 댓글쓰기
         .mt-3.border-bottom
             h5 댓글
@@ -55,14 +54,18 @@ block content
                                         -const liker = comment && comment.commentLiker.map(l => l.id).includes(user.id);
                                         if user && !liker
                                             form.d-inline(method='post' action=`${post.id}/like/comment/${comment.id}`)
-                                                button.likeComment.btn.btn-outline-warning 좋아요 #{comment.like}
+                                                button.likeComment.btn.btn-outline-warning.text-dark
+                                                    img#nolike(style=' width:20px; height:20px;  ' src='/images/egg.png')
+                                                    span#count(style='vertical-align: middle;') #{comment.like} LIKE
                                         else if user && liker
                                             form.d-inline(method='post' action=`${post.id}/like/comment/${comment.id}/delete`)
-                                                button.unlikeComment.btn.btn-outline-warning 좋아요 취소 #{comment.like}
+                                                button.unlikeComment.btn.btn-outline-warning.text-dark.alert-warning
+                                                    img#nolike(style=' width:20px; height:20px;' src='/images/likedegg.png')
+                                                    span#count(style='vertical-align: middle;') #{comment.like} LIKE
                                     //button.btn.btn-warning(type='button') 좋아요
                                     if user
                                         form.d-inline(method='post' action=`${post.id}/comment/${comment.id}/delete`)
-                                            button.btn.btn-outline-warning(type='submit') 삭제
+                                            button.btn.btn-outline-warning.text-dark.alert-warning(type='submit') 삭제
         br.mb-5
         br
         br
