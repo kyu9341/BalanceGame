@@ -42,7 +42,7 @@ block content
                             img#nolike(style=' width:30px; height:30px;  ' src='/images/egg.png')
                             span#count(style='vertical-align: middle;') #{post.like} LIKE
                     else if user && liker
-                        button.unlike.btn.btn-outline-warning.text-dark
+                        button.unlike.btn.btn-outline-warning.text-dark.alert-warning
                             img#nolike(style=' width:30px; height:30px;' src='/images/likedegg.png')
                             span#count(style='vertical-align: middle;') #{post.like} LIKE
 
@@ -80,16 +80,16 @@ block content
                                             form.d-inline(method='post' action=`${post.id}/like/comment/${comment.id}`)
                                                 button.likeComment.btn.btn-outline-warning.text-dark
                                                     img#nolike(style=' width:20px; height:20px;  ' src='/images/egg.png')
-                                                    span#count(style='vertical-align: middle;') #{post.like} LIKE
+                                                    span#count(style='vertical-align: middle;') #{comment.like} LIKE
                                         else if user && liker
                                             form.d-inline(method='post' action=`${post.id}/like/comment/${comment.id}/delete`)
-                                                button.unlikeComment.btn.btn-outline-warning.text-dark
+                                                button.unlikeComment.btn.btn-outline-warning.text-dark.alert-warning
                                                     img#nolike(style=' width:20px; height:20px;' src='/images/likedegg.png')
-                                                    span#count(style='vertical-align: middle;') #{post.like} LIKE
+                                                    span#count(style='vertical-align: middle;') #{comment.like} LIKE
                                     //button.btn.btn-warning(type='button') 좋아요
                                     if user
                                         form.d-inline(method='post' action=`${post.id}/comment/${comment.id}/delete`)
-                                            button.btn.btn-outline-warning.text-dark(type='submit') 삭제
+                                            button.btn.btn-outline-warning.text-dark.alert-warning(type='submit') 삭제
         br.mb-5
         br
         br
