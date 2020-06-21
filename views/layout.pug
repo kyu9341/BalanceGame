@@ -21,7 +21,7 @@ body.bg-white
     #top_navbar
         nav.navbar.navbar-light.alert-warning.navbar-expand-lg
             a.navbar-brand(href='/')
-                img(src='/images/balance_logo_remove.png', width='200', height='40', alt= )
+                img(src='/images/balance_logo_remove.png', width='200', height='40')
             // 검색창
             button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent'
                 aria-expanded='false' aria-label='Toggle navigation')
@@ -29,9 +29,9 @@ body.bg-white
             .collapse.navbar-collapse#navbarSupportedContent
                 ul.navbar-nav.mr-auto
                     li.nav-item
-                        form.form-inline(style='justify-content: right; margin-left:460px;' action='/search/1' method='get')
+                        form.form-inline(style='justify-content: right;' action='/search/1' method='get')
                             input.form-control.mr-sm-2(type='search' name='search' placeholder='Search' aria-label='Search')
-                            button.btn.btn-outline-success.my-2.my-sm-0(type='submit' style='background-color: white;') Search
+                            button.btn.btn-outline-success.my-2.my-sm-0(type='submit' style='background-color: white;') 검색
                 // 사용자
 
                 ul.navbar-nav.justify-content-end
