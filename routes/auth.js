@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const passport = require('passport');
 
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
-const { User } = require('../models');
+const { User, Post } = require('../models');
 
 const router = express.Router();
 // router.get(미들웨어1, 미들웨어2, 미들웨어3) 순서대로 진행
