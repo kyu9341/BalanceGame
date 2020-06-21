@@ -30,27 +30,27 @@ block content
                                 .img-left-preview
                                     img#img-left-preview.card-img-top(src='' style='display: none;' width='250' alt='미리보기')
                                     input#img-left-url(type='hidden' name='url_left')
-                                .card-body.img-input-left
-                                    input#left-description.card-text.form-control(type='text' placeholder='설명'
+                                .card-body.img-input-left.border-top
+                                    label#img-left-label(for='img-left') 전자 사진 업로드(선택)
+                                    input#img-left(type='file' accept='image/*')
+                                    input#left-description.card-text.form-control.mt-2(type='text' placeholder='닥전'
                                         aria-describedby='left-descriptionHelp' name='description_left' required max='50')
                                     small#left-descriptionHelp.form-text.text-muted
                                         | 설명을 입력하세요.
                                     small.invalid-feedback | 설명을 입력하세요.
-                                    label#img-left-label(for='img-left') 사진 업로드
-                                    input#img-left(type='file' accept='image/*')
                         .col-6
                             .vs-left.card
                                 .img-left-preview
                                     img#img-right-preview.card-img-top(src='' style='display: none;' width='250' alt='미리보기')
                                     input#img-right-url(type='hidden' name='url_right')
-                                .card-body.img-input-left
-                                    input#right-description.card-text.form-control(type='text' placeholder='설명'
+                                .card-body.img-input-left.border-top
+                                    label#img-right-label(for='img-right') 후자 사진 업로드(선택)
+                                    input#img-right(type='file' accept='image/*')
+                                    input#right-description.card-text.form-control.mt-2(type='text' placeholder='닥후'
                                         aria-describedby='right-descriptionHelp' name='description_right' required max='50')
                                     small#right-descriptionHelp.form-text.text-muted
                                         | 설명을 입력하세요.
                                     small.invalid-feedback | 설명을 입력하세요.
-                                    label#img-right-label(for='img-right') 사진 업로드
-                                    input#img-right(type='file' accept='image/*')
 
                 .form-group
                     button#write-btn.btn.btn-warning.btn-block(type='submit' aria-describedby='submitHelp')
