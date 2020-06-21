@@ -8,7 +8,7 @@ const moment = require('moment');
 
 // 프로필 페이지
 router.get('/profile', isLoggedIn, (req, res) => {
-    res.render('profile', {title: 'profile - BalanceGame', user: null});
+    res.render('profile', {title: 'profile - BalanceGame', user: req.user});
 });
 
 // 회원가입 페이지

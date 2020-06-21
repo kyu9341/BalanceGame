@@ -22,6 +22,10 @@ module.exports = ((sequelize, DataTypes) => (
             type: DataTypes.STRING(30),
             allowNull: true,
         },
+        introduce: {
+            type: DataTypes.STRING(50),
+            allowNULL: true,
+        },
     }, {
         timestamps: true, // sequelize 가 자동으로 수정일과 row 생성일을 기록해줌
         paranoid: true, // 삭제일 기록 (데이터 복구가 가능해짐)

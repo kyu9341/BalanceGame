@@ -21,6 +21,7 @@ body.bg-white
     #top_navbar
         nav.navbar.navbar-light.alert-warning.navbar-expand-lg
             a.navbar-brand(href='/')
+
                 img(src='/images/balance_logo_remove.png', width='200', height='40')
             // 검색창
             button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent'
@@ -49,7 +50,7 @@ body.bg-white
                                         img(src='/images/breakegg.png' width='20' height='20' alt='' loading='lazy' style='border-radius: .25rem;')
                                     | #{user.nickname} ▼
                                 .dropdown-menu.dropdown-menu-sm-right
-                                    a.dropdown-item(href='#') 마이페이지
+                                    a.dropdown-item(href='/profile') 마이페이지
                                     a.dropdown-item(href='#') 출석부
                                     a.dropdown-item(href='/my-posts/1') 내가 쓴 글
                                     a.dropdown-item(href='#') 좋아요한 글
@@ -69,7 +70,7 @@ body.bg-white
                             span
                                 img(src='/images/breakegg.png' width=50 height=50)
                                 b.card-title          #{user.nickname}님
-                            p.card-text=user.email
+                            p.card-text=user.introduce
                             .progress
                                 .progress-bar.progress-bar-striped.bg-warning(role='progressbar' style='width: 25%;' aria-valuenow='25' aria-valuemin='0' aria-valuemax='100') 25%
 

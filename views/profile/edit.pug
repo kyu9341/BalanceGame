@@ -1,0 +1,58 @@
+extends ../layout
+
+block content
+    .container
+        .py-5.text-center
+            h2 프로필 수정
+        .row.justify-content-center
+            form.edit(action='/profile/edit/submit' method='post')
+                .form-group
+                    label(for='edit-nickname') 닉네임
+                    input#editNickname.form-control(type='text' name='nickname' value=user.nickname
+                        aria-describedby='nicknameHelp'
+                        required minlength='3' maxlength='20')
+                    small#nicknameHelp.form-text.text-muted
+                        | 공백없이 문자와 숫자로만 3자 이상 20자 이내로 입력하세요.
+                    small.invalid-feedback 닉네임을 입력하세요.
+                .form-group
+                    label(for='edit-introduce') 내 소개
+                    input#editIntroduce.form-control(type='text' name='introduce'
+                        value=user.introduce aria-describedby='introduceHelp'
+                        maxlength='50')
+                    small#introduceHelp.form-text.text-muted
+                        | 내 소개를 입력하세요.
+                .form-group
+                    label(for='password') 새 패스워드(미입력시 미변경)
+                    input#password.form-control(type='password' name='password' aria-describedby='passwordHelp'
+                        placeholder='password' minlength='6' maxlength='50')
+                    small#passwordHelp.form-text.text-muted
+                        | 6자 이상 50자 이내로 입력하세요.
+                    small.invalid-feedback 패스워드를 입력하세요.
+                .form-group
+                    label(for='check-password') 패스워드 확인
+                    input#check-password.form-control(type='password' placeholder='password check'
+                        minlength='6' maxlength='50' onchange='isSame()')
+                    small.invalid-feedback 패스워드를 확인하세요.
+                    small#same.form-text
+
+                if profileEditError
+                    smaill.error-message= profileEditError
+                button#profile-edit-btn.btn.btn-warning.btn-block.text-secondary(type='submit') 저장
+
+    include ../form-validation
+    script(type='application/javascript').
+        function isSame() {
+            let btn;
+            btn = document.getElementById('profile-edit-btn');
+            if (document.getElementById("password").value !== '' && document.getElementById("check-password").value !== '') {
+                if (document.getElementById('password').value === document.getElementById('check-password').value) {
+                    document.getElementById('same').innerHTML = '비밀번호가 일치합니다.';
+                    document.getElementById('same').style.color = 'blue';
+                    btn.disabled = false;
+                } else { // TODO 비밀번호 6자 이상일 때 비밀번호가 일치하지 않는 경우 빨간 테두리로 표시되도록 변경해야 함.
+                    document.getElementById('same').innerHTML = '비밀번호가 일치하지 않습니다.';
+                    document.getElementById('same').style.color = 'red';
+                    btn.disabled = 'disabled';
+                }
+            }
+        }
