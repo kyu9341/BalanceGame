@@ -116,6 +116,18 @@ router.delete('/:type/:id/like', isLoggedIn, async (req, res, next) => {
     }
 });
 
+router.post('/:id/delete', isLoggedIn, async (req, res, next) => {
+    try {
+        await Post.destroy({
+            where: { id: req.params.id, userId: req.user.id },
+        });
+        res.redirect('/my-posts/1');
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
+});
+
 // 댓글 입력
 router.post('/:type/:id/comment', isLoggedIn, async (req, res, next) => {
     try {

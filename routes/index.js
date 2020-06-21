@@ -163,4 +163,56 @@ router.get('/search/:page', async (req, res, next) => {
     }
 });
 
+
+router.get('/my-posts/:page', isLoggedIn, async (req, res, next) => {
+    try{
+        const board_type = 'my-posts'; // req.params.type;
+        const path = '/board/' + board_type + '/';
+        const type = '내가 쓴 글';
+        const curPage = req.params.page;
+        const pageSize = 10; // 한 페이지 당 게시글
+        const pageListSize = 5; // 페이지의 갯수
+
+        let offset = ""; // limit 변수
+        let totalPostCount = 0; // 전체 게시글 수
+
+        const post = await Post.findAndCountAll({
+            where: { userId: req.user.id },
+        });
+        totalPostCount = post.count;
+
+        // 페이징
+        let result = paging(totalPostCount, curPage, pageSize, pageListSize, offset);
+
+        const posts = await Post.findAll({
+            include: [{
+                model: User, // 작성자를 가져옴
+                attributes: ['id', 'nickname'],
+            },],
+            offset: result.offset,
+            limit: pageSize,
+            order: [['createdAt', 'DESC']],
+            where: { userId: req.user.id },
+        });
+        res.render('board/board', {
+            title: board_type + '-board',
+            type,
+            posts: posts,
+            user: req.user,
+            count: totalPostCount,
+            pageSize,
+            pageListSize,
+            curPage,
+            result,
+            moment,
+            path,
+        });
+
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
+});
+
+
 module.exports = router;

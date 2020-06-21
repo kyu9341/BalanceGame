@@ -23,6 +23,8 @@ block content
                             th(scope='col')
                             th(scope='col') 댓글수
                             th(scope='col') 추천수
+                            if type === '내가 쓴 글'
+                                th(scope='col')
                     tbody
                         if count === 0
                             tr
@@ -42,6 +44,11 @@ block content
                                     td #{resultDate}
                                     td #{post.comment_count}
                                     td #{post.like}
+                                    if type === '내가 쓴 글'
+                                        td
+                                            form.d-inline(method='post' action=`/post/${post.id}/delete`)
+                                                button.btn.btn-outline-warning.btn-outline-danger(type='submit') 삭제
+
 
 
         // 하단 페이지 이동바

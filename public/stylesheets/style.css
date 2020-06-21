@@ -52,11 +52,11 @@ a {
   /* background-color: white !important; */
 }
 /* 드롭박스css */
-.list-group-item.active{
-  background-color: #f2eaa7;
-  border-color: #f2eaa7;
-  color: black;
-}
+/*.list-group-item.active{*/
+/*  background-color: #f2eaa7;*/
+/*  border-color: #f2eaa7;*/
+/*  color: black;*/
+/*}*/
 /* 하단 페이지 이동 버튼 */
 .paging_comm{
   position: relative;
