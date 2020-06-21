@@ -16,10 +16,13 @@ block content
                     -const liker = post && post.postLiker.map(l => l.id).includes(user.id);
                     -console.log("liker : " + liker + "  user : " + user);
                     if user && !liker
-                        button.like.btn.btn-outline-warning 좋아요 #{post.like}
+                        button.like.btn
+                            img#nolike(style=' width:30px; height:30px;  ' src='/images/egg.png')
+                        span#count(style='vertical-align: middle;') #{post.like} LIKE
                     else if user && liker
-                        button.unlike.btn.btn-outline-warning 좋아요 취소 #{post.like}
-
+                        button.unlike.btn
+                            img#nolike(style=' width:30px; height:30px;' src='/images/likedegg.png')
+                        span#count(style='vertical-align: middle;') #{post.like} LIKE
         // 댓글쓰기
         .mt-3.border-bottom
             h5 댓글
