@@ -1,6 +1,6 @@
 const express = require('express');
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
-const { Post, User, postLike, Comment, commentLike } = require('../models');
+const { Post, User, postLike, Comment, commentLike, Vote } = require('../models');
 const multer = require('multer');
 const path = require('path');
 const moment = require('moment');
@@ -39,7 +39,11 @@ router.get('/:type/:id', async (req, res, next) => {
                 model: User, // 좋아요를 누른 사람들을 가져옴
                 attributes: ['id', 'nickname'],
                 as: 'postLiker', // include 에서 같은 모델이 여러개면 as로 구분
-            },],
+            },{
+                model: User, // 좋아요를 누른 사람들을 가져옴
+                attributes: ['id', 'nickname'],
+                as: 'Voter', // include 에서 같은 모델이 여러개면 as로 구분
+            }],
         });
         const comments = await Comment.findAll({
            where: { postId: req.params.id },
@@ -50,14 +54,21 @@ router.get('/:type/:id', async (req, res, next) => {
             model: User, // 좋아요를 누른 사람들을 가져옴
                 attributes: ['id', 'nickname'],
                 as: 'commentLiker', // include 에서 같은 모델이 여러개면 as로 구분
-            }],
+            },],
         });
+        let leftPer = (post.score_left / (post.score_left + post.score_right)) * 100;
+        console.log("leftPer : " + leftPer);
+        let rightPer = (post.score_right / (post.score_left + post.score_right)) * 100;
+        console.log("rightPer : " + rightPer);
+
         res.render('board/' + req.params.type + '-detail', {
             title: 'board - ' + req.params.type,
             post: post,
             comments: comments,
             user: req.user,
             moment,
+            leftPer,
+            rightPer,
         });
 
     } catch (error) {
@@ -127,6 +138,59 @@ router.post('/:id/delete', isLoggedIn, async (req, res, next) => {
         next(error);
     }
 });
+
+
+router.post('/:type/:id/vote', isLoggedIn, async (req, res, next) => {
+    try {
+        console.log("vote : " + req.body.target);
+
+        await Vote.create({
+            postId: req.params.id,
+            userId: req.user.id,
+            target: req.body.target,
+        }); // 현재 포스트와 Voter를 연결
+        const voteLeft = await Vote.count({
+            where: { postId: req.params.id, target: 'left' },
+        });
+        const voteRight = await Vote.count({
+            where: { postId: req.params.id, target: 'right' },
+        });
+
+        await Post.update({
+            score_left: voteLeft,
+            score_right: voteRight
+        },{
+            where: { id: req.params.id },
+        });
+
+        let post = await Post.findOne({
+            include: [{
+                model: User, // 좋아요를 누른 사람들을 가져옴
+                attributes: ['id', 'nickname'],
+                as: 'Voter', // include 에서 같은 모델이 여러개면 as로 구분
+            }],
+            where: { id: req.params.id }
+        });
+
+        let leftPer = (post.score_left / (post.score_left + post.score_right)) * 100;
+        console.log("leftPer : " + leftPer);
+        let rightPer = (post.score_right / (post.score_left + post.score_right)) * 100;
+        console.log("rightPer : " + rightPer);
+
+
+        res.status(200).send({
+            title: 'board - ' + req.params.type,
+            post: post,
+            user: req.user,
+            leftPer,
+            rightPer,
+        });
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
+});
+
 
 // 댓글 입력
 router.post('/:type/:id/comment', isLoggedIn, async (req, res, next) => {

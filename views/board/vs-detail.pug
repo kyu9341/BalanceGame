@@ -14,32 +14,64 @@ block content
             .card-body.mb-3.border-bottom
                 .row.text-center
                     .col-2
-                    .col-4
-                        .vs-left.card
-                            div(style="width: 200; height: 200px;")
-                                if !post.img_left
-                                    img.card-img-top(src='/images/toright.png' width="200" height="200" alt='닥전')
-                                else
-                                    img.card-img-top(src=post.img_left width="200" height="200" alt='닥전')
-                            .card-body.border-top
-                                p.card-title #{post.description_left}
-                                //a.btn.btn-primary(href='#') 닥전
-                    .col-4
-                        .vs-right.card
-                            div(style="width: 200; height: 200px;")
-                                if !post.img_right
-                                    img.card-img-top(src='/images/toleft.png' width="200" height="200" alt='닥전')
-                                else
-                                    img.card-img-top(src=post.img_right width="200" height="200" alt='닥후')
-                            .card-body.border-top
-                                p.card-title #{post.description_right}
-                                //a.btn.btn-primary(href='#') 닥후
+                    if user
+                        -const voter = post && post.Voter.map(l => l.id).includes(user.id);
+                        if user && !voter
+                            .col-4
+                                .vs-left.card#left
+                                    div(style="width: 200; height: 200px;")
+                                        if !post.img_left
+                                            img.card-img-top(src='/images/toright.png' width="200" height="200" alt='닥전')
+                                        else
+                                            img.card-img-top(src=post.img_left width="200" height="200" alt='닥전')
+                                    .card-body.border-top
+                                        p.card-title #{post.description_left}
+                                        //a.btn.btn-primary(href='#') 닥전
+                            .col-4
+                                .vs-right.card#right
+                                    div(style="width: 200; height: 200px;")
+                                        if !post.img_right
+                                            img.card-img-top(src='/images/toleft.png' width="200" height="200" alt='닥전')
+                                        else
+                                            img.card-img-top(src=post.img_right width="200" height="200" alt='닥후')
+                                    .card-body.border-top
+                                        p.card-title #{post.description_right}
+                                        //a.btn.btn-primary(href='#') 닥후
+                        else if user && voter
+                            .col-4
+                                .vs-left.card
+                                    div(style="width: 200; height: 200px;")
+                                        if !post.img_left
+                                            img.card-img-top(src='/images/toright.png' width="200" height="200" alt='닥전')
+                                        else
+                                            img.card-img-top(src=post.img_left width="200" height="200" alt='닥전')
+                                    .card-body.border-top
+                                        p.card-title #{post.description_left}
+                                    .card-body.border-top
+                                        #left-progress-div.progress
+                                            #left-progress.progress-bar.progress-bar-striped.bg-warning(role='progressbar' style='width: 0%;'
+                                                aria-valuenow='25' aria-valuemin='0' aria-valuemax='100') #{leftPer} %
+
+                            .col-4
+                                .vs-right.card
+                                    div(style="width: 200; height: 200px;")
+                                        if !post.img_right
+                                            img.card-img-top(src='/images/toleft.png' width="200" height="200" alt='닥전')
+                                        else
+                                            img.card-img-top(src=post.img_right width="200" height="200" alt='닥후')
+                                    .card-body.border-top
+                                        p.card-title #{post.description_right}
+                                    .card-body.border-top
+                                        #right-progress-div.progress
+                                            #right-progress.progress-bar.progress-bar-striped.bg-warning(role='progressbar' style='width: 0%;'
+                                                aria-valuenow='25' aria-valuemin='0' aria-valuemax='100') #{rightPer} %
+
             .text-center.mb-3.mt-3
                 if user
                     -const liker = post && post.postLiker.map(l => l.id).includes(user.id);
                     if user && !liker
                         button.like.btn.btn-outline-warning.text-dark
-                            img#nolike(style=' width:30px; height:30px;  ' src='/images/egg.png')
+                            img#nolike(style=' width:30px; height:30px;' src='/images/egg.png')
                             span#count(style='vertical-align: middle;') #{post.like} LIKE
                     else if user && liker
                         button.unlike.btn.btn-outline-warning.text-dark.btn-warning
@@ -61,7 +93,7 @@ block content
             each comment in comments
                 .border-top.pt-1.pb-1
                     .row.mt-2
-                        .col-3.col-md-2.col-lg-1.pl-4=comment.user.nickname
+                        .col-3.col-md-2.col-lg-1=comment.user.nickname
                         .col-6.col-md-7.col-lg-8
                             .comment-show
                                 .comment-text.mb-3=comment.content
@@ -136,4 +168,57 @@ block content
                 xhr.open('DELETE', pathname + '/like');
                 xhr.send();
             });
+        });
+
+        let left = document.querySelector('#left');
+        let right = document.querySelector('#right');
+
+        $(function () {
+            let pathname = window.location.pathname;
+            left.addEventListener('click', function () {
+                let xhr = new XMLHttpRequest();
+                let data = {'target': 'left'};
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        location.reload();
+                    } else {
+                        console.error(xhr.responseText);
+                    }
+                };
+                xhr.open('POST', pathname + '/vote');
+                xhr.setRequestHeader('Content-Type', 'application/json'); // 컨텐츠타입을 json으로
+                xhr.send(JSON.stringify(data));
+            });
+            right.addEventListener('click', function () {
+                let xhr = new XMLHttpRequest();
+                let data = {'target': 'right'};
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        location.reload();
+                    } else {
+                        console.error(xhr.responseText);
+                    }
+                };
+                xhr.open('POST', pathname + '/vote');
+                xhr.setRequestHeader('Content-Type', 'application/json'); // 컨텐츠타입을 json으로
+                xhr.send(JSON.stringify(data));
+            });
+
+
+
+        });
+        window.addEventListener('load', function () {
+            let left = document.getElementById('left-progress');
+            let leftProgressGroup = document.getElementById('left-progress-div');
+            leftProgressGroup.style.display = "block";
+            setTimeout(function () {
+                left.style.width = !{leftPer} + "%";
+            }, 200);
+
+            let right = document.getElementById('right-progress');
+            let rightProgressGroup = document.getElementById('right-progress-div');
+            rightProgressGroup.style.display = "block";
+            setTimeout(function () {
+                right.style.width = !{rightPer} + "%";
+            }, 200);
         });

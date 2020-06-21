@@ -35,6 +35,14 @@ module.exports = (sequelize, DataTypes) => (
             type: DataTypes.STRING(50),
             allowNull: false,
         },
+        score_left: {
+            type: DataTypes.INTEGER.UNSIGNED,
+            defaultValue: 0,
+        },
+        score_right: {
+            type: DataTypes.INTEGER.UNSIGNED,
+            defaultValue: 0,
+        },
     }, {
         timestamps: true,
         paranoid: true,
