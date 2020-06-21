@@ -24,13 +24,13 @@ router.get('/sign-up', isNotLoggedIn, (req, res) => {
 // 메인 페이지 www
 router.get('/', async (req, res, next) => {
     try {
+        let limitValue = 5;
         const freePosts = await Post.findAll({
             include: [{
                 model: User, // 작성자를 가져옴
                 attributes: ['id', 'nickname'],
             },],
-            offset: 0,
-            limit: 5,
+            limit: limitValue,
             // attributes: { include: [[await Comment.count({}) ], 'count'] },
             order: [['createdAt', 'DESC']],
             where: { board_type: 'free' },
@@ -41,17 +41,42 @@ router.get('/', async (req, res, next) => {
                 model: User, // 작성자를 가져옴
                 attributes: ['id', 'nickname'],
             },],
-            offset: 0,
-            limit: 5,
+            limit: limitValue,
             // attributes: { include: [[await Comment.count({}) ], 'count'] },
             order: [['createdAt', 'DESC']],
             where: { board_type: 'vs' },
         });
+
+        const bestVsPosts = await Post.findAll({
+            include: [{
+                model: User, // 작성자를 가져옴
+                attributes: ['id', 'nickname'],
+            },],
+            limit: limitValue,
+            // attributes: { include: [[await Comment.count({}) ], 'count'] },
+            order: [['like', 'DESC'], ['createdAt', 'DESC']],
+            where: { board_type: 'vs' },
+        });
+
+
+        const bestFreePosts = await Post.findAll({
+            include: [{
+                model: User, // 작성자를 가져옴
+                attributes: ['id', 'nickname'],
+            },],
+            limit: limitValue,
+            // attributes: { include: [[await Comment.count({}) ], 'count'] },
+            order: [['like', 'DESC'], ['createdAt', 'DESC']],
+            where: { board_type: 'free' },
+        });
+
         res.render('index', {
             title: 'BalanceGame',
             user: req.user,
             freePosts,
             vsPosts,
+            bestFreePosts,
+            bestVsPosts,
             moment,
         });
     } catch (error) {
