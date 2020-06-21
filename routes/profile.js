@@ -63,7 +63,7 @@ router.post('/edit/submit', isLoggedIn, async (req, res, next) => {
     try {
         const exUser = await User.findOne({ where: { nickname }});
 
-        if (exUser) {
+        if (exUser&&exUser.id!==req.user.id) {
             req.flash('profileEditError', '이미 존재하는 닉네임입니다.');
             return res.redirect('/profile/edit');
         }

@@ -8,7 +8,7 @@ block content
             form.edit(action='/profile/edit/submit' method='post')
                 .form-group
                     label(for='edit-nickname') 닉네임
-                    input#editNickname.form-control(type='text' name='nickname' placeholder='new nickname'
+                    input#editNickname.form-control(type='text' name='nickname' value=user.nickname
                         aria-describedby='nicknameHelp'
                         required minlength='3' maxlength='20')
                     small#nicknameHelp.form-text.text-muted
@@ -22,16 +22,16 @@ block content
                     small#introduceHelp.form-text.text-muted
                         | 내 소개를 입력하세요.
                 .form-group
-                    label(for='password') 새 패스워드
+                    label(for='password') 새 패스워드(미입력시 미변경)
                     input#password.form-control(type='password' name='password' aria-describedby='passwordHelp'
-                        placeholder='password' required minlength='6' maxlength='50')
+                        placeholder='password' minlength='6' maxlength='50')
                     small#passwordHelp.form-text.text-muted
                         | 6자 이상 50자 이내로 입력하세요.
                     small.invalid-feedback 패스워드를 입력하세요.
                 .form-group
                     label(for='check-password') 패스워드 확인
                     input#check-password.form-control(type='password' placeholder='password check'
-                        required minlength='6' maxlength='50' onchange='isSame()')
+                        minlength='6' maxlength='50' onchange='isSame()')
                     small.invalid-feedback 패스워드를 확인하세요.
                     small#same.form-text
 
