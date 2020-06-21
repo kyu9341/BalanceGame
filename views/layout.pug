@@ -73,12 +73,19 @@ body.bg-white
                             .progress
                                 .progress-bar.progress-bar-striped.bg-warning(role='progressbar' style='width: 25%;' aria-valuenow='25' aria-valuemin='0' aria-valuemax='100') 25%
 
-
+                    
                 // 우측 네비게이션바
-                #list-tab.list-group(role='tablist')
+                //- #list-tab.list-group(role='tablist')
+                //-     button.btn.btn-outline-warning.mt-3.mb-1.btn-block(onclick="location.href='/write'" type='button') 글쓰기
+                //-     a#list-best-vs-list.list-group-item.list-group-item-action.active(href='/board/best/vs/1' data-toggle='list' role='tab' aria-current='page' aria-controls='settings') best vs 게시판
+                //-     a#list-best-free-list.list-group-item.list-group-item-action(href='/board/best/free/1' data-toggle='list' role='tab' aria-controls='profile') best 자유 게시판
+                //-     a#list-vs-list.list-group-item.list-group-item-action(href='/board/vs/1' data-toggle='list' role='tab' aria-controls='messages') vs 게시판
+                //-     a#list-free-list.list-group-item.list-group-item-action(href='/board/free/1' data-toggle='list' role='tab' aria-controls='settings') 자유 게시판
+                #list-tab.list-group
                     button.btn.btn-outline-warning.mt-3.mb-1.btn-block(onclick="location.href='/write'" type='button') 글쓰기
-                    a#list-best-vs-list.list-group-item.list-group-item-action(href='/board/best/vs/1' role='tab' aria-controls='settings') best vs 게시판
-                    a#list-best-free-list.list-group-item.list-group-item-action(href='/board/best/free/1' role='tab' aria-controls='profile') best 자유 게시판
-                    a#list-vs-list.list-group-item.list-group-item-action(href='/board/vs/1' role='tab' aria-controls='messages') vs 게시판;
-                    a#list-free-list.list-group-item.list-group-item-action(href='/board/free/1' role='tab' aria-controls='settings') 자유 게시판
+                    button#list-best-vs-list.list-group-item.list-group-item-action(style='outline-color:#ffc107;' onclick="location.href='/board/best/vs/1' ") best vs 게시판
+                    button#list-best-free-list.list-group-item.list-group-item-action(style='outline-color:#ffc107;' onclick="location.href='/board/best/free/1'" ) best 자유 게시판
+                    button#list-vs-list.list-group-item.list-group-item-action(style='outline-color:#ffc107;' onclick="location.href='/board/vs/1'"  ) vs 게시판
+                    button#list-free-list.list-group-item.list-group-item-action(style='outline-color:#ffc107;' onclick="location.href='/board/free/1'" ) 자유 게시판
+                
         .col-1
