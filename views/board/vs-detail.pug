@@ -7,7 +7,7 @@ block content
                 li.breadcrumb-item
                     a(href='/') Home
                 li.breadcrumb-item.active
-                    a(href='/board/free/1' aria-current='page') 자유 게시판
+                    a(href='/board/vs/1' aria-current='page') vs 게시판
         .card.mt-3
             h5.card-header=post.title
             .card-body!= post.content
@@ -107,41 +107,3 @@ block content
                 xhr.send();
             });
         });
-        // let unlikeComment = document.querySelectorAll('.unlikeComment');
-        // let likeComment = document.querySelectorAll('.likeComment');
-        //
-        // $(function () {
-        //     let pathname = window.location.pathname;
-        //     likeComment.addEventListener('click', function () {
-        //         let commentId = $('.commentId').val();
-        //         console.log("commentId : " + commentId);
-        //         let xhr = new XMLHttpRequest();
-        //         xhr.onload = function () {
-        //             if (xhr.status === 200) {
-        //                 location.reload();
-        //             } else {
-        //                 console.error(xhr.responseText);
-        //             }
-        //         };
-        //         xhr.open('POST', pathname + '/like/comment/' + commentId);
-        //         xhr.send();
-        //     });
-        // });
-        //
-        // $(function () {
-        //     let pathname = window.location.pathname;
-        //     unlikeComment.addEventListener('click', function () {
-        //         // let postId = document.querySelector('#post-id').value;
-        //         let xhr = new XMLHttpRequest();
-        //         xhr.onload = function () {
-        //             if (xhr.status === 200) {
-        //                 location.reload();
-        //             } else {
-        //                 console.error(xhr.responseText);
-        //             }
-        //         };
-        //         xhr.open('DELETE', pathname + '/like/comment/');
-        //         xhr.send();
-        //     });
-        // })
-        //  /:type/:id/like/comment/:commentId

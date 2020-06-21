@@ -22,7 +22,7 @@ router.post('/write', isLoggedIn, async (req, res, next) => {
     }
 });
 
-router.get('/free/:id', async (req, res, next) => {
+router.get('/:type/:id', async (req, res, next) => {
     try {
         const id = req.params.id;
         const post = await Post.findOne({
@@ -47,8 +47,8 @@ router.get('/free/:id', async (req, res, next) => {
                 as: 'commentLiker', // include 에서 같은 모델이 여러개면 as로 구분
             }],
         });
-        res.render('board/free-detail', {
-            title: 'board - free',
+        res.render('board/' + req.params.type + '-detail', {
+            title: 'board - ' + req.params.type,
             post: post,
             comments: comments,
             user: req.user,
@@ -61,7 +61,7 @@ router.get('/free/:id', async (req, res, next) => {
     }
 });
 
-router.post('/free/:id/like', isLoggedIn, async (req, res, next) => {
+router.post('/:type/:id/like', isLoggedIn, async (req, res, next) => {
     try {
         let post = await Post.findOne({ where: { id: req.params.id }});
         await post.addPostLiker(req.user.id); // 현재 포스트와 Liker를 연결
@@ -78,7 +78,7 @@ router.post('/free/:id/like', isLoggedIn, async (req, res, next) => {
 
         console.log("likeCount2: " + likeCount.count);
         res.status(200).send({
-            title: 'board - free',
+            title: 'board - ' + req.params.type,
             post: post,
             user: req.user,
         });
@@ -88,7 +88,7 @@ router.post('/free/:id/like', isLoggedIn, async (req, res, next) => {
     }
 });
 
-router.delete('/free/:id/like', isLoggedIn, async (req, res, next) => {
+router.delete('/:type/:id/like', isLoggedIn, async (req, res, next) => {
     try {
         await postLike.destroy({ where: { userId: req.user.id, postId: req.params.id }});
         const likeCount = await postLike.findAndCountAll({
@@ -101,7 +101,7 @@ router.delete('/free/:id/like', isLoggedIn, async (req, res, next) => {
         });
         // const post = await Post.findOne({ where: { id: req.params.id }});
         res.status(200).send({
-            title: 'board - free',
+            title: 'board - ' + req.params.type,
             post: post,
             user: req.user,
         });
@@ -111,28 +111,8 @@ router.delete('/free/:id/like', isLoggedIn, async (req, res, next) => {
     }
 });
 
-
-
-router.get('/free/:id/comment', async (req, res, next) => {
-    try {
-        const comments = await Comment.findAll({
-            include: [{
-                model: Post,
-                where: { id: req.params.id },
-            }, {
-                model: User,
-                attributes: ['id', 'nickname'],
-            }],
-        });
-        res.json(comments);
-    } catch (error) {
-        console.error(error);
-        next(error);
-    }
-});
-
 // 댓글 입력
-router.post('/free/:id/comment', isLoggedIn, async (req, res, next) => {
+router.post('/:type/:id/comment', isLoggedIn, async (req, res, next) => {
     try {
         await Comment.create({
             content: req.body.content,
@@ -146,7 +126,7 @@ router.post('/free/:id/comment', isLoggedIn, async (req, res, next) => {
             where: { id: req.params.id }
           },
         );
-        res.redirect('/post/free/' + req.params.id);
+        res.redirect('/post/' + req.params.type + '/' + req.params.id);
     } catch (error) {
         console.error(error);
         next(error);
