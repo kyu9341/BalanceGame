@@ -1,6 +1,6 @@
 const express = require('express');
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
-const { Post, User, Like, Comment } = require('../models');
+const { Post, User, postLike, Comment, commentLike } = require('../models');
 const multer = require('multer');
 const path = require('path');
 const moment = require('moment');
@@ -33,15 +33,19 @@ router.get('/free/:id', async (req, res, next) => {
             }, {
                 model: User, // 좋아요를 누른 사람들을 가져옴
                 attributes: ['id', 'nickname'],
-                as: 'Liker', // include 에서 같은 모델이 여러개면 as로 구분
+                as: 'postLiker', // include 에서 같은 모델이 여러개면 as로 구분
             },],
         });
         const comments = await Comment.findAll({
            where: { postId: req.params.id },
-           include: {
+           include: [{
               model: User,
               attributes: ['id', 'nickname'],
-           } ,
+           }, {
+            model: User, // 좋아요를 누른 사람들을 가져옴
+                attributes: ['id', 'nickname'],
+                as: 'commentLiker', // include 에서 같은 모델이 여러개면 as로 구분
+            }],
         });
         res.render('board/free-detail', {
             title: 'board - free',
@@ -60,8 +64,8 @@ router.get('/free/:id', async (req, res, next) => {
 router.post('/free/:id/like', isLoggedIn, async (req, res, next) => {
     try {
         let post = await Post.findOne({ where: { id: req.params.id }});
-        await post.addLiker(req.user.id); // 현재 포스트와 Liker를 연결
-        const likeCount = await Like.findAndCountAll({
+        await post.addPostLiker(req.user.id); // 현재 포스트와 Liker를 연결
+        const likeCount = await postLike.findAndCountAll({
             where: { postId: req.params.id },
         });
         console.log("likeCount1: " + likeCount.count);
@@ -86,8 +90,8 @@ router.post('/free/:id/like', isLoggedIn, async (req, res, next) => {
 
 router.delete('/free/:id/like', isLoggedIn, async (req, res, next) => {
     try {
-        await Like.destroy({ where: { userId: req.user.id, postId: req.params.id }});
-        const likeCount = await Like.findAndCountAll({
+        await postLike.destroy({ where: { userId: req.user.id, postId: req.params.id }});
+        const likeCount = await postLike.findAndCountAll({
             where: { postId: req.params.id },
         });
         const post = await Post.update({
@@ -149,26 +153,10 @@ router.post('/free/:id/comment', isLoggedIn, async (req, res, next) => {
     }
 });
 
-
-router.patch('/free/:id/comment', isLoggedIn, async (req, res, next) => {
-   try {
-       await Comment.update({
-          content: req.body.content,
-       },{
-           where: { postId: req.params.id, userId: req.user.id },
-       });
-
-       res.redirect('/free/:id');
-   } catch (error) {
-        console.error(error);
-        next(error);
-   }
-});
-
-router.delete('/free/:id/comment', isLoggedIn, async (req, res, next) => {
+router.post('/:type/:id/comment/:commentId/delete', isLoggedIn, async (req, res, next) => {
    try {
        await Comment.destroy({
-          where: { postId: req.params.id, userId: req.user.id },
+          where: { id: req.params.commentId, userId: req.user.id },
        });
        let count = await Comment.count({ where: { postId: req.params.id } });
        await Post.update({
@@ -177,7 +165,7 @@ router.delete('/free/:id/comment', isLoggedIn, async (req, res, next) => {
                where: { id: req.params.id }
            },
        );
-       res.redirect('/free/:id');
+       res.redirect('/post/'+ req.params.type + '/' + req.params.id);
    } catch (error) {
        console.error(error);
        next(error);
@@ -203,5 +191,47 @@ router.post('/free/image', upload.single('file'), (req, res) => {
 });
 
 
+router.post('/:type/:id/like/comment/:commentId', isLoggedIn, async (req, res, next) => {
+    try {
+        // let post = await Post.findOne({ where: { id: req.params.id }});
+        let comment = await Comment.findOne({ where: { id: req.params.commentId }});
+        await comment.addCommentLiker(req.user.id); // 현재 포스트와 Liker를 연결
+        const likeCount = await commentLike.findAndCountAll({
+            where: { commentId: req.params.commentId },
+        });
+        console.log("likeCount1: " + likeCount.count);
+
+        await Comment.update({
+            like: likeCount.count,
+        },{
+            where: { id: req.params.commentId },
+        });
+
+        console.log("likeCount2: " + likeCount.count);
+        res.redirect('/post/'+ req.params.type + '/' + req.params.id);
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
+});
+
+router.post('/:type/:id/like/comment/:commentId/delete', isLoggedIn, async (req, res, next) => {
+    try {
+        await commentLike.destroy({ where: { userId: req.user.id, commentId: req.params.commentId }});
+        const likeCount = await commentLike.findAndCountAll({
+            where: { commentId: req.params.commentId },
+        });
+        await Comment.update({
+            like: likeCount.count,
+        },{
+            where: { id: req.params.commentId },
+        });
+
+        res.redirect('/post/'+ req.params.type + '/' + req.params.id);
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
+});
 
 module.exports = router;

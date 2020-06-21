@@ -13,7 +13,7 @@ block content
             .card-body!= post.content
             .text-center.mb-3
                 if user
-                    -const liker = post && post.Liker.map(l => l.id).includes(user.id);
+                    -const liker = post && post.postLiker.map(l => l.id).includes(user.id);
                     -console.log("liker : " + liker + "  user : " + user);
                     if user && !liker
                         button.like.btn.btn-outline-warning 좋아요 #{post.like}
@@ -39,6 +39,7 @@ block content
                         .col-6.col-md-7.col-lg-8
                             .comment-show
                                 .comment-text.mb-3=comment.content
+                                    span.commentId(hidden)=comment.id
                                 small.d-block
                                 - let dateform = new Date(comment.createdAt)
                                 - moment.locale('ko');
@@ -46,12 +47,23 @@ block content
                                     small=resultDate
                         .col-3.btn-group.btn-group-sm(role='group')
                             small.d-block
-                                button.btn.btn-warning(type='button') 좋아요
-                                button.btn.btn-outline-warning(type='button') 삭제
-                                button.btn.btn-outline-warning(type='button') 신고
-            br.mb-5
-            br
-            br
+                                small.d-block
+                                    if user
+                                        -const liker = comment && comment.commentLiker.map(l => l.id).includes(user.id);
+                                        -console.log("liker : " + liker + "  user : " + user);
+                                        if user && !liker
+                                            form.d-inline(method='post' action=`${post.id}/like/comment/${comment.id}`)
+                                                button.likeComment.btn.btn-outline-warning 좋아요 #{comment.like}
+                                        else if user && liker
+                                            form.d-inline(method='post' action=`${post.id}/like/comment/${comment.id}/delete`)
+                                                button.unlikeComment.btn.btn-outline-warning 좋아요 취소 #{comment.like}
+                                    //button.btn.btn-warning(type='button') 좋아요
+                                    if user
+                                        form.d-inline(method='post' action=`${post.id}/comment/${comment.id}/delete`)
+                                            button.btn.btn-outline-warning(type='submit') 삭제
+        br.mb-5
+        br
+        br
 
 
 
@@ -95,12 +107,31 @@ block content
                 xhr.open('DELETE', pathname + '/like');
                 xhr.send();
             });
-        })
-
+        });
+        // let unlikeComment = document.querySelectorAll('.unlikeComment');
+        // let likeComment = document.querySelectorAll('.likeComment');
+        //
         // $(function () {
-        //     const commentForm = document.querySelector('#comment-form-button');
         //     let pathname = window.location.pathname;
-        //     commentForm.addEventListener('click', function () {
+        //     likeComment.addEventListener('click', function () {
+        //         let commentId = $('.commentId').val();
+        //         console.log("commentId : " + commentId);
+        //         let xhr = new XMLHttpRequest();
+        //         xhr.onload = function () {
+        //             if (xhr.status === 200) {
+        //                 location.reload();
+        //             } else {
+        //                 console.error(xhr.responseText);
+        //             }
+        //         };
+        //         xhr.open('POST', pathname + '/like/comment/' + commentId);
+        //         xhr.send();
+        //     });
+        // });
+        //
+        // $(function () {
+        //     let pathname = window.location.pathname;
+        //     unlikeComment.addEventListener('click', function () {
         //         // let postId = document.querySelector('#post-id').value;
         //         let xhr = new XMLHttpRequest();
         //         xhr.onload = function () {
@@ -110,32 +141,8 @@ block content
         //                 console.error(xhr.responseText);
         //             }
         //         };
-        //         xhr.open('POST', pathname + '/comment');
+        //         xhr.open('DELETE', pathname + '/like/comment/');
         //         xhr.send();
         //     });
-        // });
-        // $(function () {
-        //     let pathname = window.location.pathname;
-        //
-        //     let likeTag = document.querySelector('.like');
-        //     likeTag.addEventListener('click', function () {
-        //         // let postId = document.querySelector('#project-id').value;
-        //         likeRequest('POST')
-        //             .then(function (status) {
-        //                 if (status) {
-        //                     location.reload();
-        //                 }
-        //             }).catch(function (error) {
-        //             console.error(error);
-        //         });
-        //     });
-        //
-        //     function likeRequest(method) {
-        //         return fetch(pathname + '/like', {
-        //             method: method,
-        //             headers: {
-        //                 'Content-Type': 'application/json',
-        //             }
-        //         });
-        //     }
-        // });
+        // })
+        //  /:type/:id/like/comment/:commentId
