@@ -4,6 +4,7 @@ const { Post, User, postLike, Comment, commentLike } = require('../models');
 const multer = require('multer');
 const path = require('path');
 const moment = require('moment');
+const exp = require('./exp');
 
 const router = express.Router();
 
@@ -19,7 +20,20 @@ router.post('/write', isLoggedIn, vsUpload.none(), async (req, res, next) => {
             img_right: req.body.url_right,
             description_left: req.body.description_left,
             description_right: req.body.description_right,
+
         });
+        let addExp = 50;
+
+        if(req.body.board_type==='vs'){
+            addExp += 20;
+        }
+        await User.update({
+            exp: req.user.exp+addExp,
+        },{
+            where: { id: req.user.id },
+        }); //경험치 넣기
+
+
         res.redirect('/board/' + req.body.board_type + '/1');
     } catch (error) {
         console.error(error);
@@ -81,6 +95,14 @@ router.post('/:type/:id/like', isLoggedIn, async (req, res, next) => {
             where: { id: req.params.id },
         });
 
+        let addExp=5;
+        const postUser = await User.findOne({where: {id: req.params.userId}});
+        await User.update({
+            exp: postUser.exp + addExp,
+        },{
+            where: { id: post.userId },
+        }); //경험치 넣기
+
         console.log("likeCount2: " + likeCount.count);
         res.status(200).send({
             title: 'board - ' + req.params.type,
@@ -104,6 +126,15 @@ router.delete('/:type/:id/like', isLoggedIn, async (req, res, next) => {
         },{
             where: { id: req.params.id },
         });
+
+        let addExp=-5;
+        const postUser = await User.findOne({where: {id: req.params.userId}});
+        await User.update({
+            exp: postUser.exp + addExp,
+        },{
+            where: { id: req.params.userId },
+        }); //경험치 넣기
+
         // const post = await Post.findOne({ where: { id: req.params.id }});
         res.status(200).send({
             title: 'board - ' + req.params.type,
@@ -121,6 +152,8 @@ router.post('/:id/delete', isLoggedIn, async (req, res, next) => {
         await Post.destroy({
             where: { id: req.params.id, userId: req.user.id },
         });
+
+
         res.redirect('/my-posts/1');
     } catch (error) {
         console.error(error);
@@ -143,6 +176,14 @@ router.post('/:type/:id/comment', isLoggedIn, async (req, res, next) => {
             where: { id: req.params.id }
           },
         );
+
+        let addExp=5;
+        await User.update({
+            exp: req.user.exp+addExp,
+        },{
+            where: { id: req.user.id },
+        }); //경험치 넣기
+
         res.redirect('/post/' + req.params.type + '/' + req.params.id);
     } catch (error) {
         console.error(error);
