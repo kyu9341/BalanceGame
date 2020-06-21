@@ -1,6 +1,6 @@
 const {User} = require('../models');
 
-exports.addExp = async (req, res, next)=> {
+exports.addExp = async (id, exp)=> {
     try{
         const exp = req.body.exp;
         await User.update({
@@ -12,5 +12,5 @@ exports.addExp = async (req, res, next)=> {
     catch (error) {
         console.error(error);
         next(error);
-    }c
+    }(req, res, next);
 }

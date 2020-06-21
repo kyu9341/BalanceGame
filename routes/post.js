@@ -96,9 +96,9 @@ router.post('/:type/:id/like', isLoggedIn, async (req, res, next) => {
         });
 
         let addExp=5;
-        const postUser = await User.findOne({where: {id: req.params.userId}});
+        const postUser = await User.findOne({where: {id: post.userId}});
         await User.update({
-            exp: postUser.exp + addExp,
+            exp: postUser.exp+addExp,
         },{
             where: { id: post.userId },
         }); //경험치 넣기
@@ -121,18 +121,19 @@ router.delete('/:type/:id/like', isLoggedIn, async (req, res, next) => {
         const likeCount = await postLike.findAndCountAll({
             where: { postId: req.params.id },
         });
-        const post = await Post.update({
+        await Post.update({
             like: likeCount.count,
         },{
             where: { id: req.params.id },
         });
-
+        console.log("tomato"+req.params);
         let addExp=-5;
-        const postUser = await User.findOne({where: {id: req.params.userId}});
+        const post = await Post.findOne({where : {id: req.params.id}});
+        const postUser = await User.findOne({where : {id : post.userId}});
         await User.update({
             exp: postUser.exp + addExp,
         },{
-            where: { id: req.params.userId },
+            where: { id: postUser.id },
         }); //경험치 넣기
 
         // const post = await Post.findOne({ where: { id: req.params.id }});
