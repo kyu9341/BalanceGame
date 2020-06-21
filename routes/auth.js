@@ -12,9 +12,14 @@ const router = express.Router();
 router.post('/sign-up', isNotLoggedIn, async (req, res, next) => {
     const { email, nickname, password } = req.body;
     try {
-        const exUser = await User.findOne({ where: { email }});
-        if (exUser) {
+        const exUserMail = await User.findOne({ where: { email }});
+        const exNickname = await User.findOne({ where: { nickname }});
+        if (exUserMail) {
             req.flash('signUpError', '이미 가입된 이메일입니다.');
+            return res.redirect('/sign-up');
+        }
+        if (exNickname) {
+            req.flash('signUpError', '이미 존재하는 닉네임입니다.');
             return res.redirect('/sign-up');
         }
         const hash = await bcrypt.hash(password, 12); // salt 가 커질수록 암호화가 복잡해짐
@@ -22,6 +27,7 @@ router.post('/sign-up', isNotLoggedIn, async (req, res, next) => {
             email,
             nickname,
             password: hash,
+            introduce :" ",
         });
         return res.redirect('/');
     } catch (error) {

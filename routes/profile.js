@@ -67,15 +67,27 @@ router.post('/edit/submit', isLoggedIn, async (req, res, next) => {
             req.flash('profileEditError', '이미 존재하는 닉네임입니다.');
             return res.redirect('/profile/edit');
         }
-        const hash = await bcrypt.hash(password, 12);
 
-        await User.update({
-            nickname,
-            password: hash,
-            introduce,
-        },{
-            where: {id: req.user.id},
-        });
+        if(password===""){
+            await User.update({
+                nickname,
+                introduce,
+            },{
+                where: {id: req.user.id},
+            });
+        }
+        else{
+            const hash = await bcrypt.hash(password, 12);
+            await User.update({
+                nickname,
+                password: hash,
+                introduce,
+            },{
+                where: {id: req.user.id},
+            });
+        }
+
+
         return res.redirect('/profile/');
     } catch (error) {
         console.error(error);
