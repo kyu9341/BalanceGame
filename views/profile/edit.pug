@@ -1,0 +1,23 @@
+extends ../layout
+
+block content
+    form.edit(action='/profile/edit/submit' method='post')
+        fieldset
+            legend Profile Edit
+            .form-group
+                label(for='edit-nickname') 닉네임
+                input#editNickname.form-control(type='text' name='nickname' aria-describedby='NameHelp' placeholder='new nickname')
+            .form-group
+                label(for='edit-introduce') 내 소개
+                input#editIntroduce.form-control(type='text' name='introduce' value=user.introduce)
+            .form-group
+                label(for='password') 새 패스워드
+                input#editPassword.form-control(type='password' name='password' placeholder='new password')
+            .form-group
+                label(for='password-check') 패스워드 확인
+                input#editPassword-check.form-control(type='password' placeholder='password check')
+
+            if profileEditError
+                smaill.error-message= profileEditError
+            button.btn.btn-warning(type='submit') 저장
+

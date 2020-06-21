@@ -13,6 +13,7 @@ const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
 const postRouter = require('./routes/post');
 const boardRouter = require('./routes/board');
+const profileRouter = require('./routes/profile');
 // const userRouter = require('./routes/users');
 const { sequelize } = require('./models');
 const passportConfig = require('./passport');
@@ -48,6 +49,7 @@ app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/post', postRouter);
 app.use('/board', boardRouter);
+app.use('/profile',profileRouter);
 
 
 app.use((req, res, next) => {
