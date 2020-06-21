@@ -37,11 +37,10 @@ router.get('/edit', isLoggedIn, async(req, res, next) =>{
 
 router.post('/edit/submit', isLoggedIn, async (req, res, next) => {
     console.log("tomaot");
-    //console.log("sasd",req);
     const { nickname, password, introduce } = req.body;
     try {
         const exUser = await User.findOne({ where: { nickname }});
-        //console.log("dfsfsfsd",exUser);
+
         if (exUser) {
             req.flash('profileEditError', '이미 존재하는 닉네임입니다.');
             return res.redirect('/profile/edit');

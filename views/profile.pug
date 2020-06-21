@@ -1,0 +1,10 @@
+extends layout
+
+block content
+    h1= title
+    p This is #{title}
+    .profile
+        if user && user.id
+            .user-name= user.nickname + '   ' +user.introduce
+
+    a#edit.btn(href='/profile/edit') 프로필 수정

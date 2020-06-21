@@ -1,23 +1,34 @@
 extends ../layout
 
 block content
-    form.edit(action='/profile/edit/submit' method='post')
-        fieldset
-            legend Profile Edit
-            .form-group
-                label(for='edit-nickname') 닉네임
-                input#editNickname.form-control(type='text' name='nickname' aria-describedby='NameHelp' placeholder='new nickname')
-            .form-group
-                label(for='edit-introduce') 내 소개
-                input#editIntroduce.form-control(type='text' name='introduce' value=user.introduce)
-            .form-group
-                label(for='password') 새 패스워드
-                input#editPassword.form-control(type='password' name='password' placeholder='new password')
-            .form-group
-                label(for='password-check') 패스워드 확인
-                input#editPassword-check.form-control(type='password' placeholder='password check')
+    .container
+        .py-5.text-center
+            h2 프로필 수정
+        .row.justify-content-center
+            form.edit(action='/profile/edit/submit' method='post')
+                .form-group
+                    label(for='edit-nickname') 닉네임
+                    input#editNickname.form-control(type='text' name='nickname' placeholder='new nickname'
+                        aria-describedby='nicknameHelp'
+                        required minlength='3' maxlength='20')
+                    small#nicknameHelp.form-text.text-muted
+                        | 공백없이 문자와 숫자로만 3자 이상 20자 이내로 입력하세요.
+                    small.invalid-feedback 닉네임을 입력하세요.
+                .form-group
+                    label(for='edit-introduce') 내 소개
+                    input#editIntroduce.form-control(type='text' name='introduce'
+                        value=user.introduce aria-describedby='introduceHelp'
+                        maxlength='50')
+                    small#introduceHelp.form-text.text-muted
+                        | 내 소개를 입력하세요.
+                .form-group
+                    label(for='password') 새 패스워드
+                    input#editPassword.form-control(type='password' name='password' placeholder='new password')
+                .form-group
+                    label(for='password-check') 패스워드 확인
+                    input#editPassword-check.form-control(type='password' placeholder='password check')
 
-            if profileEditError
-                smaill.error-message= profileEditError
-            button.btn.btn-warning(type='submit') 저장
+                if profileEditError
+                    smaill.error-message= profileEditError
+                button.btn.btn-warning(type='submit') 저장
 
