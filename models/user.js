@@ -32,6 +32,11 @@ module.exports = ((sequelize, DataTypes) => (
             allowNULL: false,
             defaultValue : 0,
         },
+        level : {
+            type: DataTypes.INTEGER.UNSIGNED,
+            allowNULL: false,
+            defaultValue : 1,
+        }
 
     }, {
         timestamps: true, // sequelize 가 자동으로 수정일과 row 생성일을 기록해줌
