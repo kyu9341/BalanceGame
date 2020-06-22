@@ -39,7 +39,7 @@ router.get('/:type/:id', async (req, res, next) => {
             where: { id },
             include: [{
                 model: User, // 작성자를 가져옴
-                attributes: ['id', 'nickname'],
+                attributes: ['id', 'nickname', 'level'],
             }, {
                 model: User, // 좋아요를 누른 사람들을 가져옴
                 attributes: ['id', 'nickname'],
@@ -50,7 +50,7 @@ router.get('/:type/:id', async (req, res, next) => {
            where: { postId: req.params.id },
            include: [{
               model: User,
-              attributes: ['id', 'nickname'],
+              attributes: ['id', 'nickname', 'level'],
            }, {
             model: User, // 좋아요를 누른 사람들을 가져옴
                 attributes: ['id', 'nickname'],
