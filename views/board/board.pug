@@ -42,7 +42,7 @@ block content
                                     // - let resultDate = moment(dateform).format('MMMM Do YYYY, h:mm:ss a');
                                     - let resultDate = moment(dateform).startOf('hour').fromNow();
                                     // - let resultDate = getTimeGap(dateform);
-                                    td #{resultDate}
+                                    td.post-date #{post.createdAt}
                                     td #{post.comment_count}
                                     td #{post.like}
                                     if type === '내가 쓴 글'
@@ -82,43 +82,8 @@ block content
                         li.page-item.disabled
                             a.page-link(href='javascript:void(0);' aria-label='Next')
                                 span(aria-hidden='true') &raquo;
-
+    include ../getDate
     script(type='application/javascript').
         // how many times from write day
-        function getTimeGap(timeData) {
-            let nowTimeData = new Date();
-            let nowSec = 0;
-            let problemSec = 0;
-            if (nowTimeData.getFullYear === timeData.getFullYear && nowTimeData.getMonth() === timeData.getMonth()) {
-                nowSec += nowTimeData.getMinutes() * 60;
-                nowSec += nowTimeData.getHours() * 60 * 60;
-                nowSec += nowTimeData.getDate() * 60 * 60 * 24;
+        setWriteTimeByClassName("post-date");
 
-                nowSec -= timeData.getMinutes() * 60;
-                nowSec -= timeData.getHours() * 60 * 60;
-                nowSec -= timeData.getDate() * 60 * 60 * 24;
-
-                //시간 전 작성
-                if (nowSec < 60)
-                    return "방금전";
-                else if (nowSec < 3600) {
-                    return nowSec / 60 + "분전";
-                } else if (nowSec < 86400) {
-                    return (nowSec / 3600).toFixed(0) + "시간전";
-                }
-            } else
-                return null;
-        };
-
-        //function clickTrEvent(post) {
-        //    console.log(post);
-        //    location.href = '/post' + post.board_type + '/' + post.id;
-        //}
-        //
-        // let table = document.getElementById("table_id");
-        // let rows = table.getElementsByTagName("tr");
-        // for (let i = 0; i < rows.length; i++) {
-        //     rows[i].onclick = function () {
-        //         location.href = `/post/free/1`;
-        //     }
-        // } // '/post/' + post.board_type + post.id;

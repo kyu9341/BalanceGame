@@ -23,11 +23,7 @@ block content
                                         td
                                             a(href=`/post/${post.board_type}/${post.id}`) #{post.title}
                                         td #{post.user.nickname}
-                                        - let dateform = new Date(post.createdAt)
-                                        - moment.locale('ko');
-                                        // - let resultDate = moment(dateform).format('MMMM Do YYYY, h:mm:ss a');
-                                        - let resultDate = moment(dateform).startOf('hour').fromNow();
-                                        td #{resultDate}
+                                        td.post-date #{post.createdAt}
                                         td #{post.comment_count}
                                         td #{post.like}
             .col-6
@@ -50,11 +46,7 @@ block content
                                         td
                                             a(href=`/post/${post.board_type}/${post.id}`) #{post.title}
                                         td #{post.user.nickname}
-                                        - let dateform = new Date(post.createdAt)
-                                        - moment.locale('ko');
-                                        // - let resultDate = moment(dateform).format('MMMM Do YYYY, h:mm:ss a');
-                                        - let resultDate = moment(dateform).startOf('hour').fromNow();
-                                        td #{resultDate}
+                                        td.post-date #{post.createdAt}
                                         td #{post.comment_count}
                                         td #{post.like}
         .row.mt-5.justify-content-center
@@ -78,11 +70,7 @@ block content
                                         td
                                             a(href=`/post/${post.board_type}/${post.id}`) #{post.title}
                                         td #{post.user.nickname}
-                                        - let dateform = new Date(post.createdAt)
-                                        - moment.locale('ko');
-                                        // - let resultDate = moment(dateform).format('MMMM Do YYYY, h:mm:ss a');
-                                        - let resultDate = moment(dateform).startOf('hour').fromNow();
-                                        td #{resultDate}
+                                        td.post-date #{post.createdAt}
                                         td #{post.comment_count}
                                         td #{post.like}
             .col-6
@@ -105,10 +93,10 @@ block content
                                         td
                                             a(href=`/post/${post.board_type}/${post.id}`) #{post.title}
                                         td #{post.user.nickname}
-                                        - let dateform = new Date(post.createdAt)
-                                        - moment.locale('ko');
-                                        // - let resultDate = moment(dateform).format('MMMM Do YYYY, h:mm:ss a');
-                                        - let resultDate = moment(dateform).startOf('hour').fromNow();
-                                        td #{resultDate}
+                                        td.post-date #{post.createdAt}
                                         td #{post.comment_count}
                                         td #{post.like}
+    include getDate
+    script(type='application/javascript').
+        // how many times from write day
+        setWriteTimeByClassName("post-date");

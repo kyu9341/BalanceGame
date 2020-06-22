@@ -1,0 +1,50 @@
+script(type='application/javascript').
+    function setWriteTimeByClassName(className) {
+
+        let pt = $("." + className).each(function () {
+            let problemTime = new Date($(this).text());
+            let timeGap = getTimeGap(problemTime);
+
+            if (timeGap == null) {
+                $(this).text(" " + problemTime.getFullYear() + '년 ' +
+                    (problemTime.getMonth() + 1) + '월 ' +
+                    problemTime.getDate() + '일 ' +
+                    problemTime.getHours() + '시 ' +
+                    problemTime.getMinutes() + '분');
+            } else {
+                $(this).text(" " + timeGap);
+            }
+
+
+        });
+    };
+
+
+    // how many times from write day
+    function getTimeGap(timeData) {
+
+        let nowTimeData = new Date();
+        let nowSec = 0;
+        let problemSec = 0;
+        if (nowTimeData.getFullYear === timeData.getFullYear && nowTimeData.getMonth() === timeData.getMonth()) {
+            nowSec += nowTimeData.getMinutes() * 60;
+            nowSec += nowTimeData.getHours() * 60 * 60;
+            nowSec += nowTimeData.getDate() * 60 * 60 * 24;
+
+            nowSec -= timeData.getMinutes() * 60;
+            nowSec -= timeData.getHours() * 60 * 60;
+            nowSec -= timeData.getDate() * 60 * 60 * 24;
+
+            //시간 전 작성
+            if (nowSec < 60)
+                return "방금전";
+            else if (nowSec < 3600) {
+                return nowSec / 60 + "분전";
+            } else if (nowSec < 86400) {
+                return (nowSec / 3600).toFixed(0) + "시간전";
+            }
+        } else
+            return null;
+
+
+    }

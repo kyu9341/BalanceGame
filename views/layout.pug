@@ -86,17 +86,12 @@ body.bg-white
             .col-1
         include footer
 
-
-    script.
+    script(type='application/javascript').
         window.addEventListener('load', function () {
-            // let btn = document.getElementById('btn');
             let level = document.getElementById('level-progress');
             let progressGroup = document.getElementById('progress-div');
-            // let lavel = document.getElementById('prolavel');
-            // btn.addEventListener('click', function () {
             progressGroup.style.display = "block";
             setTimeout(function () {
                 level.style.width = "70%";
             }, 200);
-            // });
         });
