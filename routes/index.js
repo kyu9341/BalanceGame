@@ -48,6 +48,8 @@ router.get('/', async (req, res, next) => {
             where: { board_type: 'free' },
         });
 
+        console.log(freePosts+"posttest");
+
         const vsPosts = await Post.findAll({
             include: [{
                 model: User, // 작성자를 가져옴

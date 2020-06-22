@@ -9,7 +9,7 @@ block content
             .row
                 .col-6
                     span
-                        img(src='/images/chick.png' width=100 height=100)
+                        img(src=lvInfo.imgUrl width=50 height=50)
                         b.card-title #{user.nickname}
                 .col-6.text-right
                     a(href='/profile/auth')
@@ -19,11 +19,14 @@ block content
             p.card-text=user.introduce
             p
                 .text-right
-                    p.card-text '경험치 : #{lvInfo.exp}  / #{lvInfo.reqExp}
+                    p.card-text 경험치 : #{lvInfo.exp}  / #{lvInfo.reqExp}
 
-                #profile-progress-div.progress
-                    #profile-level-progress.progress-bar.progress-bar-striped.bg-info(role='progressbar'
-                        style='width: 0%;' aria-valuenow='25' aria-valuemin='0' aria-valuemax='100') #{lvInfo.per}%
+                p
+                    #profile-progress-div.progress
+                        #profile-level-progress.progress-bar.progress-bar-striped.bg-info(role='progressbar'
+                            style='width: 0%;' aria-valuenow='25' aria-valuemin='0' aria-valuemax='100') #{lvInfo.per}%
+                .text-right
+                    .card-text 가입일 : #{user.createdAt}
 
     script.
         window.addEventListener('load', function () {

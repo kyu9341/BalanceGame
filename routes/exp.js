@@ -52,10 +52,8 @@ exports.lvPrint = async (id)=> {
         }
         else{
             lv=6;
+            next = 5000;
         }
-
-
-
 
         switch(lv) {
             case 1 :
