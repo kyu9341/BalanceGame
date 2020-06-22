@@ -14,20 +14,30 @@ block content
             .row
                 .col-10
                 .col-2
-                    .card.mr-2
+                    p.card.mr-2
                         small(style="display:inline; float:right;" align="center").mt-1 작성자 : #{post.user.nickname}
                         small(style="display:inline; float:right;" align="center").mt-2.mb-1.post-date #{post.createdAt}
-            .text-center.mb-3
-                if user
-                    -const liker = post && post.postLiker.map(l => l.id).includes(user.id);
-                    if user && !liker
-                        button.like.btn.btn-outline-warning.text-dark
-                            img#nolike(style=' width:30px; height:30px;  ' src='/images/egg.png')
-                            span#count(style='vertical-align: middle;') #{post.like} LIKE
-                    else if user && liker
-                        button.unlike.btn.btn-outline-warning.text-dark.btn-warning
-                            img#nolike(style=' width:30px; height:30px;' src='/images/likedegg.png')
-                            span#count(style='vertical-align: middle;') #{post.like} LIKE
+            .col
+
+                .text-center.mb-3
+                    if user
+                        -const liker = post && post.postLiker.map(l => l.id).includes(user.id);
+                        if user && !liker
+                            button.like.btn.btn-outline-warning.text-dark
+                                img#nolike(style=' width:30px; height:30px;  ' src='/images/egg.png')
+                                span#count(style='vertical-align: middle;') #{post.like} LIKE
+                        else if user && liker
+                            button.unlike.btn.btn-outline-warning.text-dark.btn-warning
+                                img#nolike(style=' width:30px; height:30px;' src='/images/likedegg.png')
+                                span#count(style='vertical-align: middle;') #{post.like} LIKE
+                        .text-right
+                            .button.reportmodal.btn.btn-outline-warning.text-dark.btn-warning 게시글 신고
+
+
+
+
+
+
         // 댓글쓰기
         .mt-3.border-bottom
             h5 댓글
