@@ -84,12 +84,11 @@ router.get('/', async (req, res, next) => {
 
 
         let lvInfo;
-        if(await req.isAuthenticated()){
+        if(await req.isAuthenticated())
             lvInfo= await lvPrint(req.user.id);
-        }
-        else{
-            lvInfo= null;
-        }
+        else
+            lvInfo = null;
+
         res.render('index', {
             title: 'BalanceGame',
             user: req.user,
