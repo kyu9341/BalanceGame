@@ -8,14 +8,19 @@ const moment = require('moment');
 const {addExp, lvPrint} = require('./exp');
 
 // 프로필 페이지
-router.get('/profile', isLoggedIn, (req, res) => {
-    const lvInfo = lvPrint(req);
-    console.log(lvInfo);
-    res.render('profile', {
-        title: 'profile - BalanceGame',
-        user: req.user,
-        lvInfo : lvInfo,
-    });
+router.get('/profile', isLoggedIn, async (req, res) => {
+    try {
+        const lvInfo = await lvPrint(req.user.id);
+
+        res.render('profile', {
+            title: 'profile - BalanceGame',
+            user: req.user,
+            lvInfo: lvInfo,
+        });
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
 });
 
 // 회원가입 페이지
@@ -77,6 +82,8 @@ router.get('/', async (req, res, next) => {
             where: { board_type: 'free' },
         });
 
+
+        const lvInfo = lvPrint(req);
         res.render('index', {
             title: 'BalanceGame',
             user: req.user,
@@ -85,7 +92,9 @@ router.get('/', async (req, res, next) => {
             bestFreePosts,
             bestVsPosts,
             moment,
+            lvInfo : lvInfo,
         });
+
     } catch (error) {
         console.error(error);
         next(error);

@@ -58,7 +58,6 @@ router.post('/auth/submit',isLoggedIn, async(req, res, next) =>{
 })
 
 router.post('/edit/submit', isLoggedIn, async (req, res, next) => {
-    console.log("tomaot");
     const { nickname, password, introduce } = req.body;
     try {
         const exUser = await User.findOne({ where: { nickname }});
