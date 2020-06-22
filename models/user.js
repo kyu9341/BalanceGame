@@ -8,6 +8,7 @@ module.exports = ((sequelize, DataTypes) => (
         nickname: {
             type: DataTypes.STRING(15),
             allowNull: false,
+            unique: true,
         },
         password: { // 카카오로 로그인한 경우 비밀번호가 없을 수 있음
             type: DataTypes.STRING(100),
@@ -26,6 +27,17 @@ module.exports = ((sequelize, DataTypes) => (
             type: DataTypes.STRING(50),
             allowNULL: true,
         },
+        exp: {
+            type: DataTypes.BIGINT.UNSIGNED,
+            allowNULL: false,
+            defaultValue : 0,
+        },
+        level : {
+            type: DataTypes.INTEGER.UNSIGNED,
+            allowNULL: false,
+            defaultValue : 1,
+        }
+
     }, {
         timestamps: true, // sequelize 가 자동으로 수정일과 row 생성일을 기록해줌
         paranoid: true, // 삭제일 기록 (데이터 복구가 가능해짐)

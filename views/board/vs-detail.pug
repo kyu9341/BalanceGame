@@ -117,7 +117,9 @@ block content
             each comment in comments
                 .border-top.pt-1.pb-1
                     .row.mt-2
-                        .col-3.col-md-2.col-lg-1=comment.user.nickname
+                        .col-3.col-md-2.col-lg-1
+                            img(src="/images/lv" + comment.user.level + ".png" width=22 height=22)
+                            | #{comment.user.nickname}
                         .col-6.col-md-7.col-lg-8
                             .comment-show
                                 .comment-text.mb-3=comment.content

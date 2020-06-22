@@ -4,6 +4,7 @@ const { Post, User, postLike, Comment, commentLike, Vote } = require('../models'
 const multer = require('multer');
 const path = require('path');
 const moment = require('moment');
+const exp = require('./exp');
 
 const router = express.Router();
 const vsUpload = multer();
@@ -19,7 +20,11 @@ router.post('/write', isLoggedIn, vsUpload.any(), async (req, res, next) => {
             img_right: req.body.url_right,
             description_left: req.body.description_left,
             description_right: req.body.description_right,
+
         });
+
+        await exp.addExp(req.user.id,type=req.body.board_type);
+
         res.redirect('/board/' + req.body.board_type + '/1');
     } catch (error) {
         console.error(error);
@@ -34,7 +39,7 @@ router.get('/:type/:id', async (req, res, next) => {
             where: { id },
             include: [{
                 model: User, // 작성자를 가져옴
-                attributes: ['id', 'nickname'],
+                attributes: ['id', 'nickname', 'level'],
             }, {
                 model: User, // 좋아요를 누른 사람들을 가져옴
                 attributes: ['id', 'nickname'],
@@ -56,7 +61,7 @@ router.get('/:type/:id', async (req, res, next) => {
            where: { postId: req.params.id },
            include: [{
               model: User,
-              attributes: ['id', 'nickname'],
+              attributes: ['id', 'nickname', 'level'],
            }, {
             model: User, // 좋아요를 누른 사람들을 가져옴
                 attributes: ['id', 'nickname'],
@@ -100,6 +105,11 @@ router.post('/:type/:id/like', isLoggedIn, async (req, res, next) => {
             where: { id: req.params.id },
         });
 
+
+        const postUser = await User.findOne({where: {id: post.userId}});
+        await exp.addExp(postUser.id,type="like");
+
+
         console.log("likeCount2: " + likeCount.count);
         res.status(200).send({
             title: 'board - ' + req.params.type,
@@ -119,11 +129,18 @@ router.delete('/:type/:id/like', isLoggedIn, async (req, res, next) => {
         const likeCount = await postLike.findAndCountAll({
             where: { postId: req.params.id },
         });
-        const post = await Post.update({
+        await Post.update({
             like: likeCount.count,
         },{
             where: { id: req.params.id },
         });
+
+        let addExp=-5;
+        const post = await Post.findOne({where : {id: req.params.id}});
+        const postUser = await User.findOne({where : {id : post.userId}});
+        await exp.addExp(postUser.id,type="deLike");
+
+        // const post = await Post.findOne({ where: { id: req.params.id }});
         res.status(200).send({
             title: 'board - ' + req.params.type,
             post: post,
@@ -141,6 +158,8 @@ router.post('/:id/delete', isLoggedIn, async (req, res, next) => {
         await Post.destroy({
             where: { id: req.params.id, userId: req.user.id },
         });
+
+
         res.redirect('/my-posts/1');
     } catch (error) {
         console.error(error);
@@ -217,6 +236,9 @@ router.post('/:type/:id/comment', isLoggedIn, async (req, res, next) => {
             where: { id: req.params.id }
           },
         );
+
+    await exp.addExp(req.user.id,type="comment");
+
         res.redirect('/post/' + req.params.type + '/' + req.params.id);
     } catch (error) {
         console.error(error);
@@ -237,6 +259,9 @@ router.post('/:type/:id/comment/:commentId/delete', isLoggedIn, async (req, res,
                where: { id: req.params.id }
            },
        );
+
+       await exp.addExp(req.user.id,type="deComment");
+
        res.redirect('/post/'+ req.params.type + '/' + req.params.id);
    } catch (error) {
        console.error(error);

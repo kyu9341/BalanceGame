@@ -37,7 +37,9 @@ block content
                                     // -let postUrl = `/post/${post.board_type}/${post.id}`;
                                     td
                                         a(href=`/post/${post.board_type}/${post.id}`) #{post.title}
-                                    td #{post.user.nickname}
+                                    td 
+                                        img(src="/images/lv"+post.user.level+".png" width=22 height=22)
+                                        |#{post.user.nickname}
                                     td.post-date #{post.createdAt}
                                     td #{post.comment_count}
                                     td #{post.like}

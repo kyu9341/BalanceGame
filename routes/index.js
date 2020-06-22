@@ -5,10 +5,22 @@ const { Post, User, Comment } = require('../models');
 const sequelize = require('sequelize');
 const paging = require('./paging');
 const moment = require('moment');
+const {addExp, lvPrint} = require('./exp');
 
 // 프로필 페이지
-router.get('/profile', isLoggedIn, (req, res) => {
-    res.render('profile', {title: 'profile - BalanceGame', user: req.user});
+router.get('/profile', isLoggedIn, async (req, res) => {
+    try {
+        const lvInfo = await lvPrint(req.user.id);
+
+        res.render('profile', {
+            title: 'profile - BalanceGame',
+            user: req.user,
+            lvInfo: lvInfo,
+        });
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
 });
 
 // 회원가입 페이지
@@ -28,7 +40,7 @@ router.get('/', async (req, res, next) => {
         const freePosts = await Post.findAll({
             include: [{
                 model: User, // 작성자를 가져옴
-                attributes: ['id', 'nickname'],
+                attributes: ['id', 'nickname', 'level'],
             },],
             limit: limitValue,
             // attributes: { include: [[await Comment.count({}) ], 'count'] },
@@ -36,10 +48,12 @@ router.get('/', async (req, res, next) => {
             where: { board_type: 'free' },
         });
 
+        console.log(freePosts+"posttest");
+
         const vsPosts = await Post.findAll({
             include: [{
                 model: User, // 작성자를 가져옴
-                attributes: ['id', 'nickname'],
+                attributes: ['id', 'nickname', 'level'],
             },],
             limit: limitValue,
             order: [['createdAt', 'DESC']],
@@ -49,7 +63,7 @@ router.get('/', async (req, res, next) => {
         const bestVsPosts = await Post.findAll({
             include: [{
                 model: User, // 작성자를 가져옴
-                attributes: ['id', 'nickname'],
+                attributes: ['id', 'nickname', 'level'],
             },],
             limit: limitValue,
             order: [['like', 'DESC'], ['createdAt', 'DESC']],
@@ -60,7 +74,7 @@ router.get('/', async (req, res, next) => {
         const bestFreePosts = await Post.findAll({
             include: [{
                 model: User, // 작성자를 가져옴
-                attributes: ['id', 'nickname'],
+                attributes: ['id', 'nickname', 'level'],
             },],
             limit: limitValue,
             // attributes: { include: [[await Comment.count({}) ], 'count'] },
@@ -68,6 +82,14 @@ router.get('/', async (req, res, next) => {
             where: { board_type: 'free' },
         });
 
+
+        let lvInfo;
+        if(await req.isAuthenticated()){
+            lvInfo= await lvPrint(req.user.id);
+        }
+        else{
+            lvInfo= null;
+        }
         res.render('index', {
             title: 'BalanceGame',
             user: req.user,
@@ -76,7 +98,9 @@ router.get('/', async (req, res, next) => {
             bestFreePosts,
             bestVsPosts,
             moment,
+            lvInfo : lvInfo,
         });
+
     } catch (error) {
         console.error(error);
         next(error);
