@@ -6,9 +6,9 @@ const path = require('path');
 const moment = require('moment');
 
 const router = express.Router();
-
 const vsUpload = multer();
-router.post('/write', isLoggedIn, vsUpload.none(), async (req, res, next) => {
+// 게시글 작성 기능
+router.post('/write', isLoggedIn, vsUpload.any(), async (req, res, next) => {
     try  {
         const post = await Post.create({
             title: req.body.title, // 제목
@@ -77,6 +77,7 @@ router.get('/:type/:id', async (req, res, next) => {
     }
 });
 
+// 게시글 좋아요 기능
 router.post('/:type/:id/like', isLoggedIn, async (req, res, next) => {
     try {
         let post = await Post.findOne({ where: { id: req.params.id }});
@@ -104,6 +105,7 @@ router.post('/:type/:id/like', isLoggedIn, async (req, res, next) => {
     }
 });
 
+// 게시글 좋아요 취소 기능
 router.delete('/:type/:id/like', isLoggedIn, async (req, res, next) => {
     try {
         await postLike.destroy({ where: { userId: req.user.id, postId: req.params.id }});
@@ -115,7 +117,6 @@ router.delete('/:type/:id/like', isLoggedIn, async (req, res, next) => {
         },{
             where: { id: req.params.id },
         });
-        // const post = await Post.findOne({ where: { id: req.params.id }});
         res.status(200).send({
             title: 'board - ' + req.params.type,
             post: post,
@@ -127,6 +128,7 @@ router.delete('/:type/:id/like', isLoggedIn, async (req, res, next) => {
     }
 });
 
+// 게시글 삭제 기능
 router.post('/:id/delete', isLoggedIn, async (req, res, next) => {
     try {
         await Post.destroy({
@@ -139,7 +141,7 @@ router.post('/:id/delete', isLoggedIn, async (req, res, next) => {
     }
 });
 
-
+// 투표 기능
 router.post('/:type/:id/vote', isLoggedIn, async (req, res, next) => {
     try {
         console.log("vote : " + req.body.target);
@@ -149,13 +151,15 @@ router.post('/:type/:id/vote', isLoggedIn, async (req, res, next) => {
             userId: req.user.id,
             target: req.body.target,
         }); // 현재 포스트와 Voter를 연결
+
+        // 각 득표수 count
         const voteLeft = await Vote.count({
             where: { postId: req.params.id, target: 'left' },
         });
         const voteRight = await Vote.count({
             where: { postId: req.params.id, target: 'right' },
         });
-
+        // 득표수 update
         await Post.update({
             score_left: voteLeft,
             score_right: voteRight
@@ -172,10 +176,9 @@ router.post('/:type/:id/vote', isLoggedIn, async (req, res, next) => {
             where: { id: req.params.id }
         });
 
+        // 득표수 %로 환산
         let leftPer = Math.round((post.score_left / (post.score_left + post.score_right)) * 100);
-        console.log("leftPer : " + leftPer);
         let rightPer = Math.round((post.score_right / (post.score_left + post.score_right)) * 100);
-        console.log("rightPer : " + rightPer);
 
 
         res.status(200).send({
@@ -214,6 +217,7 @@ router.post('/:type/:id/comment', isLoggedIn, async (req, res, next) => {
     }
 });
 
+// 댓글 삭제 기능
 router.post('/:type/:id/comment/:commentId/delete', isLoggedIn, async (req, res, next) => {
    try {
        await Comment.destroy({
@@ -251,12 +255,11 @@ router.post('/image', upload.single('file'), (req, res) => {
     res.json({ url: `/uploads/${req.file.filename}` });
 });
 
-
+// 댓글 좋아요 기능
 router.post('/:type/:id/like/comment/:commentId', isLoggedIn, async (req, res, next) => {
     try {
-        // let post = await Post.findOne({ where: { id: req.params.id }});
         let comment = await Comment.findOne({ where: { id: req.params.commentId }});
-        await comment.addCommentLiker(req.user.id); // 현재 포스트와 Liker를 연결
+        await comment.addCommentLiker(req.user.id); // 현재 댓글과 Liker를 연결
         const likeCount = await commentLike.findAndCountAll({
             where: { commentId: req.params.commentId },
         });
@@ -276,6 +279,7 @@ router.post('/:type/:id/like/comment/:commentId', isLoggedIn, async (req, res, n
     }
 });
 
+// 댓글 좋아요 취소 기능
 router.post('/:type/:id/like/comment/:commentId/delete', isLoggedIn, async (req, res, next) => {
     try {
         await commentLike.destroy({ where: { userId: req.user.id, commentId: req.params.commentId }});
