@@ -85,7 +85,13 @@ router.get('/', async (req, res, next) => {
         });
 
 
-        const lvInfo = lvPrint(req);
+        let lvInfo;
+        if(await req.isAuthenticated()){
+            lvInfo= await lvPrint(req.user.id);
+        }
+        else{
+            lvInfo= null;
+        }
         res.render('index', {
             title: 'BalanceGame',
             user: req.user,
