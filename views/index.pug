@@ -96,7 +96,7 @@ block content
                                         td.post-date #{post.createdAt}
                                         td #{post.comment_count}
                                         td #{post.like}
-    include getDate
+    include includes/getDate
     script(type='application/javascript').
         // how many times from write day
         setWriteTimeByClassName("post-date");

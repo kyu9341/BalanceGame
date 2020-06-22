@@ -55,7 +55,7 @@ block content
                 .form-group
                     button#write-btn.btn.btn-warning.btn-block(type='submit' aria-describedby='submitHelp')
                         |글쓰기
-    include ../form-validation
+    include ../includes/form-validation
     script(type='application/javascript').
         let writeButton = document.getElementById('write-btn');
         writeButton.disabled = true;
