@@ -9,8 +9,14 @@ block content
                 li.breadcrumb-item.active
                     a(href='/board/free/1' aria-current='page') 자유 게시판
         .card.mt-3
-            h5.card-header=post.title
-            .card-body!= post.content
+            h5.card-header(style="display:inline;")=post.title
+            .card-body.border-top!= post.content
+            .row
+                .col-10
+                .col-2
+                    .card.mr-2
+                        small(style="display:inline; float:right;" align="center").mt-1 작성자 : #{post.user.nickname}
+                        small(style="display:inline; float:right;" align="center").mt-2.mb-1.post-date #{post.createdAt}
             .text-center.mb-3
                 if user
                     -const liker = post && post.postLiker.map(l => l.id).includes(user.id);
@@ -37,7 +43,7 @@ block content
             each comment in comments
                 .border-top.pt-1.pb-1
                     .row.mt-2
-                        .col-3.col-md-2.col-lg-1.pl-4
+                        .col-3.col-md-2.col-lg-1
                             img(src="/images/lv"+comment.user.level+".png" width=22 height=22)
                             |#{comment.user.nickname}
                         .col-6.col-md-7.col-lg-8
@@ -45,10 +51,7 @@ block content
                                 .comment-text.mb-3=comment.content
                                     span.commentId(hidden)=comment.id
                                 small.d-block
-                                - let dateform = new Date(comment.createdAt)
-                                - moment.locale('ko');
-                                - let resultDate = moment(dateform).startOf('hour').fromNow();
-                                    small=resultDate
+                                    small.comments-date=comment.createdAt
                         .col-3.btn-group.btn-group-sm(role='group')
                             small.d-block
                                 small.d-block
@@ -72,15 +75,18 @@ block content
         br
         br
 
-
-    include ../form-validation
+    include ../includes/getDate
+    include ../includes/form-validation
     script(type='application/javascript').
+        setWriteTimeByClassName("post-date");
+        setWriteTimeByClassName("comments-date");
+
         let unlikeTag = document.querySelector('.unlike');
         let likeTag = document.querySelector('.like');
-
         $(function () {
             let pathname = window.location.pathname;
             likeTag.addEventListener('click', function () {
+
                 // let postId = document.querySelector('#post-id').value;
                 let xhr = new XMLHttpRequest();
                 xhr.onload = function () {

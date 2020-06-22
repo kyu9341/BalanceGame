@@ -56,7 +56,6 @@ router.get('/', async (req, res, next) => {
                 attributes: ['id', 'nickname', 'level'],
             },],
             limit: limitValue,
-            // attributes: { include: [[await Comment.count({}) ], 'count'] },
             order: [['createdAt', 'DESC']],
             where: { board_type: 'vs' },
         });
@@ -67,7 +66,6 @@ router.get('/', async (req, res, next) => {
                 attributes: ['id', 'nickname', 'level'],
             },],
             limit: limitValue,
-            // attributes: { include: [[await Comment.count({}) ], 'count'] },
             order: [['like', 'DESC'], ['createdAt', 'DESC']],
             where: { board_type: 'vs' },
         });
@@ -119,6 +117,7 @@ router.get('/login', (req, res, next) => {
     });
 });
 
+// 게시글 작성 화면으로 이동
 router.get('/write', isLoggedIn, (req, res, next) => {
     res.render('board/write', {
         title: 'post - write',
@@ -127,6 +126,7 @@ router.get('/write', isLoggedIn, (req, res, next) => {
     });
 });
 
+// 게시글 검색 기능
 router.get('/search/:page', async (req, res, next) => {
     try {
         const path = '/search/';
@@ -187,7 +187,7 @@ router.get('/search/:page', async (req, res, next) => {
     }
 });
 
-
+// 내가 쓴 글 기능
 router.get('/my-posts/:page', isLoggedIn, async (req, res, next) => {
     try{
         const board_type = 'my-posts'; // req.params.type;

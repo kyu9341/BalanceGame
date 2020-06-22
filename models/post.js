@@ -19,6 +19,10 @@ module.exports = (sequelize, DataTypes) => (
             type: DataTypes.INTEGER.UNSIGNED,
             defaultValue: 0,
         },
+        views: {
+            type: DataTypes.INTEGER.UNSIGNED,
+            defaultValue: 0,
+        },
         img_left: {
             type: DataTypes.STRING(200),
             allowNull: true,
@@ -34,6 +38,14 @@ module.exports = (sequelize, DataTypes) => (
         description_right: {
             type: DataTypes.STRING(50),
             allowNull: false,
+        },
+        score_left: {
+            type: DataTypes.INTEGER.UNSIGNED,
+            defaultValue: 0,
+        },
+        score_right: {
+            type: DataTypes.INTEGER.UNSIGNED,
+            defaultValue: 0,
         },
     }, {
         timestamps: true,

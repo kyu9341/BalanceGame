@@ -14,37 +14,93 @@ block content
             .card-body.mb-3.border-bottom
                 .row.text-center
                     .col-2
-                    .col-4
-                        .vs-left.card
-                            div(style="width: 200; height: 200px;")
-                                if !post.img_left
-                                    img.card-img-top(src='/images/toright.png' width="200" height="200" alt='닥전')
-                                else
-                                    img.card-img-top(src=post.img_left width="200" height="200" alt='닥전')
-                            .card-body.border-top
-                                p.card-title #{post.description_left}
-                                //a.btn.btn-primary(href='#') 닥전
-                    .col-4
-                        .vs-right.card
-                            div(style="width: 200; height: 200px;")
-                                if !post.img_right
-                                    img.card-img-top(src='/images/toleft.png' width="200" height="200" alt='닥전')
-                                else
-                                    img.card-img-top(src=post.img_right width="200" height="200" alt='닥후')
-                            .card-body.border-top
-                                p.card-title #{post.description_right}
-                                //a.btn.btn-primary(href='#') 닥후
+                    if user
+                        -const voter = post && post.Voter.map(l => l.id).includes(user.id);
+                        if user && !voter
+                            .col-4
+                                .vs-left.card.table-hover#left
+                                    div(style="width: 200; height: 200px;")
+                                        if !post.img_left
+                                            img.card-img-top(src='/images/toright.png' width="200" height="200" alt='닥전')
+                                        else
+                                            img.card-img-top(src=post.img_left width="200" height="200" alt='닥전')
+                                    .card-body.border-top
+                                        p.card-title #{post.description_left}
+                                        //a.btn.btn-primary(href='#') 닥전
+                            .col-4
+                                .vs-right.card#right
+                                    div(style="width: 200; height: 200px;")
+                                        if !post.img_right
+                                            img.card-img-top(src='/images/toleft.png' width="200" height="200" alt='닥전')
+                                        else
+                                            img.card-img-top(src=post.img_right width="200" height="200" alt='닥후')
+                                    .card-body.border-top
+                                        p.card-title #{post.description_right}
+                                        //a.btn.btn-primary(href='#') 닥후
+                        else if user && voter
+                            .col-4
+                                .vs-left.card
+                                    div(style="width: 200; height: 200px;")
+                                        if !post.img_left
+                                            img.card-img-top(src='/images/toright.png' width="200" height="200" alt='닥전')
+                                        else
+                                            img.card-img-top(src=post.img_left width="200" height="200" alt='닥전')
+                                    .card-body.border-top
+                                        p.card-title #{post.description_left}
+                                    .card-body.border-top
+                                        #left-progress-div.progress
+                                            #left-progress.progress-bar.progress-bar-striped.bg-warning(role='progressbar' style='width: 0%;'
+                                                aria-valuenow='25' aria-valuemin='0' aria-valuemax='100') #{leftPer} %
+
+                            .col-4
+                                .vs-right.card
+                                    div(style="width: 200; height: 200px;")
+                                        if !post.img_right
+                                            img.card-img-top(src='/images/toleft.png' width="200" height="200" alt='닥전')
+                                        else
+                                            img.card-img-top(src=post.img_right width="200" height="200" alt='닥후')
+                                    .card-body.border-top
+                                        p.card-title #{post.description_right}
+                                    .card-body.border-top
+                                        #right-progress-div.progress
+                                            #right-progress.progress-bar.progress-bar-striped.bg-warning(role='progressbar' style='width: 0%;'
+                                                aria-valuenow='25' aria-valuemin='0' aria-valuemax='100') #{rightPer} %
+                    else
+                        .col-4
+                            .vs-left.card
+                                div(style="width: 200; height: 200px;")
+                                    if !post.img_left
+                                        img.card-img-top(src='/images/toright.png' width="200" height="200" alt='닥전')
+                                    else
+                                        img.card-img-top(src=post.img_left width="200" height="200" alt='닥전')
+                                .card-body.border-top
+                                    p.card-title #{post.description_left}
+                        .col-4
+                            .vs-right.card
+                                div(style="width: 200; height: 200px;")
+                                    if !post.img_right
+                                        img.card-img-top(src='/images/toleft.png' width="200" height="200" alt='닥전')
+                                    else
+                                        img.card-img-top(src=post.img_right width="200" height="200" alt='닥후')
+                                .card-body.border-top
+                                    p.card-title #{post.description_right}
+                .row
+                    .col-10
+                    .col-2
+                        .card.mr-2
+                            small(style="display:inline; float:right;" align="center").mt-1 작성자 : #{post.user.nickname}
+                            small(style="display:inline; float:right;" align="center").mt-2.mb-1.post-date #{post.createdAt}
             .text-center.mb-3.mt-3
                 if user
                     -const liker = post && post.postLiker.map(l => l.id).includes(user.id);
                     if user && !liker
                         button.like.btn.btn-outline-warning.text-dark
-                            img#nolike(style=' width:30px; height:30px;  ' src='/images/egg.png')
-                            span#count(style='vertical-align: middle;') #{post.like} LIKE
+                            img#like(style=' width:30px; height:30px;' src='/images/egg.png')
+                            span#count-like(style='vertical-align: middle;') #{post.like} LIKE
                     else if user && liker
                         button.unlike.btn.btn-outline-warning.text-dark.btn-warning
-                            img#nolike(style=' width:30px; height:30px;' src='/images/likedegg.png')
-                            span#count(style='vertical-align: middle;') #{post.like} LIKE
+                            img#liked(style=' width:30px; height:30px;' src='/images/likedegg.png')
+                            span#count-liked(style='vertical-align: middle;') #{post.like} LIKE
 
         // 댓글쓰기
         .mt-3.border-bottom
@@ -61,7 +117,7 @@ block content
             each comment in comments
                 .border-top.pt-1.pb-1
                     .row.mt-2
-                        .col-3.col-md-2.col-lg-1.pl-4
+                        .col-3.col-md-2.col-lg-1
                             img(src="/images/lv" + comment.user.level + ".png" width=22 height=22)
                             | #{comment.user.nickname}
                         .col-6.col-md-7.col-lg-8
@@ -69,10 +125,7 @@ block content
                                 .comment-text.mb-3=comment.content
                                     span.commentId(hidden)=comment.id
                                 small.d-block
-                                - let dateform = new Date(comment.createdAt)
-                                - moment.locale('ko');
-                                - let resultDate = moment(dateform).startOf('hour').fromNow();
-                                    small=resultDate
+                                    small.comments-date=comment.createdAt
                         .col-3.btn-group.btn-group-sm(role='group')
                             small.d-block
                                 small.d-block
@@ -100,12 +153,16 @@ block content
 
 
 
-
-    include ../form-validation
+    include ../includes/getDate
+    include ../includes/form-validation
     script(type='application/javascript').
+        setWriteTimeByClassName("post-date");
+        setWriteTimeByClassName("comments-date");
+
         let unlikeTag = document.querySelector('.unlike');
         let likeTag = document.querySelector('.like');
 
+        // 좋아요, 좋아요 취소
         $(function () {
             let pathname = window.location.pathname;
             likeTag.addEventListener('click', function () {
@@ -138,4 +195,79 @@ block content
                 xhr.open('DELETE', pathname + '/like');
                 xhr.send();
             });
+        });
+
+
+        let left = document.querySelector('#left');
+        let right = document.querySelector('#right');
+
+        $(function () { // 투표 기능
+            let pathname = window.location.pathname;
+            left.addEventListener('click', function () {
+                let xhr = new XMLHttpRequest();
+                let data = {'target': 'left'};
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        location.reload();
+                    } else {
+                        console.error(xhr.responseText);
+                    }
+                };
+                xhr.open('POST', pathname + '/vote');
+                xhr.setRequestHeader('Content-Type', 'application/json'); // 컨텐츠타입을 json으로
+                xhr.send(JSON.stringify(data));
+            });
+            right.addEventListener('click', function () {
+                let xhr = new XMLHttpRequest();
+                let data = {'target': 'right'};
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        location.reload();
+                    } else {
+                        console.error(xhr.responseText);
+                    }
+                };
+                xhr.open('POST', pathname + '/vote');
+                xhr.setRequestHeader('Content-Type', 'application/json'); // 컨텐츠타입을 json으로
+                xhr.send(JSON.stringify(data));
+            });
+        });
+        // progress bar 동작 구현
+        window.addEventListener('load', function () {
+            let left = document.getElementById('left-progress');
+            let leftProgressGroup = document.getElementById('left-progress-div');
+            leftProgressGroup.style.display = "block";
+            setTimeout(function () {
+                left.style.width = !{leftPer} + "%";
+            }, 200);
+
+            let right = document.getElementById('right-progress');
+            let rightProgressGroup = document.getElementById('right-progress-div');
+            rightProgressGroup.style.display = "block";
+            setTimeout(function () {
+                right.style.width = !{rightPer} + "%";
+            }, 200);
+        });
+
+        $(document).ready(function () {
+            // 그림자 hover 추가
+            console.log("document is ready");
+
+            $(".vs-left").hover(
+                function () {
+                    $(this).addClass('shadow-lg').css('cursor', 'pointer');
+                }, function () {
+                    $(this).removeClass('shadow-lg');
+                }
+            );
+
+            $(".vs-right").hover(
+                function () {
+                    $(this).addClass('shadow-lg').css('cursor', 'pointer');
+                }, function () {
+                    $(this).removeClass('shadow-lg');
+                }
+            );
+
+            // document ready
         });

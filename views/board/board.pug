@@ -16,13 +16,14 @@ block content
             .card.mb-1
                 table#table_id.table.table-hover.table-border
                     thead.alert-secondary
-                        tr
+                        tr(align='center')
                             //th(scope='col') #
                             th(scope='col') 제목
                             th(scope='col')
                             th(scope='col')
-                            th(scope='col') 댓글수
-                            th(scope='col') 추천수
+                            th.table-comments(scope='col') 댓글
+                            th.table-likes(scope='col') 추천
+                            th.table-views(scope='col') 조회수
                             if type === '내가 쓴 글'
                                 th(scope='col')
                     tbody
@@ -31,24 +32,18 @@ block content
                                 th.text-center(colspan=4) 게시글이 없습니다.
                         else
                             each post in posts
-                                tr
+                                tr(align='center')
                                     //td #{post.id}
                                     // -let postUrl = `/post/${post.board_type}/${post.id}`;
                                     td
                                         a(href=`/post/${post.board_type}/${post.id}`) #{post.title}
-
-                                    td
+                                    td 
                                         img(src="/images/lv"+post.user.level+".png" width=22 height=22)
                                         |#{post.user.nickname}
-                                        -console.log(post.user.level+imglvtest)
-
-                                    - let dateform = new Date(post.createdAt)
-                                    - moment.locale('ko');
-                                    // - let resultDate = moment(dateform).format('MMMM Do YYYY, h:mm:ss a');
-                                    - let resultDate = moment(dateform).startOf('hour').fromNow();
-                                    td #{resultDate}
+                                    td.post-date #{post.createdAt}
                                     td #{post.comment_count}
                                     td #{post.like}
+                                    td #{post.views}
                                     if type === '내가 쓴 글'
                                         td
                                             form.d-inline(method='post' action=`/post/${post.id}/delete`)
@@ -86,18 +81,8 @@ block content
                         li.page-item.disabled
                             a.page-link(href='javascript:void(0);' aria-label='Next')
                                 span(aria-hidden='true') &raquo;
-
+    include ../includes/getDate
     script(type='application/javascript').
+        // how many times from write day
+        setWriteTimeByClassName("post-date");
 
-        //function clickTrEvent(post) {
-        //    console.log(post);
-        //    location.href = '/post' + post.board_type + '/' + post.id;
-        //}
-        //
-        // let table = document.getElementById("table_id");
-        // let rows = table.getElementsByTagName("tr");
-        // for (let i = 0; i < rows.length; i++) {
-        //     rows[i].onclick = function () {
-        //         location.href = `/post/free/1`;
-        //     }
-        // } // '/post/' + post.board_type + post.id;
