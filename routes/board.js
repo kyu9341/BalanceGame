@@ -30,7 +30,7 @@ router.get('/:type/:page', async (req, res, next) => {
       const posts = await Post.findAll({
          include: [{
             model: User, // 작성자를 가져옴
-            attributes: ['id', 'nickname'],
+            attributes: ['id', 'nickname', 'level'],
          },],
          offset: result.offset,
          limit: pageSize,
@@ -86,7 +86,7 @@ router.get('/best/:type/:page', async (req, res, next) => {
       const posts = await Post.findAll({
          include: [{
             model: User, // 작성자를 가져옴
-            attributes: ['id', 'nickname'],
+            attributes: ['id', 'nickname', 'level'],
          },],
          offset: result.offset,
          limit: pageSize,
