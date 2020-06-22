@@ -16,6 +16,14 @@ a {
   background: #FFB400;
   border-color: #FFB400;
 }
+.list-group > .my.active {
+  background: #FFB400;
+  border-color: #FFB400;
+}
+.active {
+  background: #FFB400;
+  border-color: #FFB400;
+}
 
    /*
        @media screen and (max-width: 700px)  {
