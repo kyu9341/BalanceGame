@@ -1,6 +1,6 @@
 const express = require('express');
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
-const { Post, User, postLike, Comment, commentLike, Vote, Report } = require('../models');
+const { Post, User, postLike, Comment, commentLike, Vote } = require('../models');
 const multer = require('multer');
 const path = require('path');
 const moment = require('moment');
@@ -237,7 +237,7 @@ router.post('/:type/:id/comment', isLoggedIn, async (req, res, next) => {
           },
         );
 
-        await exp.addExp(req.user.id,type="comment");
+    await exp.addExp(req.user.id,type="comment");
 
         res.redirect('/post/' + req.params.type + '/' + req.params.id);
     } catch (error) {
@@ -325,30 +325,6 @@ router.post('/:type/:id/like/comment/:commentId/delete', isLoggedIn, async (req,
         });
 
         res.redirect('/post/'+ req.params.type + '/' + req.params.id);
-    } catch (error) {
-        console.error(error);
-        next(error);
-    }
-});
-
-// 신고 기능
-router.post('/:type/:id/report', isLoggedIn, async (req, res, next) => {
-    try {
-        await Report.create({
-            postId: req.params.id,
-            userId: req.user.id,
-            content: req.body.content,
-        })
-        const reportCount = await Report.findAndCountAll({
-            where: { postId: req.params.id},
-        });
-
-        await Report.update({
-            report: reportCount,
-        },{
-            where: { id: req.params.commentId },
-        });
-
     } catch (error) {
         console.error(error);
         next(error);

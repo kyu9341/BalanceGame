@@ -19,10 +19,6 @@ module.exports = (sequelize, DataTypes) => (
             type: DataTypes.INTEGER.UNSIGNED,
             defaultValue: 0,
         },
-        report: {
-            type: DataTypes.INTEGER.UNSIGNED,
-            defaultValue: 0,
-        },
         views: {
             type: DataTypes.INTEGER.UNSIGNED,
             defaultValue: 0,
