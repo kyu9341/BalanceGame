@@ -47,7 +47,7 @@ body.bg-white
                                 button.btn.alert-warning(type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
                                     // 사용자 이미지
                                     a.navbar-brand(href='#')
-                                        img(src=lvInfo.imgUrl width='20' height='20' alt='' loading='lazy' style='border-radius: .25rem;')
+                                        img(src='/images/lv'+user.level+'.png' width='20' height='20' alt='' loading='lazy' style='border-radius: .25rem;')
                                     | #{user.nickname} ▼
                                 .dropdown-menu.dropdown-menu-sm-right
                                     a.dropdown-item(href='/profile') 마이페이지
@@ -69,7 +69,7 @@ body.bg-white
                         .card-body
                             span
 
-                                img(src=lvInfo.imgUrl width=30 height=30)
+                                img(src='/images/lv'+user.level+'.png' width=30 height=30)
                                 b.card-title          #{user.nickname}님
                             p.card-text=user.introduce
                             .progress

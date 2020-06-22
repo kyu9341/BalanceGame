@@ -9,8 +9,9 @@ block content
             .row
                 .col-6
                     span
-                        img(src=lvInfo.imgUrl width=50 height=50)
+                        img(src='/images/lv'+user.level+'.png' width=50 height=50)
                         b.card-title #{user.nickname}
+                    -console.log('/images/lv'+user.level+'.png');
                 .col-6.text-right
                     a(href='/profile/auth')
                         button.btn.btn-outline-info(type='button') 프로필 수정
