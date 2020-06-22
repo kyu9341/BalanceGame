@@ -1,21 +1,45 @@
 const {User} = require('../models');
 
-exports.addExp = async (req, id, exp)=> {
+exports.addExp = async (id, type)=> {
+
     try{
-        const exp = req.body.exp;
+        let exp;
+        switch(type){
+            case "vs":
+                exp = 30;
+                break;
+            case "free":
+                exp = 20;
+                break;
+            case "like":
+                exp = 5;
+                break;
+            case "comment" :
+                exp = 5;
+                break;
+            case "deLike" :
+                exp = -5;
+                break;
+            case "deComment" :
+                exp = -5;
+                break;
+        }
+
+        console.log(id+type+"expup")
+        const user = await User.findOne({where : { id }});
         await User.update({
-            exp: req.user.exp+exp,
+            exp: user.exp+exp,
         },{
-            where: { id: req.user.id },
+            where: { id },
         });
     }
     catch (error) {
         console.error(error);
-        next(error);
+        return error;
     }
 }
 
-exports.lvPrint = async (id)=> {
+exports.lvPrint = async (id,next)=> {
 
     try{
         const user = await User.findOne({
@@ -89,7 +113,7 @@ exports.lvPrint = async (id)=> {
 
     } catch(error) {
         console.error(error);
-        next(error);
+        return error;
     }
 
 }

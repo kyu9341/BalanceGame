@@ -23,16 +23,7 @@ router.post('/write', isLoggedIn, vsUpload.none(), async (req, res, next) => {
 
         });
 
-        let addExp = 20;
-        if(req.body.board_type==='vs'){
-            addExp += 10;
-        }
-        await User.update({
-            exp: req.user.exp+addExp,
-        },{
-            where: { id: req.user.id },
-        }); //경험치 넣기
-
+        await exp.addExp(req.user.id,type=req.body.board_type);
 
         res.redirect('/board/' + req.body.board_type + '/1');
     } catch (error) {
@@ -95,13 +86,10 @@ router.post('/:type/:id/like', isLoggedIn, async (req, res, next) => {
             where: { id: req.params.id },
         });
 
-        let addExp=5;
+
         const postUser = await User.findOne({where: {id: post.userId}});
-        await User.update({
-            exp: postUser.exp+addExp,
-        },{
-            where: { id: post.userId },
-        }); //경험치 넣기
+        await exp.addExp(postUser.id,type="like");
+
 
         console.log("likeCount2: " + likeCount.count);
         res.status(200).send({
@@ -130,11 +118,7 @@ router.delete('/:type/:id/like', isLoggedIn, async (req, res, next) => {
         let addExp=-5;
         const post = await Post.findOne({where : {id: req.params.id}});
         const postUser = await User.findOne({where : {id : post.userId}});
-        await User.update({
-            exp: postUser.exp + addExp,
-        },{
-            where: { id: postUser.id },
-        }); //경험치 넣기
+        await exp.addExp(postUser.id,type="deLike");
 
         // const post = await Post.findOne({ where: { id: req.params.id }});
         res.status(200).send({
@@ -178,12 +162,7 @@ router.post('/:type/:id/comment', isLoggedIn, async (req, res, next) => {
           },
         );
 
-        let addExp=5;
-        await User.update({
-            exp: req.user.exp+addExp,
-        },{
-            where: { id: req.user.id },
-        }); //경험치 넣기
+    await exp.addExp(req.user.id,type="comment");
 
         res.redirect('/post/' + req.params.type + '/' + req.params.id);
     } catch (error) {
@@ -205,12 +184,7 @@ router.post('/:type/:id/comment/:commentId/delete', isLoggedIn, async (req, res,
            },
        );
 
-       let addExp=-5;
-       await User.update({
-           exp: req.user.exp+addExp,
-       },{
-           where: { id: req.user.id },
-       }); //경험치 넣기
+       await exp.addExp(req.user.id,type="deComment");
 
        res.redirect('/post/'+ req.params.type + '/' + req.params.id);
    } catch (error) {
