@@ -9,8 +9,14 @@ block content
                 li.breadcrumb-item.active
                     a(href='/board/free/1' aria-current='page') 자유 게시판
         .card.mt-3
-            h5.card-header=post.title
-            .card-body!= post.content
+            h5.card-header(style="display:inline;")=post.title
+            .card-body.border-top!= post.content
+            .row
+                .col-10
+                .col-2
+                    .card.mr-2
+                        small(style="display:inline; float:right;" align="center").mt-1 작성자 : #{post.user.nickname}
+                        small(style="display:inline; float:right;" align="center").mt-2.mb-1.post-date #{post.createdAt}
             .text-center.mb-3
                 if user
                     -const liker = post && post.postLiker.map(l => l.id).includes(user.id);

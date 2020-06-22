@@ -84,7 +84,12 @@ block content
                                         img.card-img-top(src=post.img_right width="200" height="200" alt='닥후')
                                 .card-body.border-top
                                     p.card-title #{post.description_right}
-
+                .row
+                    .col-10
+                    .col-2
+                        .card.mr-2
+                            small(style="display:inline; float:right;" align="center").mt-1 작성자 : #{post.user.nickname}
+                            small(style="display:inline; float:right;" align="center").mt-2.mb-1.post-date #{post.createdAt}
             .text-center.mb-3.mt-3
                 if user
                     -const liker = post && post.postLiker.map(l => l.id).includes(user.id);
