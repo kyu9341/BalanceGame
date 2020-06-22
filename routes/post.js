@@ -45,6 +45,13 @@ router.get('/:type/:id', async (req, res, next) => {
                 as: 'Voter', // include 에서 같은 모델이 여러개면 as로 구분
             }],
         });
+        // 조회수 업데이트
+        await Post.update({
+            views: post.views + 1,
+        },{
+            where: { id },
+        });
+
         const comments = await Comment.findAll({
            where: { postId: req.params.id },
            include: [{

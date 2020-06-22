@@ -163,7 +163,7 @@ router.get('/search/:page', async (req, res, next) => {
     }
 });
 
-
+// 내가 쓴 글 기능
 router.get('/my-posts/:page', isLoggedIn, async (req, res, next) => {
     try{
         const board_type = 'my-posts'; // req.params.type;
