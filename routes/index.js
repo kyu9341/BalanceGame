@@ -5,10 +5,17 @@ const { Post, User, Comment } = require('../models');
 const sequelize = require('sequelize');
 const paging = require('./paging');
 const moment = require('moment');
+const {addExp, lvPrint} = require('./exp');
 
 // 프로필 페이지
 router.get('/profile', isLoggedIn, (req, res) => {
-    res.render('profile', {title: 'profile - BalanceGame', user: req.user});
+    const lvInfo = lvPrint(req);
+    console.log(lvInfo);
+    res.render('profile', {
+        title: 'profile - BalanceGame',
+        user: req.user,
+        lvInfo : lvInfo,
+    });
 });
 
 // 회원가입 페이지

@@ -22,10 +22,10 @@ router.post('/write', isLoggedIn, vsUpload.none(), async (req, res, next) => {
             description_right: req.body.description_right,
 
         });
-        let addExp = 50;
 
+        let addExp = 20;
         if(req.body.board_type==='vs'){
-            addExp += 20;
+            addExp += 10;
         }
         await User.update({
             exp: req.user.exp+addExp,
@@ -126,7 +126,7 @@ router.delete('/:type/:id/like', isLoggedIn, async (req, res, next) => {
         },{
             where: { id: req.params.id },
         });
-        console.log("tomato"+req.params);
+
         let addExp=-5;
         const post = await Post.findOne({where : {id: req.params.id}});
         const postUser = await User.findOne({where : {id : post.userId}});
@@ -204,6 +204,14 @@ router.post('/:type/:id/comment/:commentId/delete', isLoggedIn, async (req, res,
                where: { id: req.params.id }
            },
        );
+
+       let addExp=-5;
+       await User.update({
+           exp: req.user.exp+addExp,
+       },{
+           where: { id: req.user.id },
+       }); //경험치 넣기
+
        res.redirect('/post/'+ req.params.type + '/' + req.params.id);
    } catch (error) {
        console.error(error);
