@@ -1,4 +1,4 @@
-
+// 페이징 기능을 수행하는 함수를 모듈화
 paging = (totalPostCount, curPage, pageSize, pageListSize, offset) => {
     if (totalPostCount < 0) totalPostCount = 0;
 

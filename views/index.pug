@@ -7,21 +7,23 @@ block content
                 .card
                     table.table.table-hover.table-border
                         thead.bg-warning
-                            tr
+                            tr(align='center')
                                 th(scope='col') best vs 게시판
+                                th.table-title(scope='col')
                                 th(scope='col')
-                                th(scope='col')
-                                th(scope='col') 댓글
-                                th(scope='col') 추천
+                                th.table-comments(scope='col') 댓글
+                                th.table-likes(scope='col') 추천
+                                th.table-views(scope='col') 조회수
                         tbody
                             if count === 0
-                                tr
+                                tr(align='center')
                                     th.text-center(colspan=4) 게시글이 없습니다.
                             else
                                 each post in bestVsPosts
-                                    tr
-                                        td
+                                    tr(align='center')
+                                        td.table-title
                                             a(href=`/post/${post.board_type}/${post.id}`) #{post.title}
+<<<<<<< HEAD
                                         td
                                             img(src='/images/lv'+post.user.level+'.png' width=22 height=22)
                                             |#{post.user.nickname}
@@ -32,25 +34,34 @@ block content
                                         td #{resultDate}
                                         td #{post.comment_count}
                                         td #{post.like}
+=======
+                                        td #{post.user.nickname}
+                                        td.post-date #{post.createdAt}
+                                        td.table-comments #{post.comment_count}
+                                        td.table-likes #{post.like}
+                                        td.table-views #{post.views}
+>>>>>>> 3232b4fc21c012070694a90be6426416e6146879
             .col-6
                 .card
                     table.table.table-hover.table-border
                         thead.bg-warning
-                            tr
+                            tr(align='center')
                                 th(scope='col') best 자유 게시판
+                                th.table-title(scope='col')
                                 th(scope='col')
-                                th(scope='col')
-                                th(scope='col') 댓글
-                                th(scope='col') 추천
+                                th.table-comments(scope='col') 댓글
+                                th.table-likes(scope='col') 추천
+                                th.table-views(scope='col') 조회수
                         tbody
                             if count === 0
-                                tr
+                                tr(align='center')
                                     th.text-center(colspan=4) 게시글이 없습니다.
                             else
                                 each post in bestFreePosts
-                                    tr
-                                        td
+                                    tr(align='center')
+                                        td.table-title
                                             a(href=`/post/${post.board_type}/${post.id}`) #{post.title}
+<<<<<<< HEAD
                                         td
                                             img(src='/images/lv'+post.user.level+'.png' width=22 height=22)
                                             |#{post.user.nickname}
@@ -61,26 +72,35 @@ block content
                                         td #{resultDate}
                                         td #{post.comment_count}
                                         td #{post.like}
+=======
+                                        td #{post.user.nickname}
+                                        td.post-date #{post.createdAt}
+                                        td.table-comments #{post.comment_count}
+                                        td.table-likes #{post.like}
+                                        td.table-views #{post.views}
+>>>>>>> 3232b4fc21c012070694a90be6426416e6146879
         .row.mt-5.justify-content-center
             .col-6
                 .card
                     table.table.table-hover.table-border
                         thead.bg-warning
-                            tr
+                            tr(align='center')
                                 th(scope='col') vs 게시판
+                                th.table-title(scope='col')
                                 th(scope='col')
-                                th(scope='col')
-                                th(scope='col') 댓글
-                                th(scope='col') 추천
+                                th.table-comments(scope='col') 댓글
+                                th.table-likes(scope='col') 추천
+                                th.table-views(scope='col') 조회수
                         tbody
                             if count === 0
-                                tr
+                                tr(align='center')
                                     th.text-center(colspan=4) 게시글이 없습니다.
                             else
                                 each post in vsPosts
-                                    tr
-                                        td
+                                    tr(align='center')
+                                        td.table-title
                                             a(href=`/post/${post.board_type}/${post.id}`) #{post.title}
+<<<<<<< HEAD
                                         td
                                             img(src='/images/lv'+post.user.level+'.png' width=22 height=22)
                                             |#{post.user.nickname}
@@ -91,25 +111,34 @@ block content
                                         td #{resultDate}
                                         td #{post.comment_count}
                                         td #{post.like}
+=======
+                                        td #{post.user.nickname}
+                                        td.post-date #{post.createdAt}
+                                        td.table-comments #{post.comment_count}
+                                        td.table-likes #{post.like}
+                                        td.table-views #{post.views}
+>>>>>>> 3232b4fc21c012070694a90be6426416e6146879
             .col-6
                 .card
                     table.table.table-hover.table-border
                         thead.bg-warning
-                            tr
+                            tr.table-title(align='center')
                                 th(scope='col') 자유 게시판
+                                th.table-title(scope='col')
                                 th(scope='col')
-                                th(scope='col')
-                                th(scope='col') 댓글
-                                th(scope='col') 추천
+                                th.table-comments(scope='col') 댓글
+                                th.table-likes(scope='col') 추천
+                                th.table-views(scope='col') 조회수
                         tbody
                             if count === 0
-                                tr
+                                tr(align='center')
                                     th.text-center(colspan=4) 게시글이 없습니다.
                             else
                                 each post in freePosts
-                                    tr
+                                    tr(align='center')
                                         td
                                             a(href=`/post/${post.board_type}/${post.id}`) #{post.title}
+<<<<<<< HEAD
                                         td
                                             img(src='/images/lv'+post.user.level+'.png' width=22 height=22)
                                             |#{post.user.nickname}
@@ -120,3 +149,14 @@ block content
                                         td #{resultDate}
                                         td #{post.comment_count}
                                         td #{post.like}
+=======
+                                        td #{post.user.nickname}
+                                        td.post-date #{post.createdAt}
+                                        td.table-comments #{post.comment_count}
+                                        td.table-likes #{post.like}
+                                        td.table-views #{post.views}
+    include includes/getDate
+    script(type='application/javascript').
+        // how many times from write day
+        setWriteTimeByClassName("post-date");
+>>>>>>> 3232b4fc21c012070694a90be6426416e6146879

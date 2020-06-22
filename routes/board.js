@@ -6,6 +6,7 @@ const { Post, User, Like, Comment } = require('../models');
 const paging = require('./paging');
 const sequelize = require('sequelize');
 
+// 게시판 화면 출력
 router.get('/:type/:page', async (req, res, next) => {
    try{
       const board_type = req.params.type;
@@ -61,7 +62,7 @@ router.get('/:type/:page', async (req, res, next) => {
 });
 
 
-
+// 베스트 게시판 출력
 router.get('/best/:type/:page', async (req, res, next) => {
    try{
       const board_type = req.params.type;

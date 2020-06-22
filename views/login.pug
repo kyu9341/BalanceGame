@@ -20,11 +20,11 @@ block content
                     small.invalid-feedback 패스워드를 입력하세요.
                     if loginError
                         small.error-message= loginError
-                .form-group.form-check
-                    input#rememberMe.form-check-input(type='checkbox' name='remember-me')
-                    label.form-check-label(for='rememberMe' aria-describedby='rememberMeHelp') 로그인 유지
+                //.form-group.form-check
+                //    input#rememberMe.form-check-input(type='checkbox' name='remember-me')
+                //    label.form-check-label(for='rememberMe' aria-describedby='rememberMeHelp') 로그인 유지
                 .form-group
                     button.btn.btn-warning.btn-block.text-secondary(type='submit' aria-describedby='submitHelp') 로그인
                     button.btn.btn-warning.btn-block.text-secondary(type='button') 회원가입
-    include form-validation
+    include includes/form-validation
 

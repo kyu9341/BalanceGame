@@ -18,28 +18,20 @@ html
 
 body.bg-white
     // 상단 네비바
-    #top_navbar
-        nav.navbar.navbar-light.alert-warning.navbar-expand-lg
-            a.navbar-brand(href='/')
+    #wrapper
+        #top_navbar
+            nav.navbar.navbar-light.alert-warning.navbar-expand-lg
+                a.navbar-brand(href='/')
 
-                img(src='/images/balance_logo_remove.png', width='200', height='40')
-            // 검색창
-            button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent'
-                aria-expanded='false' aria-label='Toggle navigation')
-                span.navbar-toggler-icon
-            .collapse.navbar-collapse#navbarSupportedContent
-                ul.navbar-nav.mr-auto
-                    li.nav-item
-                        form.form-inline(style='justify-content: right;' action='/search/1' method='get')
-                            input.form-control.mr-sm-2(type='search' name='search' placeholder='Search' aria-label='Search')
-                            button.btn.btn-outline-success.my-2.my-sm-0(type='submit' style='background-color: white;') 검색
-                // 사용자
-
-                ul.navbar-nav.justify-content-end
-                    if !user
+                    img(src='/images/balance_logo_remove.png', width='200', height='40')
+                // 검색창
+                button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent'
+                    aria-expanded='false' aria-label='Toggle navigation')
+                    span.navbar-toggler-icon
+                .collapse.navbar-collapse#navbarSupportedContent
+                    ul.navbar-nav.mr-auto
                         li.nav-item
-                            a.nav-link(href='/login') 로그인
-                        li.nav-item
+<<<<<<< HEAD
                             a.nav-link(href='/sign-up') 회원가입
                     else
                         li.nav-item.dropdown
@@ -74,13 +66,69 @@ body.bg-white
                             p.card-text=user.introduce
                             .progress
                                 .progress-bar.progress-bar-striped.bg-warning(role='progressbar' style='width: '+lvInfo.per+'%;' aria-valuenow='25' aria-valuemin='0' aria-valuemax='100') !{lvInfo.per}%
+=======
+                            form.form-inline(style='justify-content: right;' action='/search/1' method='get')
+                                input.form-control.mr-sm-2(type='search' name='search' placeholder='Search' aria-label='Search')
+                                button.btn.btn-outline-success.my-2.my-sm-0(type='submit' style='background-color: white;') 검색
+                    // 사용자
 
+                    ul.navbar-nav.justify-content-end
+                        if !user
+                            li.nav-item
+                                a.nav-link(href='/login') 로그인
+                            li.nav-item
+                                a.nav-link(href='/sign-up') 회원가입
+                        else
+                            li.nav-item.dropdown
+                                .btn-group
+                                    button.btn.alert-warning(type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+                                        // 사용자 이미지
+                                        a.navbar-brand(href='#')
+                                            img(src='/images/breakegg.png' width='20' height='20' alt='' loading='lazy' style='border-radius: .25rem;')
+                                        | #{user.nickname} ▼
+                                    .dropdown-menu.dropdown-menu-sm-right
+                                        a.dropdown-item(href='/profile') 마이페이지
+                                        a.dropdown-item(href='#') 출석부
+                                        a.dropdown-item(href='/my-posts/1') 내가 쓴 글
+                                        a.dropdown-item(href='/write') 글쓰기
+                                        .dropdown-divider
+                                        a.dropdown-item(href='/auth/logout') 로그아웃
+        .row.justify-content-center
+            .col-1
+            .col-7
+                block content
+            .col-3
+                .container
+                    if user
+                        .card.bg-light.mb-3.mt-5.mr-5
+                            .card-header 내 정보
+                            .card-body
+                                span
+                                    img(src='/images/breakegg.png' width=50 height=50)
+                                    b.card-title          #{user.nickname}님
+                                p.card-text=user.email
+                                #progress-div.progress
+                                    #level-progress.progress-bar.progress-bar-striped.bg-info(role='progressbar' style='width: 0%;' aria-valuenow='25' aria-valuemin='0' aria-valuemax='100') 70%
 
-                // 우측 네비게이션바
-                #list-tab.list-group(role='tablist')
-                    button.btn.btn-outline-warning.mt-3.mb-1.btn-block(onclick="location.href='/write'" type='button') 글쓰기
-                    a#list-best-vs-list.list-group-item.list-group-item-action(href='/board/best/vs/1' role='tab' aria-controls='settings') best vs 게시판
-                    a#list-best-free-list.list-group-item.list-group-item-action(href='/board/best/free/1' role='tab' aria-controls='profile') best 자유 게시판
-                    a#list-vs-list.list-group-item.list-group-item-action(href='/board/vs/1' role='tab' aria-controls='messages') vs 게시판
-                    a#list-free-list.list-group-item.list-group-item-action(href='/board/free/1' role='tab' aria-controls='settings') 자유 게시판
-        .col-1
+>>>>>>> 3232b4fc21c012070694a90be6426416e6146879
+
+                    // 우측 네비게이션바
+                    //#list-tab.list-group
+                    #list-tab.list-group(role='tablist')
+                        button.btn.btn-outline-warning.mt-3.mb-1.btn-block(onclick="location.href='/write'" type='button') 글쓰기
+                        a#best-vs-list.list-group-item.list-group-item-action(class=(type === "best vs 게시판" ? "my active" : undefined) href='/board/best/vs/1' role='tab' aria-controls='settings') best vs 게시판
+                        a#best-free-list.list-group-item.list-group-item-action(class=(type === "best 자유 게시판" ? "my active" : undefined)  href='/board/best/free/1' role='tab' aria-controls='profile') best 자유 게시판
+                        a#vs-list.list-group-item.list-group-item-action(class=(type === "vs 게시판" ? "my active" : undefined)  href='/board/vs/1' role='tab' aria-controls='messages') vs 게시판
+                        a#free-list.list-group-item.list-group-item-action(class=(type === "자유 게시판" ? "my active" : undefined)  href='/board/free/1' role='tab' aria-controls='settings') 자유 게시판
+            .col-1
+        include includes/footer
+
+    script(type='application/javascript').
+        window.addEventListener('load', function () {
+            let level = document.getElementById('level-progress');
+            let progressGroup = document.getElementById('progress-div');
+            progressGroup.style.display = "block";
+            setTimeout(function () {
+                level.style.width = "70%";
+            }, 200);
+        });
