@@ -22,7 +22,9 @@ block content
                                     tr
                                         td
                                             a(href=`/post/${post.board_type}/${post.id}`) #{post.title}
-                                        td #{post.user.nickname}
+                                        td
+                                            img(src='/images/lv'+post.user.level+'.png' width=22 height=22)
+                                            #{post.user.nickname}
                                         - let dateform = new Date(post.createdAt)
                                         - moment.locale('ko');
                                         // - let resultDate = moment(dateform).format('MMMM Do YYYY, h:mm:ss a');
@@ -49,7 +51,9 @@ block content
                                     tr
                                         td
                                             a(href=`/post/${post.board_type}/${post.id}`) #{post.title}
-                                        td #{post.user.nickname}
+                                        td
+                                            img(src='/images/lv'+post.user.level+'.png' width=22 height=22)
+                                            #{post.user.nickname}
                                         - let dateform = new Date(post.createdAt)
                                         - moment.locale('ko');
                                         // - let resultDate = moment(dateform).format('MMMM Do YYYY, h:mm:ss a');
@@ -77,7 +81,9 @@ block content
                                     tr
                                         td
                                             a(href=`/post/${post.board_type}/${post.id}`) #{post.title}
-                                        td #{post.user.nickname}
+                                        td
+                                            img(src='/images/lv'+post.user.level+'.png' width=22 height=22)
+                                            #{post.user.nickname}
                                         - let dateform = new Date(post.createdAt)
                                         - moment.locale('ko');
                                         // - let resultDate = moment(dateform).format('MMMM Do YYYY, h:mm:ss a');
@@ -104,7 +110,9 @@ block content
                                     tr
                                         td
                                             a(href=`/post/${post.board_type}/${post.id}`) #{post.title}
-                                        td #{post.user.nickname}
+                                        td
+                                            img(src='/images/lv'+post.user.level+'.png' width=22 height=22)
+                                            #{post.user.nickname}
                                         - let dateform = new Date(post.createdAt)
                                         - moment.locale('ko');
                                         // - let resultDate = moment(dateform).format('MMMM Do YYYY, h:mm:ss a');

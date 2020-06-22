@@ -40,7 +40,7 @@ router.get('/', async (req, res, next) => {
         const freePosts = await Post.findAll({
             include: [{
                 model: User, // 작성자를 가져옴
-                attributes: ['id', 'nickname'],
+                attributes: ['id', 'nickname', 'level'],
             },],
             limit: limitValue,
             // attributes: { include: [[await Comment.count({}) ], 'count'] },
@@ -53,7 +53,7 @@ router.get('/', async (req, res, next) => {
         const vsPosts = await Post.findAll({
             include: [{
                 model: User, // 작성자를 가져옴
-                attributes: ['id', 'nickname'],
+                attributes: ['id', 'nickname', 'level'],
             },],
             limit: limitValue,
             // attributes: { include: [[await Comment.count({}) ], 'count'] },
@@ -64,7 +64,7 @@ router.get('/', async (req, res, next) => {
         const bestVsPosts = await Post.findAll({
             include: [{
                 model: User, // 작성자를 가져옴
-                attributes: ['id', 'nickname'],
+                attributes: ['id', 'nickname', 'level'],
             },],
             limit: limitValue,
             // attributes: { include: [[await Comment.count({}) ], 'count'] },
@@ -76,7 +76,7 @@ router.get('/', async (req, res, next) => {
         const bestFreePosts = await Post.findAll({
             include: [{
                 model: User, // 작성자를 가져옴
-                attributes: ['id', 'nickname'],
+                attributes: ['id', 'nickname', 'level'],
             },],
             limit: limitValue,
             // attributes: { include: [[await Comment.count({}) ], 'count'] },

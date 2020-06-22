@@ -36,6 +36,7 @@ block content
                                     // -let postUrl = `/post/${post.board_type}/${post.id}`;
                                     td
                                         a(href=`/post/${post.board_type}/${post.id}`) #{post.title}
+
                                     td #{post.user.nickname}
                                     - let dateform = new Date(post.createdAt)
                                     - moment.locale('ko');
