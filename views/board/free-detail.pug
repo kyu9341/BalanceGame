@@ -43,10 +43,7 @@ block content
                                 .comment-text.mb-3=comment.content
                                     span.commentId(hidden)=comment.id
                                 small.d-block
-                                - let dateform = new Date(comment.createdAt)
-                                - moment.locale('ko');
-                                - let resultDate = moment(dateform).startOf('hour').fromNow();
-                                    small=resultDate
+                                    small.comments-date=comment.createdAt
                         .col-3.btn-group.btn-group-sm(role='group')
                             small.d-block
                                 small.d-block
@@ -70,9 +67,12 @@ block content
         br
         br
 
-
+    include ../getDate
     include ../form-validation
     script(type='application/javascript').
+        setWriteTimeByClassName("post-date");
+        setWriteTimeByClassName("comments-date");
+
         let unlikeTag = document.querySelector('.unlike');
         let likeTag = document.querySelector('.like');
         $(function () {
