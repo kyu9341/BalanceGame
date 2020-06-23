@@ -346,7 +346,7 @@ router.post('/:type/:id/report', isLoggedIn, async (req, res, next) => {
 
         await Post.update({
             report: reportCount,
-        },{ 
+        },{
             where: { id: req.params.id },
         });
 
