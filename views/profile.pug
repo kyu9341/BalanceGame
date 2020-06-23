@@ -10,7 +10,8 @@ block content
                 .col-6
                     span
                         img(src='/images/lv'+user.level+'.png' width=50 height=50)
-                        b.card-title #{user.nickname}
+                        strong
+                            h5(style="display:inline; font-weight:bold").card-title.ml-1 #{user.nickname}
                     -console.log('/images/lv'+user.level+'.png');
                 .col-6.text-right
                     a(href='/profile/auth')
@@ -24,18 +25,31 @@ block content
 
                 p
                     #profile-progress-div.progress
-                        #profile-level-progress.progress-bar.progress-bar-striped.bg-warning(role='progressbar'
+                        #profile-level-progress.progress-bar.progress-bar-striped.bg-info(role='progressbar'
                             style='width: 0%;' aria-valuenow='25' aria-valuemin='0' aria-valuemax='100') #{lvInfo.per}%
                 .text-right
-                    .card-text 가입일 : #{user.createdAt}
+                    span 가입일 :
+                    .card-text.sign-up-date(style="display:inline;") #{user.createdAt}
 
+    .row.mt-5
+        .col-6
+            .card.ml-4
+                // TODO 레벨별 설명
+                p ddd
+
+        .col-6
+            .card.mr-4
+                // TODO 행위별 경험치 수치 설명
+                p ddd
+
+
+    include includes/getDate
     script.
+        setWriteTimeByClassName("sign-up-date");
+
         window.addEventListener('load', function () {
-            // let btn = document.getElementById('btn');
             let level = document.getElementById('profile-level-progress');
             let progressGroup = document.getElementById('profile-progress-div');
-            // let lavel = document.getElementById('prolavel');
-            // btn.addEventListener('click', function () {
             progressGroup.style.display = "block";
             setTimeout(function () {
                 level.style.width = !{lvInfo.per} + "%";

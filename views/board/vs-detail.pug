@@ -9,7 +9,8 @@ block content
                 li.breadcrumb-item.active
                     a(href='/board/vs/1' aria-current='page') vs 게시판
         .card.mt-3
-            h5.card-header=post.title
+            h5(style="display:inline;").card-header=post.title
+                span(style="float:right; font-size:15px;") 조회수 #{post.views}
             .card-body.border-bottom.mb-3!= post.content
             .card-body.mb-3.border-bottom
                 .row.text-center

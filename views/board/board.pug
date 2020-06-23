@@ -56,7 +56,7 @@ block content
             nav(aria-label='Page navigation example')
                 ul.pagination.my
                     -console.log("start : "+ result.startPage + "   end: " + result.endPage + "   current : " + curPage + "   total : " + result.totalPage)
-                    if result.startPage > result.totalPage
+                    if result.startPage !== 1
                         li.page-item
                             a.page-link(href=`${path}${result.startPage - 1}${searchWordUrl}` aria-label='previous')
                                 span(aria-hidden='true') &laquo;

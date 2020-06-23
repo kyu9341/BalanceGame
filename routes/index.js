@@ -143,7 +143,11 @@ router.get('/search/:page', async (req, res, next) => {
             title: {
               [sequelize.Op.like]: '%' + searchWord + '%'
             }
-          }
+          },
+          include: {
+            model: User,
+            attributes: ['id', 'nickname', 'level'],
+          },
         });
         totalPostCount = post.count;
 
@@ -152,8 +156,8 @@ router.get('/search/:page', async (req, res, next) => {
 
         const posts = await Post.findAll({
             include: [{
-              model: User, // 작성자를 가져옴
-              attributes: ['id', 'nickname'],
+                model: User, // 작성자를 가져옴
+                attributes: ['id', 'nickname', 'level'],
             },],
             offset: result.offset,
             limit: pageSize,
@@ -207,10 +211,11 @@ router.get('/my-posts/:page', isLoggedIn, async (req, res, next) => {
         // 페이징
         let result = paging(totalPostCount, curPage, pageSize, pageListSize, offset);
 
+
         const posts = await Post.findAll({
             include: [{
                 model: User, // 작성자를 가져옴
-                attributes: ['id', 'nickname'],
+                attributes: ['id', 'nickname', 'level'],
             },],
             offset: result.offset,
             limit: pageSize,
