@@ -29,15 +29,15 @@ exports.addExp = async (id, type)=> {
         const user = await User.findOne({where : { id }});
 
         let lv;
-        if(user.exp<100)
+        if(user.exp+exp<100)
             lv=1;
-        else if(user.exp<250)
+        else if(user.exp+exp<250)
             lv=2;
-        else if(user.exp<450)
+        else if(user.exp+exp<450)
             lv=3;
-        else if(user.exp<750)
+        else if(user.exp+exp<750)
             lv=4;
-        else if(user.exp<1200)
+        else if(user.exp+exp<1200)
             lv=5;
         else
             lv=6;

@@ -334,20 +334,23 @@ router.post('/:type/:id/like/comment/:commentId/delete', isLoggedIn, async (req,
 // 신고 기능
 router.post('/:type/:id/report', isLoggedIn, async (req, res, next) => {
     try {
+        console.log("rpttest");
         await Report.create({
             postId: req.params.id,
             userId: req.user.id,
             content: req.body.content,
         })
-        const reportCount = await Report.findAndCountAll({
+        const reportCount = await Report.count({
             where: { postId: req.params.id},
         });
 
-        await Report.update({
+        await Post.update({
             report: reportCount,
-        },{
-            where: { id: req.params.commentId },
+        },{ 
+            where: { id: req.params.id },
         });
+
+        res.redirect('/post/'+ req.params.type + '/' + req.params.id);
 
     } catch (error) {
         console.error(error);
