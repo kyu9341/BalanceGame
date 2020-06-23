@@ -14,23 +14,55 @@ block content
             .row
                 .col-10
                 .col-2
-                    .card.mr-2
+                    p.card.mr-2
                         small(style="display:inline; float:right;" align="center").mt-1 작성자 : #{post.user.nickname}
                         small(style="display:inline; float:right;" align="center").mt-2.mb-1.post-date #{post.createdAt}
-            .text-center.mb-3
-                if user
-                    -const liker = post && post.postLiker.map(l => l.id).includes(user.id);
-                    if user && !liker
-                        button.like.btn.btn-outline-warning.text-dark
-                            img#nolike(style=' width:30px; height:30px;  ' src='/images/egg.png')
-                            span#count(style='vertical-align: middle;') #{post.like} LIKE
-                    else if user && liker
-                        button.unlike.btn.btn-outline-warning.text-dark.btn-warning
-                            img#nolike(style=' width:30px; height:30px;' src='/images/likedegg.png')
-                            span#count(style='vertical-align: middle;') #{post.like} LIKE
+
+
+            .col
+                .text-center.mb-3
+                    if user
+                        -const liker = post && post.postLiker.map(l => l.id).includes(user.id);
+                        if user && !liker
+                            button.like.btn.btn-outline-warning.text-dark
+                                img#nolike(style=' width:30px; height:30px;  ' src='/images/egg.png')
+                                span#count(style='vertical-align: middle;') #{post.like} LIKE
+                        else if user && liker
+                            button.unlike.btn.btn-outline-warning.text-dark.btn-warning
+                                img#nolike(style=' width:30px; height:30px;' src='/images/likedegg.png')
+                                span#count(style='vertical-align: middle;') #{post.like} LIKE
+
+                        button.btn.btn-warning.btn-block(type='button' data-toggle='modal' data-target='#myModal' style=' width:120px;  float: right;')
+                            | 게시글 신고
+                        #myModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='myModalLabel' align='right' )
+                            .modal-dialog(role='document')
+                                .modal-content
+                                    form.edit(action='/post/' + post.board_type + '/' + post.id + '/report' method='post')
+                                        .modal-header
+                                            //button.close(type='button' data-dismiss='modal' aria-label='Close')
+                                                span(aria-hidden='true') &times;
+                                            h4#myModalLabel.modal-title 신고하기
+
+                                        .modal-body
+                                            .form-group
+                                                .row-6
+                                                    input#reportComment.form-control.input-group-lg(name='content'
+                                                        placeholder='신고사유를 작성하세요.')
+                                                    small#reportCommentHelp.form-text.text-muted
+                                                        | 허위 신고 시 불이익이 있을 수 있습니다.
+
+
+                                        .modal-footer
+                                            .col-4
+                                                button#report-button.btn.btn-warning.btn-block(type='submit') 저장
+                                            button.btn.btn-default(type='button' data-dismiss='modal') 닫기
+
+
+
         // 댓글쓰기
-        .mt-3.border-bottom
+        .mt-3
             h5 댓글
+
             .mt-3
                 form#comment-form.needs-validation(method='post' action='/post/' + post.board_type + '/' + post.id + '/comment' novalidate)
                     .row.mb-5
