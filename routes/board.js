@@ -35,11 +35,9 @@ router.get('/:type/:page', async (req, res, next) => {
          },],
          offset: result.offset,
          limit: pageSize,
-         // attributes: { include: [[await Comment.count({}) ], 'count'] },
          order: [['createdAt', 'DESC']],
          where: { board_type },
       });
-      // console.log("comment: " + posts[0].comments);
       res.render('board/board', {
          title: board_type + '-board',
          type,
@@ -91,11 +89,9 @@ router.get('/best/:type/:page', async (req, res, next) => {
          },],
          offset: result.offset,
          limit: pageSize,
-         // attributes: { include: [[await Comment.count({}) ], 'count'] },
          order: [['like', 'DESC'], ['createdAt', 'DESC']],
          where: { board_type },
       });
-      // console.log("comment: " + posts[0].comments);
       res.render('board/board', {
          title: board_type + '-board',
          type,

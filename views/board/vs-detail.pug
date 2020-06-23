@@ -102,8 +102,8 @@ block content
                             img#liked(style=' width:30px; height:30px;' src='/images/likedegg.png')
                             span#count-liked(style='vertical-align: middle;') #{post.like} LIKE
 
-                    button.btn.btn-warning.btn-block(type='button' data-toggle='modal' data-target='#myModal' style=' width:120px;  float: right;')
-                        | 게시글 신고
+                    button.btn.btn-outline-danger.text-danger.mr-4(type='button' data-toggle='modal' data-target='#myModal' style=' width:80px;  float: right;')
+                        | 신고
                     #myModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='myModalLabel' align='right' )
                         .modal-dialog(role='document')
                             .modal-content
@@ -124,8 +124,8 @@ block content
 
                                     .modal-footer
                                         .col-4
-                                            button#report-button.btn.btn-warning.btn-block(type='submit') 저장
-                                        button.btn.btn-default(type='button' data-dismiss='modal') 닫기
+                                            button#report-button.btn.btn-outline-danger(type='submit') 신고하기
+                                        button.btn.btn-outline-dark(type='button' data-dismiss='modal') 닫기
 
         // 댓글쓰기
         .mt-3.border-bottom
