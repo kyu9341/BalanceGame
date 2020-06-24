@@ -194,11 +194,12 @@ router.get('/search/:page', async (req, res, next) => {
 router.get('/my-posts/:page', isLoggedIn, async (req, res, next) => {
     try{
         const board_type = 'my-posts'; // req.params.type;
-        const path = '/board/' + board_type + '/';
+        const path = '/' + board_type + '/';
         const type = '내가 쓴 글';
         const curPage = req.params.page;
         const pageSize = 10; // 한 페이지 당 게시글
         const pageListSize = 5; // 페이지의 갯수
+        const searchWordUrl = '';
 
         let offset = ""; // limit 변수
         let totalPostCount = 0; // 전체 게시글 수
@@ -234,6 +235,7 @@ router.get('/my-posts/:page', isLoggedIn, async (req, res, next) => {
             result,
             moment,
             path,
+            searchWordUrl,
         });
 
     } catch (error) {
