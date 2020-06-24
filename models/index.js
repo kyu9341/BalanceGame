@@ -16,7 +16,7 @@ db.postLike = require('./postLike')(sequelize, Sequelize);
 db.commentLike = require('./commentLike')(sequelize, Sequelize);
 db.Comment = require('./comment')(sequelize, Sequelize);
 db.Vote = require('./vote')(sequelize, Sequelize);
-db.Report = require('./report')(sequelize, Sequelize);
+db.report = require('./report')(sequelize, Sequelize);
 
 // 1대다 관계
 db.User.hasMany(db.Post);
@@ -35,8 +35,8 @@ db.User.belongsToMany(db.Post, { through : db.Vote });
 db.Post.belongsToMany(db.User, { through : db.Vote, as: 'Voter' }); // 사용자를 Voter로 가져옴
 
 // 다대다 관계 - 매칭 테이블 : report
-db.User.belongsToMany(db.Post, { through : db.Report });
-db.Post.belongsToMany(db.User, { through : db.Report, as: 'Reporter' }); // 사용자를 Reporter로 가져옴
+db.User.belongsToMany(db.Post, { through : db.report });
+db.Post.belongsToMany(db.User, { through : db.report, as: 'reporter' }); // 사용자를 Reporter로 가져옴
 
 // 1대다 포스트 : 댓글
 db.Post.hasMany(db.Comment);

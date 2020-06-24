@@ -1,6 +1,6 @@
 const express = require('express');
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
-const { Post, User, postLike, Comment, commentLike, Vote, Report } = require('../models');
+const { Post, User, postLike, Comment, commentLike, Vote, report } = require('../models');
 const multer = require('multer');
 const path = require('path');
 const moment = require('moment');
@@ -48,6 +48,10 @@ router.get('/:type/:id', async (req, res, next) => {
                 model: User, // 좋아요를 누른 사람들을 가져옴
                 attributes: ['id', 'nickname'],
                 as: 'Voter', // include 에서 같은 모델이 여러개면 as로 구분
+            },{
+                model: User, // 신고를 누른 사람들을 가져옴
+                attributes: ['id', 'nickname'],
+                as: 'reporter', // include 에서 같은 모델이 여러개면 as로 구분
             }],
         });
         // 조회수 업데이트
@@ -135,7 +139,6 @@ router.delete('/:type/:id/like', isLoggedIn, async (req, res, next) => {
             where: { id: req.params.id },
         });
 
-        let addExp=-5;
         const post = await Post.findOne({where : {id: req.params.id}});
         const postUser = await User.findOne({where : {id : post.userId}});
         await exp.addExp(postUser.id,type="deLike");
@@ -335,12 +338,12 @@ router.post('/:type/:id/like/comment/:commentId/delete', isLoggedIn, async (req,
 router.post('/:type/:id/report', isLoggedIn, async (req, res, next) => {
     try {
         console.log("rpttest");
-        await Report.create({
+        await report.create({
             postId: req.params.id,
             userId: req.user.id,
             content: req.body.content,
         })
-        const reportCount = await Report.count({
+        const reportCount = await report.count({
             where: { postId: req.params.id},
         });
 
