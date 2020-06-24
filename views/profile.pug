@@ -1,10 +1,14 @@
 extends layout
 
 block content
-    .py-5.text-left
-        h2 내정보
+    nav(aria-label='breadcrumb').mr-5
+        ol.breadcrumb.mt-5.pl-2.pr-2
+            li.breadcrumb-item
+                a(href='/') Home
+            li.breadcrumb-item.active
+            | 마이페이지
 
-    .card.bg-light.mb-3.mt-5.mr-5
+    .card.bg-light.mb-3.mt-2.mr-5
         .card-header
             .row
                 .col-6
