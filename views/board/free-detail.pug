@@ -19,21 +19,12 @@ block content
                         small(style="display:inline; float:right;" align="center").mt-1 작성자 : #{post.user.nickname}
                         small(style="display:inline; float:right;" align="center").mt-2.mb-1.post-date #{post.createdAt}
 
-
             .col
                 .text-center.mb-3
-                    if user
-                        -const liker = post && post.postLiker.map(l => l.id).includes(user.id);
-                        if user && !liker
-                            button.like.btn.btn-outline-warning.text-dark
-                                img#nolike(style=' width:30px; height:30px;  ' src='/images/egg.png')
-                                span#count(style='vertical-align: middle;') #{post.like} LIKE
-                        else if user && liker
-                            button.unlike.btn.btn-outline-warning.text-dark.btn-warning
-                                img#nolike(style=' width:30px; height:30px;' src='/images/likedegg.png')
-                                span#count(style='vertical-align: middle;') #{post.like} LIKE
+                    // 좋아요 UI
+                    include ../includes/like
 
-                        button.btn.btn-outline-danger.text-danger.mr-4(type='button' data-toggle='modal' data-target='#myModal' style=' width:80px;  float: right;')
+                        button.btn.btn-outline-danger.text-danger.mr-4.mb-1(type='button' data-toggle='modal' data-target='#myModal' style=' width:80px;  float: right;')
                             | 신고
                         #myModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='myModalLabel' align='right' )
                             .modal-dialog(role='document')
@@ -61,49 +52,8 @@ block content
 
 
         // 댓글쓰기
-        .mt-3
-            h5 댓글
+        include ../includes/comment
 
-            .mt-3
-                form#comment-form.needs-validation(method='post' action='/post/' + post.board_type + '/' + post.id + '/comment' novalidate)
-                    .row.mb-5
-                        .col-10
-                            textarea.form-control(name='content' aria-label='With textarea' rows='2' required)
-                        .col-2
-                            button#comment-form-button.btn.btn-warning.h-100.mr-2(type='submit') 댓글 달기
-                        small.invalid-feedback.mb-5 내용을 입력하세요.
-
-            each comment in comments
-                .border-top.pt-1.pb-1
-                    .row.mt-2
-                        .col-3.col-md-2.col-lg-2
-                            img(src="/images/lv"+comment.user.level+".png" width=22 height=22)
-                            |#{comment.user.nickname}
-                        .col-6.col-md-7.col-lg-7
-                            .comment-show
-                                .comment-text.mb-3=comment.content
-                                    span.commentId(hidden)=comment.id
-                                small.d-block
-                                    small.comments-date=comment.createdAt
-                        .col-3.btn-group.btn-group-sm(role='group')
-                            small.d-block
-                                small.d-block
-                                    if user
-                                        -const liker = comment && comment.commentLiker.map(l => l.id).includes(user.id);
-                                        if user && !liker
-                                            form.d-inline(method='post' action=`${post.id}/like/comment/${comment.id}`)
-                                                button.likeComment.btn.btn-outline-warning.text-dark
-                                                    img#nolike(style=' width:20px; height:20px;  ' src='/images/egg.png')
-                                                    span#count(style='vertical-align: middle;') #{comment.like} LIKE
-                                        else if user && liker
-                                            form.d-inline(method='post' action=`${post.id}/like/comment/${comment.id}/delete`)
-                                                button.unlikeComment.btn.btn-outline-warning.text-dark.alert-warning
-                                                    img#nolike(style=' width:20px; height:20px;' src='/images/likedegg.png')
-                                                    span#count(style='vertical-align: middle;') #{comment.like} LIKE
-                                    //button.btn.btn-warning(type='button') 좋아요
-                                    if user
-                                        form.d-inline(method='post' action=`${post.id}/comment/${comment.id}/delete`)
-                                            button.btn.btn-outline-warning.text-dark.alert-warning(type='submit') 삭제
         br.mb-5
         br
         br
@@ -150,41 +100,3 @@ block content
                 xhr.send();
             });
         });
-        // let unlikeComment = document.querySelectorAll('.unlikeComment');
-        // let likeComment = document.querySelectorAll('.likeComment');
-        //
-        // $(function () {
-        //     let pathname = window.location.pathname;
-        //     likeComment.addEventListener('click', function () {
-        //         let commentId = $('.commentId').val();
-        //         console.log("commentId : " + commentId);
-        //         let xhr = new XMLHttpRequest();
-        //         xhr.onload = function () {
-        //             if (xhr.status === 200) {
-        //                 location.reload();
-        //             } else {
-        //                 console.error(xhr.responseText);
-        //             }
-        //         };
-        //         xhr.open('POST', pathname + '/like/comment/' + commentId);
-        //         xhr.send();
-        //     });
-        // });
-        //
-        // $(function () {
-        //     let pathname = window.location.pathname;
-        //     unlikeComment.addEventListener('click', function () {
-        //         // let postId = document.querySelector('#post-id').value;
-        //         let xhr = new XMLHttpRequest();
-        //         xhr.onload = function () {
-        //             if (xhr.status === 200) {
-        //                 location.reload();
-        //             } else {
-        //                 console.error(xhr.responseText);
-        //             }
-        //         };
-        //         xhr.open('DELETE', pathname + '/like/comment/');
-        //         xhr.send();
-        //     });
-        // })
-        //  /:type/:id/like/comment/:commentId

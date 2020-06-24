@@ -1,0 +1,10 @@
+if user
+    -const liker = post && post.postLiker.map(l => l.id).includes(user.id);
+    if user && !liker
+        button.like.btn.btn-outline-warning.text-dark
+            img#nolike(style=' width:30px; height:30px;  ' src='/images/egg.png')
+            span#count(style='vertical-align: middle;') #{post.like} LIKE
+    else if user && liker
+        button.unlike.btn.btn-outline-warning.text-dark.btn-warning
+            img#nolike(style=' width:30px; height:30px;' src='/images/likedegg.png')
+            span#count(style='vertical-align: middle;') #{post.like} LIKE
