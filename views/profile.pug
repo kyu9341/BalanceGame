@@ -31,17 +31,89 @@ block content
                     span 가입일 :
                     .card-text.sign-up-date(style="display:inline;") #{user.createdAt}
 
-    .row.mt-5
-        .col-6
-            .card.ml-4
-                // TODO 레벨별 설명
-                p ddd
+    .card.bg-light.mb-3.mt-5.mr-5
+        .card-header
+            .row
+                strong
+                    h5(style="display:inline; font-weight:bold").card-title.ml-4 레벨 및 경험치 표
+        .card-body
+            .row
+                .col-7
+                    .card.ml-4
+                        // TODO 레벨별 설명
+                        .col.row.ml-4(style='margin:10px;')
+                            .col-3
+                                img(src='/images/lv1.png' width=50 height=50)
+                            .col-8.mt-3.row(style='padding:0;')
+                                .col-5
+                                    h5 LV 1. 알
+                                .col-7.text-right
+                                    h5 0~100xp
+                        .col.row.ml-4(style='margin:10px;')
+                            .col-3
+                                img(src='/images/lv2.png' width=50 height=50)
+                            .col-8.mt-3.row(style='padding:0;')
+                                .col-6
+                                    h5 LV 2. 깨진 알
+                                .col-6.text-right
+                                    h5 100~250xp
+                        .col.row.ml-4(style='margin:10px;')
+                            .col-3
+                                img(src='/images/lv3.png' width=50 height=50)
+                            .col-8.mt-3.row(style='padding:0;')
+                                .col-7
+                                    h5 LV 3. 알 깬 병아리
+                                .col-5.text-right
+                                    h5 250~450xp
+                        .col.row.ml-4(style='margin:10px;')
+                            .col-3
+                                img(src='/images/lv4.png' width=50 height=50)
+                            .col-8.mt-3.row(style='padding:0;')
+                                .col-5
+                                    h5 LV 4. 병아리
+                                .col-7.text-right
+                                    h5 450~750xp
+                        .col.row.ml-4(style='margin:10px;')
+                            .col-3
+                                img(src='/images/lv5.png' width=50 height=50)
+                            .col-8.mt-3.row(style='padding:0;')
+                                .col-5
+                                    h5 LV 5. 꼬꼬닭
+                                .col-7.text-right
+                                    h5 750~1200xp
+                        .col.row.ml-4(style='margin:10px;')
+                            .col-3
+                                img(src='/images/lv6.png' width=50 height=50)
+                            .col-8.mt-3.row(style='padding:0;')
+                                .col-5
+                                    h5 LV 6. 치킨
+                                .col-7.text-right
+                                    h5 1200~
 
-        .col-6
-            .card.mr-4
-                // TODO 행위별 경험치 수치 설명
-                p ddd
 
+                .col-5
+                    .card.mr-4.mt-5
+                        // TODO 행위별 경험치 수치 설명
+                        .col.row.ml-4(style='margin:10px;')
+                            .col-4
+                                img(src='/images/vs.png' width=60 height=60)
+                            .col-8.mt-3
+                                h5 [VS] 글쓰기 +30xp
+                        .col.row.ml-4(style='margin:10px;')
+                            .col-4
+                                img(src='/images/free.png' width=60 height=60)
+                            .col-8.mt-3
+                                h5 [자유] 글쓰기 +20xp
+                        .col.row.ml-4(style='margin:10px;')
+                            .col-4
+                                img(src='/images/comment.png'  width=60 height=60)
+                            .col-8.mt-3
+                                h5 댓글쓰기 +5xp
+                        .col.row.ml-4(style='margin:10px;')
+                            .col-4
+                                img(src='/images/egglike.png' width=60 height=60)
+                            .col-8.mt-3
+                                h5 좋아요 받기 +5xp
 
     include includes/getDate
     script.
