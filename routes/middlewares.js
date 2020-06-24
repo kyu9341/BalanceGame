@@ -1,4 +1,4 @@
-exports.isLoggedIn = (req, res, next) => { // req, res, next 가 있으면 미들웨어
+exports.isLoggedIn = (req, res, next) => { // 로그인 한 사용자인지 확인
     if (req.isAuthenticated()) { // 로그인 여부
         next();
     } else {
@@ -6,7 +6,7 @@ exports.isLoggedIn = (req, res, next) => { // req, res, next 가 있으면 미�
     }
 };
 
-exports.isNotLoggedIn = (req, res, next) => {
+exports.isNotLoggedIn = (req, res, next) => { // 로그인 하지 않은 사용자인지 확인
     if (!req.isAuthenticated()) {
         next();
     } else {
