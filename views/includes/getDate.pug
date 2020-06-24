@@ -8,9 +8,9 @@ script(type='application/javascript').
             if (timeGap == null) {
                 $(this).text(" " + problemTime.getFullYear() + '.' +
                     (problemTime.getMonth() + 1) + '.' +
-                    problemTime.getDate() + '.' +
-                    problemTime.getHours() + ':' +
-                    problemTime.getMinutes() + '');
+                    problemTime.getDate() + '. ' +
+                    problemTime.getHours() + '시' +
+                    problemTime.getMinutes() + '분');
             } else {
                 $(this).text(" " + timeGap);
             }

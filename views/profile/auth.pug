@@ -5,17 +5,19 @@ block content
         .py-5.text-center
             h2 비밀번호 확인
         .row.justify-content-center
-            form.edit(action='/profile/auth/submit' method='post')
+            .col-3
+            .col-6
+                form.edit(action='/profile/auth/submit' method='post')
 
-                .form-group
-                    label(for='password') 패스워드 입력
-                    input#password.form-control(type='password' name='password' aria-describedby='passwordHelp'
-                        placeholder='password' required minlength='6' maxlength='50' size=200)
-                    small#passwordHelp.form-text.text-muted
-                        | 프로필 수정을 위해 권한이 필요합니다.
-                    small.invalid-feedback 패스워드를 입력하세요.
+                    .form-group
+                        label(for='password') 패스워드 입력
+                        input#password.form-control(type='password' name='password' aria-describedby='passwordHelp'
+                            placeholder='password' required minlength='6' maxlength='50' size=200)
+                        small#passwordHelp.form-text.text-muted
+                            | 프로필 수정을 위해 권한이 필요합니다.
+                        small.invalid-feedback 패스워드를 입력하세요.
 
-                if profileEditError
-                    smaill.error-message= profileEditError
-                button.btn.btn-warning.btn-block.text-secondary(type='submit') 확인
-
+                    if profileEditError
+                        smaill.error-message= profileEditError
+                    button.btn.btn-warning.btn-block.text-secondary(type='submit') 확인
+            .col-3
