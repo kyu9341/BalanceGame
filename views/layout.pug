@@ -67,9 +67,9 @@ body.bg-white
                             .card-header 내 정보
                             .card-body
                                 span
-                                    img(src='/images/lv'+user.level+'.png' width=30 height=30)
-                                    b.card-title.ml-2 #{user.nickname}님
-                                p.mt-1.card-text=user.introduce
+                                    img(src='/images/lv'+user.level+'.png' width=23 height=23)
+                                    b.card-title.ml-2 #{user.nickname}
+                                p.mt-2.card-text=user.introduce
                                 #progress-div.progress
                                     #level-progress.progress-bar.progress-bar-striped.bg-info(role='progressbar' style='width: 0%;' aria-valuenow='25' aria-valuemin='0' aria-valuemax='100') !{lvInfo.per}%
 

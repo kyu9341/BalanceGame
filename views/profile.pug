@@ -15,7 +15,7 @@ block content
                     span
                         img(src='/images/lv'+user.level+'.png' width=50 height=50)
                         strong
-                            h5(style="display:inline; font-weight:bold").card-title.ml-1 #{user.nickname}
+                            h5(style="display:inline; font-weight:bold").card-title.ml-3 #{user.nickname}
                     -console.log('/images/lv'+user.level+'.png');
                 .col-6.text-right
                     a(href='/profile/auth')
@@ -25,14 +25,14 @@ block content
             p.card-text=user.introduce
             p
                 .text-right
-                    p.card-text 전체경험치 : #{lvInfo.exp}
+                    p.card-text.mb-2 전체경험치 : #{lvInfo.exp}
                 span
                     img(src='/images/lv'+user.level+'.png' width=30 height=30)
                     img(src='/images/lv'+(user.level+1)+'.png' width=30 height=30, style="float:right")
 
 
 
-                #profile-progress-div.progress
+                #profile-progress-div.progress.mt-1
                     #profile-level-progress.progress-bar.progress-bar-striped.bg-info(role='progressbar'
                         style='width: 0%;' aria-valuenow='25' aria-valuemin='0' aria-valuemax='100') #{lvInfo.per}%
                 .text-right

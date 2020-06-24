@@ -97,8 +97,10 @@ block content
                     .col-10
                     .col-2
                         .card.mr-2
+                            span(style="display:inline;" align="center").mt-1
+                                img(src='/images/lv'+user.level+'.png' width=13 height=13 style="display:inline;" align="center").mb-1
+                                small(style="display:inline; " align="center")  #{post.user.nickname}
 
-                            small(style="display:inline; float:right;" align="center").mt-1  #{post.user.nickname}
                             small(style="display:inline; float:right;" align="center").mt-2.mb-1.post-date #{post.createdAt}
             .text-center.mb-3.mt-3
                 // 좋아요 UI

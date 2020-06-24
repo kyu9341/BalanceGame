@@ -16,7 +16,10 @@ block content
                 .col-10
                 .col-2
                     p.card.mr-2
-                        small(style="display:inline; float:right;" align="center").mt-1 작성자 : #{post.user.nickname}
+                        span(style="display:inline;" align="center").mt-1
+                            img(src='/images/lv' + user.level + '.png' width=13 height=13 style="display:inline;" align="center").mb-1
+                            small(style="display:inline; " align="center")  #{post.user.nickname}
+
                         small(style="display:inline; float:right;" align="center").mt-2.mb-1.post-date #{post.createdAt}
 
             .col
