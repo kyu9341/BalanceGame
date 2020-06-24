@@ -8,7 +8,7 @@ block content
                     table.table.table-hover.table-border
                         thead.bg-warning
                             tr(align='center')
-                                th(scope='col') best vs 게시판
+                                th.table-type(scope='col') best vs 게시판
                                 th.table-title(scope='col')
                                 th(scope='col')
                                 th.table-comments(scope='col') 댓글
@@ -23,7 +23,7 @@ block content
                                     tr(align='center')
                                         td.table-title
                                             a(href=`/post/${post.board_type}/${post.id}`) #{post.title}
-                                        td
+                                        td.post-author
                                             img(src='/images/lv'+post.user.level+'.png' width=22 height=22)
                                             |#{post.user.nickname}
                                         td.post-date #{post.createdAt}
@@ -35,7 +35,7 @@ block content
                     table.table.table-hover.table-border
                         thead.bg-warning
                             tr(align='center')
-                                th(scope='col') best 자유 게시판
+                                th.table-type(scope='col') best 자유 게시판
                                 th.table-title(scope='col')
                                 th(scope='col')
                                 th.table-comments(scope='col') 댓글
@@ -50,7 +50,7 @@ block content
                                     tr(align='center')
                                         td.table-title
                                             a(href=`/post/${post.board_type}/${post.id}`) #{post.title}
-                                        td
+                                        td.post-author
                                             img(src='/images/lv'+post.user.level+'.png' width=22 height=22)
                                             |#{post.user.nickname}
                                         td.post-date #{post.createdAt}
@@ -63,7 +63,7 @@ block content
                     table.table.table-hover.table-border
                         thead.bg-warning
                             tr(align='center')
-                                th(scope='col') vs 게시판
+                                th.table-type(scope='col') vs 게시판
                                 th.table-title(scope='col')
                                 th(scope='col')
                                 th.table-comments(scope='col') 댓글
@@ -78,7 +78,7 @@ block content
                                     tr(align='center')
                                         td.table-title
                                             a(href=`/post/${post.board_type}/${post.id}`) #{post.title}
-                                        td
+                                        td.post-author
                                             img(src='/images/lv'+post.user.level+'.png' width=22 height=22)
                                             |#{post.user.nickname}
                                         td.post-date #{post.createdAt}
@@ -90,7 +90,7 @@ block content
                     table.table.table-hover.table-border
                         thead.bg-warning
                             tr.table-title(align='center')
-                                th(scope='col') 자유 게시판
+                                th.table-type(scope='col') 자유 게시판
                                 th.table-title(scope='col')
                                 th(scope='col')
                                 th.table-comments(scope='col') 댓글
@@ -103,9 +103,9 @@ block content
                             else
                                 each post in freePosts
                                     tr(align='center')
-                                        td
+                                        td.table-title
                                             a(href=`/post/${post.board_type}/${post.id}`) #{post.title}
-                                        td
+                                        td.post-author
                                             img(src='/images/lv'+post.user.level+'.png' width=22 height=22)
                                             |#{post.user.nickname}
                                         td.post-date #{post.createdAt}

@@ -6,11 +6,11 @@ script(type='application/javascript').
             let timeGap = getTimeGap(problemTime);
 
             if (timeGap == null) {
-                $(this).text(" " + problemTime.getFullYear() + '년 ' +
-                    (problemTime.getMonth() + 1) + '월 ' +
-                    problemTime.getDate() + '일 ' +
-                    problemTime.getHours() + '시 ' +
-                    problemTime.getMinutes() + '분');
+                $(this).text(" " + problemTime.getFullYear() + '.' +
+                    (problemTime.getMonth() + 1) + '.' +
+                    problemTime.getDate() + '.' +
+                    problemTime.getHours() + ':' +
+                    problemTime.getMinutes() + '');
             } else {
                 $(this).text(" " + timeGap);
             }

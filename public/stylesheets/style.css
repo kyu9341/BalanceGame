@@ -20,6 +20,27 @@ a {
   background: #FFB400;
   border-color: #FFB400;
 }
+
+td.post-date{
+  font-size: 12px;
+}
+
+td.table-title {
+  font-size: 13px;
+}
+td.table-comments ,td.table-likes , td.table-views, td.post-author {
+  font-size: 12px;
+
+}
+
+ th.table-type{
+ font-size: 15px;
+ }
+
+th.table-comments, th.table-likes, th.table-views{
+  font-size: 12px;
+
+}
 #wrapper {
 
   position:relative;
@@ -39,7 +60,7 @@ body{
 
 }
 
- html{
+html{
    max-width:100%;
    width:100%;
    height:100%;
