@@ -17,7 +17,7 @@ block content
                             | 프로필 수정을 위해 권한이 필요합니다.
                         small.invalid-feedback 패스워드를 입력하세요.
 
-                    if profileEditError
-                        smaill.error-message= profileEditError
+                    if profileAuthError
+                        small.error-message=profileAuthError
                     button.btn.btn-warning.btn-block.text-secondary(type='submit') 확인
             .col-3

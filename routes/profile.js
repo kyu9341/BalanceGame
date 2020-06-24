@@ -46,7 +46,7 @@ router.post('/auth/submit',isLoggedIn, async(req, res, next) =>{
 
         if(!result) {
             req.flash('profileAuthError', '비밀번호가 맞지 않습니다.');
-            return res.redirect('profile/auth');
+            return res.redirect('/profile/auth');
         }
         return res.redirect('/profile/edit');
     }
