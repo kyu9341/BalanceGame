@@ -8,3 +8,7 @@ if user
         button.unlike.btn.btn-outline-warning.text-dark.btn-warning
             img#nolike(style=' width:30px; height:30px;' src='/images/likedegg.png')
             span#count(style='vertical-align: middle;') #{post.like} LIKE
+else
+    button.logoutlike.btn.text-dark
+        img#logoutlike(style=' width:30px; height:30px;  ' src='/images/egg.png')
+        span(style='vertical-align: middle; ') #{post.like} LIKE
