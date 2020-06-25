@@ -23,11 +23,11 @@
 
 
 ## 기능 블록도
-![balancegame](github.com/kyu9341/BalanceGame/blob/master/images/balancegame.png)
+![balancegame](github.com/kyu9341/BalanceGame/blob/master/images/balancegame.png){: width="400" height="400"}
 
 # UI 및 동작
 
-### 메인 화면
+## 메인 화면
 
 <div style="width: 800px; height: 600px;">
     <img src="https://github.com/kyu9341/BalanceGame/blob/master/images/main.png" style="width: 800px
@@ -35,7 +35,7 @@
 </div>
 
 
-### 회원가입, 로그인
+## 회원가입, 로그인
 
 <div style="width: 800px; height: 600px;">
     <img src="https://github.com/kyu9341/BalanceGame/blob/master/images/signup.png" style="width: 800px
@@ -48,21 +48,21 @@
 </div>
 
 
-### 게시글 작성
+## 게시글 작성
 
 <div style="width: 800px; height: 600px;">
     <img src="https://github.com/kyu9341/BalanceGame/blob/master/images/write.png" style="width: 800px
     ; height: 600px;">
 </div>
 
-### vs 게시글 작성
+## vs 게시글 작성
 
 <div style="width: 800px; height: 600px;">
     <img src="https://github.com/kyu9341/BalanceGame/blob/master/images/vs_write.png" style="width: 800px
     ; height: 600px;">
 </div>
 
-### 게시글 확인
+## 게시글 확인
 
 <div style="width: 800px; height: 600px;">
     <img src="https://github.com/kyu9341/BalanceGame/blob/master/images/free_detail.png" style="width: 800px
@@ -87,7 +87,7 @@
 
 - vs 게시판 댓글
 
-### 게시판 
+## 게시판 
 
 <div style="width: 800px; height: 600px;">
     <img src="https://github.com/kyu9341/BalanceGame/blob/master/images/free_board.png" style="width: 800px
@@ -100,7 +100,7 @@
 </div>
 
 
-### 마이페이지 
+## 마이페이지 
 
 <div style="width: 800px; height: 600px;">
     <img src="https://github.com/kyu9341/BalanceGame/blob/master/images/mypage.png" style="width: 800px
@@ -109,7 +109,7 @@
 
 - 레벨 기능을 통해 활동 장려
 
-### 내가 쓴 글 
+## 내가 쓴 글 
 
 <div style="width: 800px; height: 600px;">
     <img src="https://github.com/kyu9341/BalanceGame/blob/master/images/my_posts.png" style="width: 800px
