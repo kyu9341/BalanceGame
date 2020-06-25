@@ -32,44 +32,29 @@
 ![main](https://github.com/kyu9341/BalanceGame/blob/master/images/main.png)
 
 ## 회원가입, 로그인
-<img src="https://github.com/kyu9341/BalanceGame/blob/master/images/signup.png" alt="vs_write" width="500px" height="700px"/>
+<img src="https://github.com/kyu9341/BalanceGame/blob/master/images/signup.png" alt="vs_write" width="500px" height="600px"/>
 
 <img src="https://github.com/kyu9341/BalanceGame/blob/master/images/login.png" alt="vs_write" width="500px" height="400px"/>
 
 
 
 ## 게시글 작성
-
-<div style="width: 800px; height: 600px;">
-    <img src="https://github.com/kyu9341/BalanceGame/blob/master/images/write.png" style="width: 800px
-    ; height: 600px;">
-</div>
+<img src="https://github.com/kyu9341/BalanceGame/blob/master/images/write.png" alt="write" width="700px" height="600px"/>
 
 ## vs 게시글 작성
-<img src="https://github.com/kyu9341/BalanceGame/blob/master/images/vs_write.png" alt="vs_write" width="500px" height="600px"/>
+<img src="https://github.com/kyu9341/BalanceGame/blob/master/images/vs_write.png" alt="vs_write" width="700px" height="700px"/>
 
 ## 게시글 확인
-
-<div style="width: 800px; height: 600px;">
-    <img src="https://github.com/kyu9341/BalanceGame/blob/master/images/free_detail.png" style="width: 800px
-    ; height: 600px;">
-</div>
+<img src="https://github.com/kyu9341/BalanceGame/blob/master/images/free_detail.png" alt="free_detail" width="800px" height="700px"/>
 
 - 일반 게시판 게시글 확인
+<img src="https://github.com/kyu9341/BalanceGame/blob/master/images/vs_detail.png" alt="vs_detail" width="800px" height="700px"/>
 
-
-<div style="width: 800px; height: 600px;">
-    <img src="https://github.com/kyu9341/BalanceGame/blob/master/images/vs_detail.png" style="width: 800px
-    ; height: 600px;">
-</div>
 
 - vs 게시판 게시글 (투표 후)
 
+<img src="https://github.com/kyu9341/BalanceGame/blob/master/images/vs_detail_comment.png" alt="vs_detail_comment" width="800px" height="550px"/>
 
-<div style="width: 800px; height: 600px;">
-    <img src="https://github.com/kyu9341/BalanceGame/blob/master/images/vs_detail_comment.png" style="width: 800px
-    ; height: 600px;">
-</div>
 
 - vs 게시판 댓글
 
