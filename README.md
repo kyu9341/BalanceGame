@@ -59,33 +59,20 @@
 - vs 게시판 댓글
 
 ## 게시판 
+<img src="https://github.com/kyu9341/BalanceGame/blob/master/images/free_board.png" alt="free_board" width="800px" height="450px"/>
+- 자유 게시판
 
-<div style="width: 800px; height: 600px;">
-    <img src="https://github.com/kyu9341/BalanceGame/blob/master/images/free_board.png" style="width: 800px
-    ; height: 600px;">
-</div>
-
-<div style="width: 800px; height: 600px;">
-    <img src="https://github.com/kyu9341/BalanceGame/blob/master/images/best_vs_board.png" style="width: 800px
-    ; height: 600px;">
-</div>
-
+<img src="https://github.com/kyu9341/BalanceGame/blob/master/images/best_vs_board.png" alt="best_vs_board" width="800px" height="450px"/>
+- best vs 게시판
 
 ## 마이페이지 
-
-<div style="width: 800px; height: 600px;">
-    <img src="https://github.com/kyu9341/BalanceGame/blob/master/images/mypage.png" style="width: 800px
-    ; height: 600px;">
-</div>
+<img src="https://github.com/kyu9341/BalanceGame/blob/master/images/mypage.png" alt="mypage" width="800px" height="700px"/>
 
 - 레벨 기능을 통해 활동 장려
 
 ## 내가 쓴 글 
+<img src="https://github.com/kyu9341/BalanceGame/blob/master/images/my_posts.png" alt="my_posts" width="800px" height="650px"/>
 
-<div style="width: 800px; height: 600px;">
-    <img src="https://github.com/kyu9341/BalanceGame/blob/master/images/my_posts.png" style="width: 800px
-    ; height: 600px;">
-</div>
 
 
 
