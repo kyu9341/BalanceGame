@@ -12,7 +12,14 @@
 - mariaDB
 - AWS(호스팅 예정)
 
+## 기능 블록도
 
+<div style="width: 800px; height: 600px;">
+    <img src="https://github.com/kyu9341/BalanceGame/blob/master/images/balancegame.png" style="width: 800px
+    ; height: 600px;">
+</div>
+
+## UI 및 동작
 
 - 메인 화면
 <div style="width: 800px; height: 600px;">
@@ -21,6 +28,26 @@
 </div>
 
 
+- 회원가입, 로그인
+<div style="width: 800px; height: 600px;">
+    <img src="https://github.com/kyu9341/BalanceGame/blob/master/images/signup.png" style="width: 800px
+    ; height: 600px;">
+</div>
 
+<div style="width: 800px; height: 600px;">
+    <img src="https://github.com/kyu9341/BalanceGame/blob/master/images/login.png" style="width: 800px
+    ; height: 600px;">
+</div>
+
+
+- 게시글 작성
+<div style="width: 800px; height: 600px;">
+    <img src="https://github.com/kyu9341/BalanceGame/blob/master/images/write.png" style="width: 800px
+    ; height: 600px;">
+</div>
+<div style="width: 800px; height: 600px;">
+    <img src="https://github.com/kyu9341/BalanceGame/blob/master/images/vs_write.png" style="width: 800px
+    ; height: 600px;">
+</div>
 
 
