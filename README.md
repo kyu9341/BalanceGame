@@ -12,3 +12,15 @@
 - mariaDB
 - AWS(호스팅 예정)
 
+
+
+- 메인 화면
+<div style="width: 800px; height: 600px;">
+    <img src="https://github.com/kyu9341/BalanceGame/blob/master/images/main.png" style="width: 800px
+    ; height: 600px;">
+</div>
+
+
+
+
+
