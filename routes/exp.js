@@ -66,29 +66,46 @@ exports.lvPrint = async (id)=> {
 
         console.log(id+exp+"exptest");
         //const exp = await
-        let next = 0;
+        let nextLv;
+        let prsntlv;
 
-        if(exp<100)
-            next = 100;
-        else if(exp<250)
-            next = 250;
-        else if(exp<450)
-            next = 450;
-        else if(exp<750)
-            next = 750;
-        else if(exp<1200)
-            next = 1200;
-        else
-            next = 5000;
+        if(exp<100) {
+            prsntlv = 0;
+            nextLv = 100;
+        }
+        else if(exp<250) {
+            prsntlv = 100;
+            nextLv = 250;
+        }
+        else if(exp<450) {
+            prsntlv = 250;
+            nextLv = 450;
+        }
+        else if(exp<750){
+            prsntlv = 450;
+            nextLv = 750;
+        }
+        else if(exp<1200){
+            prsntlv = 450;
+            nextLv = 1200;
+        }
+        else{
+            prsntlv = 0;
+            nextLv = exp;
+        }
 
-
-        const per = Math.round(exp/next*100);
+        const prsntexp = exp-prsntlv;
+        const forNext = nextLv-prsntlv;
+        const per = Math.round(prsntexp/forNext*100);
 
         return lvInfo = {
-            reqExp:next,
+            reqExp:nextLv,
             exp:exp,
             per: per,
             level : user.level,
+            forNext : forNext,
+            prsntlv :prsntlv,
+            prsntexp : prsntexp,
         };
 
     } catch(error) {

@@ -16,40 +16,17 @@ block content
                 .col-10
                 .col-2
                     p.card.mr-2
-                        small(style="display:inline; float:right;" align="center").mt-1 작성자 : #{post.user.nickname}
+                        span(style="display:inline;" align="center").mt-1
+                            img(src='/images/lv' + post.user.level + '.png' width=13 height=13 style="display:inline;" align="center").mb-1
+                            small(style="display:inline; " align="center")  #{post.user.nickname}
+
                         small(style="display:inline; float:right;" align="center").mt-2.mb-1.post-date #{post.createdAt}
 
             .col
                 .text-center.mb-3
                     // 좋아요 UI
                     include ../includes/like
-
-                        button.btn.btn-outline-danger.text-danger.mr-4.mb-1(type='button' data-toggle='modal' data-target='#myModal' style=' width:80px;  float: right;')
-                            | 신고
-                        #myModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='myModalLabel' align='right' )
-                            .modal-dialog(role='document')
-                                .modal-content
-                                    form.edit(action='/post/' + post.board_type + '/' + post.id + '/report' method='post')
-                                        .modal-header
-                                            //button.close(type='button' data-dismiss='modal' aria-label='Close')
-                                                span(aria-hidden='true') &times;
-                                            h4#myModalLabel.modal-title 신고하기
-
-                                        .modal-body
-                                            .form-group
-                                                .row-6
-                                                    input#reportComment.form-control.input-group-lg(name='content'
-                                                        placeholder='신고사유를 작성하세요.')
-                                                    small#reportCommentHelp.form-text.text-muted
-                                                        | 허위 신고 시 불이익이 있을 수 있습니다.
-
-
-                                        .modal-footer
-                                            .col-4
-                                                button#report-button.btn.btn-outline-danger(type='submit') 신고하기
-                                            button.btn.btn-outline-dark(type='button' data-dismiss='modal') 닫기
-
-
+                        include ../includes/report
 
         // 댓글쓰기
         include ../includes/comment
@@ -60,6 +37,8 @@ block content
 
     include ../includes/getDate
     include ../includes/form-validation
+
+
     script(type='application/javascript').
         setWriteTimeByClassName("post-date");
         setWriteTimeByClassName("comments-date");
