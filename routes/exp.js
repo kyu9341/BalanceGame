@@ -1,5 +1,5 @@
 const {User} = require('../models');
-
+// 경험치 모듈화
 exports.addExp = async (id, type)=> {
 
     try{

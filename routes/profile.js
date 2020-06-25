@@ -6,7 +6,7 @@ const router = express.Router();
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 const { User } = require('../models');
 
-
+// 프로필 수정 창
 router.get('/edit', isLoggedIn, async(req, res, next) =>{
     try{
         await res.render('profile/edit',{
@@ -22,6 +22,7 @@ router.get('/edit', isLoggedIn, async(req, res, next) =>{
     }
 });
 
+// 비밀번호 확인 창
 router.get('/auth', isLoggedIn, async(req, res, next) =>{
     try{
         await res.render('profile/auth',{
@@ -37,6 +38,7 @@ router.get('/auth', isLoggedIn, async(req, res, next) =>{
     }
 });
 
+// 비밀번호 확인
 router.post('/auth/submit',isLoggedIn, async(req, res, next) =>{
 
     const password = req.body.password;
@@ -56,7 +58,7 @@ router.post('/auth/submit',isLoggedIn, async(req, res, next) =>{
     }
 
 })
-
+// 프로필 수정 폼
 router.post('/edit/submit', isLoggedIn, async (req, res, next) => {
     const { nickname, password, introduce } = req.body;
     try {
