@@ -23,29 +23,19 @@
 
 
 ## 기능 블록도
-![balancegame](https://github.com/kyu9341/BalanceGame/blob/master/images/balancegame.png){: width="400" height="400"}
+
+![balancegame](https://github.com/kyu9341/BalanceGame/blob/master/images/balancegame.png)
 
 # UI 및 동작
 
 ## 메인 화면
-
-<div style="width: 800px; height: 600px;">
-    <img src="https://github.com/kyu9341/BalanceGame/blob/master/images/main.png" style="width: 800px
-    ; height: 600px;">
-</div>
-
+![main](https://github.com/kyu9341/BalanceGame/blob/master/images/main.png)
 
 ## 회원가입, 로그인
+<img src="https://github.com/kyu9341/BalanceGame/blob/master/images/signup.png" alt="vs_write" width="500px" height="700px"/>
 
-<div style="width: 800px; height: 600px;">
-    <img src="https://github.com/kyu9341/BalanceGame/blob/master/images/signup.png" style="width: 800px
-    ; height: 600px;">
-</div>
+<img src="https://github.com/kyu9341/BalanceGame/blob/master/images/login.png" alt="vs_write" width="500px" height="400px"/>
 
-<div style="width: 800px; height: 600px;">
-    <img src="https://github.com/kyu9341/BalanceGame/blob/master/images/login.png" style="width: 800px
-    ; height: 600px;">
-</div>
 
 
 ## 게시글 작성
@@ -56,7 +46,7 @@
 </div>
 
 ## vs 게시글 작성
-<img src="https://github.com/kyu9341/BalanceGame/blob/master/images/vs_write.png" alt="vs_write" width="500px" height="800px"/>
+<img src="https://github.com/kyu9341/BalanceGame/blob/master/images/vs_write.png" alt="vs_write" width="500px" height="600px"/>
 
 ## 게시글 확인
 
