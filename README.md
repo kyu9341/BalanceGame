@@ -56,11 +56,7 @@
 </div>
 
 ## vs 게시글 작성
-
-<div style="width: 800px; height: 600px;">
-    <img src="https://github.com/kyu9341/BalanceGame/blob/master/images/vs_write.png" style="width: 800px
-    ; height: 600px;">
-</div>
+<img src="https://github.com/kyu9341/BalanceGame/blob/master/images/vs_write.png" alt="vs_write" width="500px" height="800px"/>
 
 ## 게시글 확인
 
