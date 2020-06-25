@@ -50,7 +50,7 @@ block content
                                     .card-body.border-top
                                         p.span.col
                                             img.card-img-vote(src='/images/toright.png' width="22" height="22")
-                                            b.mb-2.card-text #{post.score_left}
+                                            b.mb-2.ml-1.card-txext #{post.score_left}
                                         #left-progress-div.progress
                                             #left-progress.progress-bar.progress-bar-striped.bg-warning(role='progressbar' style='width: 0%;'
                                                 aria-valuenow='25' aria-valuemin='0' aria-valuemax='100') #{leftPer} %
@@ -68,8 +68,9 @@ block content
                                         p.card-title #{post.description_right}
                                     .card-body.border-top
                                         p.span.col
-                                            b.card-text #{post.score_right}
                                             img.card-img-vote(src='/images/toleft.png' width="22" height="22")
+                                            b.card-text.ml-1 #{post.score_right}
+
 
                                         #right-progress-div.progress
                                             #right-progress.progress-bar.progress-bar-striped.bg-warning(role='progressbar' style='width: 0%;'
