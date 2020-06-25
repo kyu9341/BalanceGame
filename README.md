@@ -23,7 +23,7 @@
 
 
 ## 기능 블록도
-![balancegame](github.com/kyu9341/BalanceGame/blob/master/images/balancegame.png){: width="400" height="400"}
+![balancegame](https://github.com/kyu9341/BalanceGame/blob/master/images/balancegame.png){: width="400" height="400"}
 
 # UI 및 동작
 
